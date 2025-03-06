@@ -37,7 +37,7 @@ body {
 .button-container {
             position: absolute;
             top: 20px;
-            left: 50%;
+            left: 35%;
             transform: translateX(-50%);
 }
 
