@@ -37,6 +37,7 @@ body {
 .button-container {
             position: absolute;
             top: 20px;
+            display:block;
             margin-left: auto;
             margin-right: auto;
 }
