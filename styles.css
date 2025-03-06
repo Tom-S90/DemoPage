@@ -51,11 +51,12 @@ body {
             font-size: 18px;
             cursor: pointer;
             border: none;
-            background: black;
-            color: white;
+            background: white;
+            color: black;
             clip-path: polygon(0 25%, 15% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .button-container button:hover {
             background: yellow;
+            color: black;
 }
