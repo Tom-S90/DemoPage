@@ -2,21 +2,21 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevents unwanted scrolling */
-        }
+body {
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+}
 
-        .container {
+.container {
             display: flex;
-            width: 200vw; /* 2 pages side by side */
+            width: 700vw; /* 7 pages*/
             transition: transform 0.5s ease-in-out;
             overflow: hidden; /* Prevents horizontal scrolling */
-        }
+}
 
-        .page {
+.page {
             width: 100vw;
             height: 100vh;
             display: flex;
@@ -24,29 +24,34 @@
             justify-content: center;
             font-size: 24px;
             flex-shrink: 0; /* Prevents content from squishing */
-        }
+}
 
-        .page1 { background-color: lightblue; }
-        .page2 { background-color: lightcoral; }
+            .page1 { background-color: #EEEBE0; }
+            .page2 { background-color: #EEEBE0; }
+            .page3 { background-color: #EEEBE0; }
+            .page4 { background-color: #EEEBE0; }
+            .page5 { background-color: #EEEBE0; }
+            .page6 { background-color: #EEEBE0; }
+            .page7 { background-color: #EEEBE0; }
 
-        .button-container {
+.button-container {
             position: absolute;
-            bottom: 20px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-        }
+}
 
-        button {
+button {
             padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
             border: none;
             background: black;
             color: white;
-            border-radius: 5px;
+            clip-path: polygon(0 25%, 15% 0, 100% 0, 100% 100%, 0 100%);
             transition: background 0.3s ease;
-        }
+}
 
-        button:hover {
-            background: gray;
-        }
+button:hover {
+            background: yellow;
+}
