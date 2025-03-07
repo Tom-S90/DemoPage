@@ -1,11 +1,12 @@
 :root {
     /* Light Theme (Default) */
     --background-color: #ffffff;
-    --nav-background: black;
     --text-color: #000000;
-    --button-background: yellow;
+    --theme-toggle: grey;
+    --theme-toggle-text: white;
+    --button-background: #ffffff;
     --button-text: #000000;
-    --button-hover-background: white;
+    --button-hover-background: yellow;
     --button-hover-text: #000000;
     --page-background: #EEEBE0;
     --video-item-background: #f9f9f9;
@@ -20,9 +21,10 @@
     /* Dark Theme */
     --background-color: #121212;
     --text-color: #ffffff;
-    --button-background: yellow;
-    --button-text: black;
-    --nav-background: white;
+    --theme-toggle: lightgray;
+    --theme-toggle-text: black;
+    --button-background: #333333;
+    --button-text: #ffffff;
     --button-hover-background: #555555;
     --button-hover-text: #ffffff;
     --page-background: #1e1e1e;
@@ -54,17 +56,21 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--nav-background);
+    background-color: var(--theme-toggle);
     z-index: 1000; /* Ensure it's above everything */
     padding: 10px;
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center; /* Vertically center buttons */
 }
 
+/* Button Container */
 .button-container {
     display: flex;
-    justify-content: center;
     gap: 10px;
 }
 
+/* Button Styles */
 .button-container button {
     padding: 10px 20px;
     font-size: 16px;
@@ -72,10 +78,34 @@ body {
     border: none;
     background: var(--button-background);
     color: var(--button-text);
-    clip-path: polygon(0 25%, 15% 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .button-container button:hover {
+    background: var(--button-hover-background);
+    color: var(--button-hover-text);
+}
+
+/* Theme Toggle Button Container */
+.theme-toggle-container {
+    position: absolute;
+    top: 70px; /* Adjust this value to place it below the nav bar */
+    right: 20px; /* Adjust this value to place it to the right */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    border-radius: 48%;
+    padding: 8px 13px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background: var(--theme-toggle);
+    color: var(--theme-toggle-text);
+}
+
+#theme-toggle:hover {
     background: var(--button-hover-background);
     color: var(--button-hover-text);
 }
