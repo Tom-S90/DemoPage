@@ -1,3 +1,6 @@
+<!--Background Color = #EEEBE0 
+Button shape modifier = clip-path: polygon(0 25%, 15% 0, 100% 0, 100% 100%, 0 100%);
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,40 +10,72 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container" id="container">
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="button-container">
+            <button onclick="goToPage(1)">Go to Page 1</button>
+            <button onclick="goToPage(2)">Go to Page 2</button>
+            <button onclick="goToPage(3)">Go to Page 3</button>
+            <button onclick="goToPage(4)">Go to Page 4</button>
+            <button onclick="goToPage(5)">Go to Page 5</button>
+            <button onclick="goToPage(6)">Go to Page 6</button>
+            <button onclick="goToPage(7)">Go to Page 7</button>
+        </div>
+    </div>
+
+    <!-- Page Container -->
+    <div class="container" id="container">
+        <!-- Page 1 -->
         <div class="page page1">
             <h1>Page 1</h1>
         </div>
+
+        <!-- Page 2 -->
         <div class="page page2">
             <h1>Page 2</h1>
         </div>
+
+        <!-- Page 3 -->
         <div class="page page3">
-            <h1>Page 3</h1>
+            <!-- Logo and Right-Aligned Text -->
+            <div class="logo-section">
+                <img src="logo.png" alt="Logo" class="logo1">
+                <p class="right-text">Text under the logo</p>
+            </div>
+
+            <!-- Video List -->
+            <div id="video-list" class="video-list"></div>
         </div>
+
+        <!-- Page 4 -->
         <div class="page page4">
             <h1>Page 4</h1>
         </div>
+
+        <!-- Page 5 -->
         <div class="page page5">
             <h1>Page 5</h1>
         </div>
+
+        <!-- Page 6 -->
         <div class="page page6">
             <h1>Page 6</h1>
         </div>
+
+        <!-- Page 7 -->
         <div class="page page7">
             <h1>Page 7</h1>
         </div>
     </div>
 
-    <div class="button-container">
-      <button onclick="goToPage(1)">Go to Page 1</button>
-      <button onclick="goToPage(2)">Go to Page 2</button>
-      <button onclick="goToPage(3)">Go to Page 3</button>
-      <button onclick="goToPage(4)">Go to Page 4</button>
-      <button onclick="goToPage(5)">Go to Page 5</button>
-      <button onclick="goToPage(6)">Go to Page 6</button>
-      <button onclick="goToPage(7)">Go to Page 7</button>
-        
+    <!-- Video Popup -->
+    <div id="video-popup" class="video-popup">
+        <div class="popup-content">
+            <div id="video-frame-container"></div>
+            <button onclick="closePopup()">Close</button>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
