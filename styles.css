@@ -1,3 +1,40 @@
+:root {
+    /* Light Theme (Default) */
+    --background-color: #ffffff;
+    --nav-background: black;
+    --text-color: #000000;
+    --button-background: yellow;
+    --button-text: #000000;
+    --button-hover-background: white;
+    --button-hover-text: #000000;
+    --page-background: #EEEBE0;
+    --video-item-background: #f9f9f9;
+    --video-title-color: #333;
+    --video-description-color: #888;
+    --popup-background: darkblue;
+    --popup-text: white;
+    --logo-text-color: #333;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --button-background: yellow;
+    --button-text: black;
+    --nav-background: white;
+    --button-hover-background: #555555;
+    --button-hover-text: #ffffff;
+    --page-background: #1e1e1e;
+    --video-item-background: #333333;
+    --video-title-color: #ffffff;
+    --video-description-color: #cccccc;
+    --popup-background: #222222;
+    --popup-text: #ffffff;
+    --logo-text-color: #ffffff;
+}
+
+/* Apply CSS Variables */
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +44,8 @@
 body {
     font-family: 'Courier New', monospace;
     overflow: hidden;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 /* Navigation Bar */
@@ -15,8 +54,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #f0f0f0;
-    z-index: 1000;
+    background-color: var(--nav-background);
+    z-index: 1000; /* Ensure it's above everything */
     padding: 10px;
 }
 
@@ -31,17 +70,17 @@ body {
     font-size: 16px;
     cursor: pointer;
     border: none;
-    background: white;
-    color: black;
+    background: var(--button-background);
+    color: var(--button-text);
     clip-path: polygon(0 25%, 15% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .button-container button:hover {
-    background: yellow;
-    color: black;
+    background: var(--button-hover-background);
+    color: var(--button-hover-text);
 }
 
-/* Pages Container */
+/* Page Container */
 .container {
     display: flex;
     width: 700vw; /* 7 pages */
@@ -58,13 +97,18 @@ body {
     padding-top: 80px; /* Offset for the fixed navigation bar */
     font-size: 24px;
     flex-shrink: 0;
+    background-color: var(--page-background);
 }
 
-.page1 { background-color: #EEEBE0; }
-.page2 { background-color: #EEEBE0; }
+.page1 { background-color: var(--page-background); }
+.page2 { background-color: var(--page-background); }
+.page3 { background-color: var(--page-background); }
+.page4 { background-color: var(--page-background); }
+.page5 { background-color: var(--page-background); }
+.page6 { background-color: var(--page-background); }
+.page7 { background-color: var(--page-background); }
 
-.page3 { background-color: #EEEBE0; }
-/* Logo and Right-Aligned Text for page 3 */
+/* Logo and Right-Aligned Text */
 .logo-section {
     align-self: flex-end;
     text-align: right;
@@ -79,14 +123,8 @@ body {
 
 .right-text {
     font-size: 16px;
-    color: #333;
+    color: var(--logo-text-color);
 }
-
-.page4 { background-color: #EEEBE0; }
-.page5 { background-color: #EEEBE0; }
-.page6 { background-color: #EEEBE0; }
-.page7 { background-color: #EEEBE0; }
-
 
 /* Video List */
 .video-list {
@@ -104,8 +142,10 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
     width: 100%;
+    background-color: var(--video-item-background);
     padding: 10px;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .video-item img {
@@ -124,14 +164,14 @@ body {
 }
 
 .video-item h3 {
-    font-size: 28px;
+    font-size: 18px;
     margin: 0 0 10px 0;
-    color: #f0f0f0f;
+    color: var(--video-title-color);
 }
 
 .video-item p {
     font-size: 14px;
-    color: #888;
+    color: var(--video-description-color);
     margin: 0;
 }
 
@@ -160,12 +200,13 @@ body {
 }
 
 .popup-content {
-    background-color: darkblue;
+    background-color: var(--popup-background);
     padding: 20px;
     border-radius: 10px;
     position: relative;
     width: 80%;
     max-width: 800px;
+    color: var(--popup-text);
 }
 
 #video-frame-container {
