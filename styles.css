@@ -84,6 +84,19 @@ body {
     display: block;
 }
 
+/* Hide dark buttons by default */
+.dark-button {
+    display: none;
+}
+
+[data-theme="dark"] .light-button {
+    display: none;
+}
+
+[data-theme="dark"] .dark-button {
+    display: block;
+}
+
 /* Text Overlay */
 .button-text {
     position: absolute;
