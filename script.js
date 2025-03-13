@@ -1,4 +1,3 @@
-
 // Cache key for storing API response
 const CACHE_KEY = 'youtube_videos_cache';
 const CACHE_EXPIRY = 24 * 60 * 60 * 1000; // Cache expires after 1 hour (in milliseconds)
@@ -149,37 +148,25 @@ window.onload = fetchVideos;
 // Page navigation function
 function goToPage(pageNumber) {
     const container = document.getElementById('container');
-    switch (pageNumber) {
-        case 1:
-            container.style.transform = 'translateX(0)';
-            break;
-        case 2:
-            container.style.transform = 'translateX(-100vw)';
-            break;
-        case 3:
-            container.style.transform = 'translateX(-200vw)';
-            break;
-        case 4:
-            container.style.transform = 'translateX(-300vw)';
-            break;
-        case 5:
-            container.style.transform = 'translateX(-400vw)';
-            break;
-        case 6:
-            container.style.transform = 'translateX(-500vw)';
-            break;
-        case 7:
-            container.style.transform = 'translateX(-600vw)';
-            break;
-        default:
-            container.style.transform = 'translateX(0)';
-    }
+    const buttons = document.querySelectorAll('.button-container .nav-button-container');
+
+    // Remove active class from all buttons
+    buttons.forEach(button => button.classList.remove('active'));
+
+    // Add active class to the clicked button
+    buttons[pageNumber - 1].classList.add('active');
+
+    // Move the container to the selected page
+    container.style.transform = `translateX(-${(pageNumber - 1) * 100}vw)`;
 }
 
+// Set the initial active button (Page 1)
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.button-container .nav-button-container');
+    buttons[0].classList.add('active');
+});
 
-
-
-// Theme Toggle Functionality###################################################################################################################################################################\\
+// Theme Toggle Functionality
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
