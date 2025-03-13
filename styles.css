@@ -4,10 +4,10 @@
     --text-color: #000000;
     --theme-toggle: grey;
     --theme-toggle-text: white;
-    --button-background: #ffffff;
-    --button-text: #000000;
-    --button-hover-background: yellow;
-    --button-hover-text: #000000;
+    --button-background: yellow;
+    --button-text: black;
+    --button-hover-background: white;
+    --button-hover-text: black;
     --page-background: #EEEBE0;
     --video-item-background: #f9f9f9;
     --video-title-color: #333;
@@ -52,16 +52,16 @@ body {
 
 /* Navigation Bar */
 .nav-bar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     background-color: var(--theme-toggle);
-    z-index: 1000; /* Ensure it's above everything */
-    padding: 10px;
+    z-index: 1000;
     display: flex;
-    justify-content: center; /* Center the buttons horizontally */
-    align-items: center; /* Vertically center buttons */
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
 }
 
 /* Button Container */
@@ -70,37 +70,60 @@ body {
     gap: 10px;
 }
 
-/* Button Styles */
-.button-container button {
-    padding: 10px 20px;
-    font-size: 16px;
+/* Navigation Button Container */
+.nav-button-container {
+    position: relative;
     cursor: pointer;
-    border: none;
-    background: var(--button-background);
-    color: var(--button-text);
-    clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 100%);
+    display: inline-block;
 }
 
-.button-container button:hover {
-    background: var(--button-hover-background);
+/* Navigation Button Image */
+.nav-button {
+    width: 100px;
+    height: auto;
+    display: block;
+}
+
+/* Text Overlay */
+.button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* Active Button Styles */
+.nav-button-container.active .button-text {
+    color: var(--text-color);
+}
+
+/* Hover Effect */
+.nav-button-container:hover .button-text {
     color: var(--button-hover-text);
 }
 
 /* Theme Toggle Button Container */
 .theme-toggle-container {
     position: absolute;
-    top: 70px; /* Adjust this value to place it below the nav bar */
-    right: 20px; /* Adjust this value to place it to the right */
-    z-index: 1000; /* Ensure it's above other content */
+    top: 70px;
+    right: 20px;
+    z-index: 1000;
+    padding: 2px;
 }
 
 /* Theme Toggle Button */
 #theme-toggle {
-    border-radius: 48%;
+    border-radius: 48% 48% 48% 48%;
     padding: 8px 13px;
     font-size: 16px;
     cursor: pointer;
     border: none;
+    margin: 20px;
     background: var(--theme-toggle);
     color: var(--theme-toggle-text);
 }
@@ -113,96 +136,22 @@ body {
 /* Page Container */
 .container {
     display: flex;
-    width: 700vw; /* 7 pages */
+    height: 100vh;
+    width: 700vw;
     transition: transform 0.5s ease-in-out;
 }
 
 .page {
     width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     align-items: flex-start;
     padding: 20px;
-    padding-top: 80px; /* Offset for the fixed navigation bar */
+    padding-top: 80px;
     font-size: 24px;
     flex-shrink: 0;
     background-color: var(--page-background);
-}
-
-.page1 { background-color: var(--page-background); }
-.page2 { background-color: var(--page-background); }
-.page3 { background-color: var(--page-background); }
-.page4 { background-color: var(--page-background); }
-.page5 { background-color: var(--page-background); }
-.page6 { background-color: var(--page-background); }
-.page7 { background-color: var(--page-background); }
-
-/* Logo and Right-Aligned Text */
-.logo-section {
-    align-self: flex-end;
-    text-align: right;
-    margin-bottom: 20px;
-}
-
-.logo1 {
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.right-text {
-    font-size: 16px;
-    color: var(--logo-text-color);
-}
-
-/* Video List */
-.video-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-.video-item {
-    display: flex;
-    align-items: flex-start; /* Align items to the top */
-    margin-bottom: 20px;
-    cursor: pointer;
-    width: 100%;
-    background-color: var(--video-item-background);
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.video-item img {
-    width: 250px; /* Fixed width for the thumbnail */
-    height: 140px; /* Fixed height for the thumbnail */
-    border-radius: 8px;
-    margin-right: 20px; /* Space between thumbnail and text */
-    flex-shrink: 0; /* Prevent the thumbnail from shrinking */
-}
-
-.video-item .video-text {
-    flex: 1; /* Allow text to take remaining space */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align text to the top */
-}
-
-.video-item h3 {
-    font-size: 18px;
-    margin: 0 0 10px 0;
-    color: var(--video-title-color);
-}
-
-.video-item p {
-    font-size: 14px;
-    color: var(--video-description-color);
-    margin: 0;
 }
 
 /* Video Popup */
@@ -237,10 +186,6 @@ body {
     width: 80%;
     max-width: 800px;
     color: var(--popup-text);
-}
-
-#video-frame-container {
-    width: 100%;
 }
 
 #video-frame-container iframe {
