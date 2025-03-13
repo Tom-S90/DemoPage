@@ -52,16 +52,16 @@ body {
 
 /* Navigation Bar */
 .nav-bar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     background-color: var(--theme-toggle);
     z-index: 1000;
-    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 10px;
 }
 
 /* Button Container */
@@ -103,7 +103,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: var(--theme-toggle-text);
     font-size: 16px;
     font-weight: bold;
     text-align: center;
