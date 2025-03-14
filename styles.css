@@ -85,7 +85,8 @@ body {
 }
 
 /* Hide dark buttons by default */
-.dark-button {
+.dark-button, .light-selected-button,
+.dark-selected-button {
     display: none;
 }
 
