@@ -160,18 +160,8 @@ background: #DBB92A;
 
 /* Theme Toggle Button */
 #theme-toggle {
-    border-radius: 48%;
+    border-radius: 50%;
     padding: 8px 13px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background: var(--theme-toggle);
-    color: var(--theme-toggle-text);
-}
-
-#theme-toggle:hover {
-    background: var(--button-hover-background);
-    color: var(--button-hover-text);
 }
 
 /* Page Container */
