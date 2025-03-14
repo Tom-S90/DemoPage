@@ -89,7 +89,7 @@ body {
 
 /* Hide dark buttons by default */
 .dark-button, .light-selected-button,
-.dark-selected-button, .light-theme-toggle{
+.dark-selected-button, .light-theme-toggle {
     display: none;
 }
 
@@ -100,11 +100,13 @@ body {
 [data-theme="dark"] .dark-button {
     display: block;
 }
-[data-theme= "dark"] .light-theme-toggle{
+
+[data-theme="dark"] .light-theme-toggle {
     display: block;
 }
-[data-theme= "dark"] .dark-theme-toggle{
-    display:none;
+
+[data-theme="dark"] .dark-theme-toggle {
+    display: none;
 }
 
 /* Text Overlay */
