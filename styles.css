@@ -203,7 +203,6 @@ body {
     display: flex; /* Use Flexbox */
     align-items: flex-start; /* Align items to the top */
     gap: 20px; /* Space between left and right containers */
-    padding: 20px; /* Optional: Add padding */
 }
 
 /* Left Image */
