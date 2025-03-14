@@ -73,6 +73,7 @@ body {
 /* Navigation Button Container */
 .nav-button-container {
     position: relative;
+    bottom: -1px;
     cursor: pointer;
     display: inline-block;
 }
