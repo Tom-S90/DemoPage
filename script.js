@@ -175,6 +175,10 @@ const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     body.setAttribute('data-theme', savedTheme);
     updateThemeToggleImage(savedTheme);
+} else {
+    // Default to light theme if no theme is saved
+    body.setAttribute('data-theme', 'light');
+    updateThemeToggleImage('light');
 }
 
 // Toggle Theme
@@ -199,7 +203,6 @@ function updateThemeToggleImage(theme) {
         darkToggle.style.display = 'block';
     }
 }
-
 /*/ Testing purposes fake youtube api response
 //##################################################################################################################################################################################//
 const mockResponse = {
