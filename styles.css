@@ -245,12 +245,12 @@ body {
 }
 /* Top Text */
 .page1-text-overlay.page1-top-text {
-    top: 0; /* Position at the top of the image */
+    top: 6.666666667vh; /* Position at the top of the image */
 }
 
 /* Bottom Text */
 .page1-text-overlay.page1-bottom-text {
-    bottom: 0; /* Position at the bottom of the image */
+    bottom: 20vh; /* Position at the bottom of the image */
 }
 
 
