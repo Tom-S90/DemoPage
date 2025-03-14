@@ -15,7 +15,7 @@
     --popup-background: darkblue;
     --popup-text: white;
     --logo-text-color: #333;
-    --text-overlay-color: white;
+    --text-overlay-color: black;
 }
 
 [data-theme="dark"] {
@@ -35,7 +35,7 @@
     --popup-background: #222222;
     --popup-text: #ffffff;
     --logo-text-color: #ffffff;
-    --text-overlay-color: black;
+    --text-overlay-color: white;
 }
 
 /* Apply CSS Variables */
@@ -89,7 +89,7 @@ body {
 
 /* Navigation Button Image */
 .nav-button {
-    width: 100px;
+    width: 125px;
     height: auto;
     display: block;
 }
@@ -220,7 +220,7 @@ body {
 /* Left Image */
 .page1-left-image {
     flex: 1; /* Allow the left image to take up available space */
-    max-width: 600px; /* Set a max width for the left image */
+    max-width: 500px; /* Set a max width for the left image */
 }
 
 .page1-left-image img {
