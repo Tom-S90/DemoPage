@@ -124,6 +124,8 @@ body {
     display: block;
 }
 
+
+
 /* Text Overlay */
 .button-text {
     position: absolute;
@@ -208,12 +210,14 @@ body {
     display: flex; /* Use Flexbox */
     align-items: flex-start; /* Align items to the top */
     gap: 20px; /* Space between left and right containers */
+    padding: 20px; /* Optional: Add padding */
+    width: 100%; /* Ensure the container takes full width */
 }
 
 /* Left Image */
 .page1-left-image img {
     width: 100%; /* Make the image responsive */
-    max-width: 500px; /* Set a max width for the left image */
+    max-width: 600px; /* Set a max width for the left image */
     height: auto; /* Maintain aspect ratio */
 }
 
@@ -240,7 +244,6 @@ body {
     font-family: Arial, sans-serif; /* Customize font */
     font-size: 12px; /* Customize font size */
     font-weight: bold; /* Make text bold */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     padding: 2px; /* Add padding for better readability */
 }
 
@@ -258,12 +261,24 @@ body {
 
 /* Bottom Text */
 .page1-text-overlay.page1-bottom-text {
-    bottom: 17px;/* Position at the bottom of the image */
+    bottom: 10px;/* Position at the bottom of the image */
     margin: 13px;
     right: 7px;
     left: 1px;
 }
 
+[data-theme="dark"] .darkLogo, darkRightP1{
+    display: block;
+}
+[data-theme="dark"] .lightLogo, lightRightP1{
+    display: none;
+}
+[data-theme="light"] .darkLogo, darkRightP1{
+    display: none;
+}
+[data-theme="light"] .lightLogo, lightRightP1{
+    display: block;
+}
 
 /*Page1 style block #####################################################################################################*/
 /* Logo and Right-Aligned Text */
