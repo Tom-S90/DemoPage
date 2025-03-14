@@ -97,6 +97,13 @@ body {
     display: block;
 }
 
+[data-theme="dark"] .light-selected-button{
+    display:none;
+}
+[data-theme="dark"] .dark-selected-button{
+    display:none;
+}
+
 /* Text Overlay */
 .button-text {
     position: absolute;
