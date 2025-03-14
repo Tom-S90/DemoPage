@@ -15,6 +15,7 @@
     --popup-background: darkblue;
     --popup-text: white;
     --logo-text-color: #333;
+    --text-overlay-color: white;
 }
 
 [data-theme="dark"] {
@@ -34,6 +35,7 @@
     --popup-background: #222222;
     --popup-text: #ffffff;
     --logo-text-color: #ffffff;
+    --text-overlay-color: black;
 }
 
 /* Apply CSS Variables */
@@ -206,25 +208,31 @@ body {
 /*Page specific editions###################################################################################################### */
 /*Page 1 layout code*/
 /* Container for the entire layout */
+/* Page 1 Container */
 .page1 {
     display: flex; /* Use Flexbox */
     align-items: flex-start; /* Align items to the top */
     gap: 20px; /* Space between left and right containers */
-    padding: 20px; /* Optional: Add padding */
+    padding: 20px; /* Add padding */
     width: 100%; /* Ensure the container takes full width */
 }
 
 /* Left Image */
+.page1-left-image {
+    flex: 1; /* Allow the left image to take up available space */
+    max-width: 600px; /* Set a max width for the left image */
+}
+
 .page1-left-image img {
     width: 100%; /* Make the image responsive */
-    max-width: 600px; /* Set a max width for the left image */
     height: auto; /* Maintain aspect ratio */
 }
 
 /* Right Image Container */
 .page1-right-image-container {
-    position: relative; /* Needed for absolute positioning of text */
+    flex: 1; /* Allow the right container to take up available space */
     max-width: 300px; /* Set a max width for the right image */
+    position: relative; /* Needed for absolute positioning of text */
 }
 
 /* Right Image */
@@ -234,49 +242,58 @@ body {
     display: block; /* Remove extra space below the image */
 }
 
-/* Text Overlay */
-.page1-text-overlay {
+/* Text Overlay Container */
+.page1-text-right-image-container {
     position: absolute; /* Position text over the image */
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space text at top and bottom */
+    padding: 10px; /* Add padding for better readability */
+}
+
+/* Text Overlay */
+.page1-text-overlay {
     text-align: center; /* Center the text horizontally */
-    color: white; /* Text color */
+    color: var(--text-overlay-color); /* Use CSS variable for text color */
     font-family: Arial, sans-serif; /* Customize font */
     font-size: 12px; /* Customize font size */
     font-weight: bold; /* Make text bold */
-    padding: 2px; /* Add padding for better readability */
+    background-color: var(--text-overlay-background); /* Use CSS variable for background */
+    padding: 5px; /* Add padding for better readability */
+    border-radius: 5px; /* Add rounded corners */
 }
 
-.page1-text-right-image-container{
-    max-width: 250px;
-    height: relative;
-}
 /* Top Text */
 .page1-text-overlay.page1-top-text {
-    top: 5px; /* Position at the top of the image */
-    margin: 13px;
-    right: 7px;
-    left: 1px;
+    align-self: flex-start; /* Align to the top */
 }
 
 /* Bottom Text */
 .page1-text-overlay.page1-bottom-text {
-    bottom: 10px;/* Position at the bottom of the image */
-    margin: 13px;
-    right: 7px;
-    left: 1px;
+    align-self: flex-end; /* Align to the bottom */
 }
 
-[data-theme="dark"] .darkLogo, .darkRightP1{
+[data-theme="dark"] .darkLogo,
+[data-theme="dark"] .darkRightP1 {
     display: block;
 }
-[data-theme="dark"] .lightLogo, .lightRightP1{
+
+[data-theme="dark"] .lightLogo,
+[data-theme="dark"] .lightRightP1 {
     display: none;
 }
-[data-theme="light"] .darkLogo, .darkRightP1{
+
+[data-theme="light"] .darkLogo,
+[data-theme="light"] .darkRightP1 {
     display: none;
 }
-[data-theme="light"] .lightLogo, .lightRightP1{
+
+[data-theme="light"] .lightLogo,
+[data-theme="light"] .lightRightP1 {
     display: block;
 }
 
