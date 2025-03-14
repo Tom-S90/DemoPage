@@ -174,7 +174,7 @@ const body = document.body;
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     body.setAttribute('data-theme', savedTheme);
-    updateButtonText(savedTheme);
+    updateThemeToggleImage(savedTheme);
 }
 
 // Toggle Theme
@@ -183,12 +183,21 @@ themeToggle.addEventListener('click', () => {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     body.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    updateButtonText(newTheme);
+    updateThemeToggleImage(newTheme);
 });
 
-// Update Button Text
-function updateButtonText(theme) {
-    themeToggle.innerText = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+// Update Theme Toggle Image
+function updateThemeToggleImage(theme) {
+    const lightToggle = document.querySelector('.light-theme-toggle');
+    const darkToggle = document.querySelector('.dark-theme-toggle');
+
+    if (theme === 'dark') {
+        lightToggle.style.display = 'block';
+        darkToggle.style.display = 'none';
+    } else {
+        lightToggle.style.display = 'none';
+        darkToggle.style.display = 'block';
+    }
 }
 
 
