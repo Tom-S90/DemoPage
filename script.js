@@ -167,7 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Theme Toggle Functionality
-const themeToggle = document.getElementById('theme-toggle');
+const lightToDarkToggle = document.getElementById('light-to-dark-toggle');
+const darkToLightToggle = document.getElementById('dark-to-light-toggle');
 const body = document.body;
 
 // Check for saved theme in localStorage
@@ -182,25 +183,27 @@ if (savedTheme) {
 }
 
 // Toggle Theme
-themeToggle.addEventListener('click', () => {
+lightToDarkToggle.addEventListener('click', toggleTheme);
+darkToLightToggle.addEventListener('click', toggleTheme);
+
+function toggleTheme() {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     body.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeToggleImage(newTheme);
-});
+}
 
 // Update Theme Toggle Image
 function updateThemeToggleImage(theme) {
-    const lightToggle = document.querySelector('.light-theme-toggle');
-    const darkToggle = document.querySelector('.dark-theme-toggle');
-
     if (theme === 'dark') {
-        lightToggle.style.display = 'block';
-        darkToggle.style.display = 'none';
+        // Show the dark-to-light toggle (switch back to light)
+        darkToLightToggle.style.display = 'block';
+        lightToDarkToggle.style.display = 'none';
     } else {
-        lightToggle.style.display = 'none';
-        darkToggle.style.display = 'block';
+        // Show the light-to-dark toggle (switch to dark)
+        darkToLightToggle.style.display = 'none';
+        lightToDarkToggle.style.display = 'block';
     }
 }
 /*/ Testing purposes fake youtube api response
