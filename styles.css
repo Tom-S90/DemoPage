@@ -50,6 +50,11 @@ body {
     color: var(--text-color);
 }
 
+.page1-titleText{
+    top: 40px;
+    font-size: 16px;
+}
+
 /* Navigation Bar */
 .nav-bar {
     position: absolute;
