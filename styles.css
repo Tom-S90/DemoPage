@@ -155,6 +155,7 @@ body {
     top: 70px;
     right: 20px;
     z-index: 1000;
+    cursor: pointer;
 }
 
 /* Theme Toggle Button */
