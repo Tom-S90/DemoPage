@@ -249,6 +249,11 @@ body {
     font-size: 14px;
     color: var(--video-description-color);
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines in the description to avoid huge video portions */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Video Popup */
