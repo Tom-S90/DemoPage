@@ -234,12 +234,16 @@ body {
     text-align: center; /* Center the text horizontally */
     color: white; /* Text color */
     font-family: Arial, sans-serif; /* Customize font */
-    font-size: 20px; /* Customize font size */
+    font-size: 14px; /* Customize font size */
     font-weight: bold; /* Make text bold */
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     padding: 10px; /* Add padding for better readability */
 }
 
+.page1-text-right-image-container{
+    max-width: 250px;
+    height: relative;
+}
 /* Top Text */
 .page1-text-overlay.page1-top-text {
     top: 0; /* Position at the top of the image */
@@ -251,6 +255,7 @@ body {
 }
 
 
+/*Page1 style block #####################################################################################################*/
 /* Logo and Right-Aligned Text */
 .logo-section {
     align-self: flex-end;
