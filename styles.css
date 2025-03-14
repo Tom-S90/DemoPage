@@ -52,7 +52,7 @@ body {
 
 .page1-titleText{
     top: 40px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 /* Navigation Bar */
@@ -250,12 +250,12 @@ body {
 }
 /* Top Text */
 .page1-text-overlay.page1-top-text {
-    top: 6.666666667vh; /* Position at the top of the image */
+    top: 5px; /* Position at the top of the image */
 }
 
 /* Bottom Text */
 .page1-text-overlay.page1-bottom-text {
-    bottom: 20vh; /* Position at the bottom of the image */
+    bottom: 10px; /* Position at the bottom of the image */
 }
 
 
