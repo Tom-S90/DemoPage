@@ -238,10 +238,10 @@ body {
     text-align: center; /* Center the text horizontally */
     color: white; /* Text color */
     font-family: Arial, sans-serif; /* Customize font */
-    font-size: 14px; /* Customize font size */
+    font-size: 12px; /* Customize font size */
     font-weight: bold; /* Make text bold */
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    padding: 10px; /* Add padding for better readability */
+    padding: 2px; /* Add padding for better readability */
 }
 
 .page1-text-right-image-container{
@@ -251,11 +251,17 @@ body {
 /* Top Text */
 .page1-text-overlay.page1-top-text {
     top: 5px; /* Position at the top of the image */
+    margin: 13px;
+    right: 7px;
+    left: 1px;
 }
 
 /* Bottom Text */
 .page1-text-overlay.page1-bottom-text {
-    bottom: 10px; /* Position at the bottom of the image */
+    bottom: 17px;/* Position at the bottom of the image */
+    margin: 13px;
+    right: 7px;
+    left: 1px;
 }
 
 
