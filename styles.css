@@ -267,16 +267,16 @@ body {
     left: 1px;
 }
 
-[data-theme="dark"] .darkLogo, darkRightP1{
+[data-theme="dark"] .darkLogo, .darkRightP1{
     display: block;
 }
-[data-theme="dark"] .lightLogo, lightRightP1{
+[data-theme="dark"] .lightLogo, .lightRightP1{
     display: none;
 }
-[data-theme="light"] .darkLogo, darkRightP1{
+[data-theme="light"] .darkLogo, .darkRightP1{
     display: none;
 }
-[data-theme="light"] .lightLogo, lightRightP1{
+[data-theme="light"] .lightLogo, .lightRightP1{
     display: block;
 }
 
