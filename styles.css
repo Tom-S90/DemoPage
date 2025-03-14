@@ -88,19 +88,22 @@ body {
 .dark-button {
     display: none;
 }
-
 [data-theme="dark"] .light-button {
     display: none;
 }
-
 [data-theme="dark"] .dark-button {
     display: block;
 }
-
 [data-theme="dark"] .light-selected-button{
     display:none;
 }
 [data-theme="dark"] .dark-selected-button{
+    display:none;
+}
+[data-theme="light"] .light-selected-button{
+    display:none;
+}
+[data-theme="light"] .dark-selected-button{
     display:none;
 }
 
