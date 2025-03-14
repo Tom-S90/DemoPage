@@ -114,6 +114,15 @@ body {
 .nav-button-container.active .button-text {
     color: var(--text-color);
 }
+/*Selected button changes style-----------------------------------------------------*/
+[data-theme="dark"].nav-button-container.active{
+    .darkbutton{display: none;}
+    .light-selected-button {display: block;}
+}
+[data-theme="light"].nav-button-container.active{
+    .light-button{display: none;}
+    .dark-selected-button {display: block;}
+}
 
 /* Hover Effect */
 .nav-button-container:hover .button-text {
