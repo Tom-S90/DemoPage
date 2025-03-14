@@ -155,17 +155,6 @@ body {
     z-index: 1000;
 }
 
-/* theme toggle position for image once included
-
-position: absolute;
-left: 92.76%;
-right: 3.6%;
-top: 12.13%;
-bottom: 81.39%;
-
-background: #DBB92A;
-*/
-
 /* Theme Toggle Button */
 #theme-toggle {
     border-radius: 50%;
