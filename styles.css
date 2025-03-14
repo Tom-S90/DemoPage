@@ -89,7 +89,7 @@ body {
 
 /* Hide dark buttons by default */
 .dark-button, .light-selected-button,
-.dark-selected-button, .light-theme-toggle {
+.dark-selected-button, .dark-to-light-toggle {
     display: none;
 }
 
@@ -107,6 +107,16 @@ body {
 
 [data-theme="dark"] .dark-theme-toggle {
     display: none;
+}
+
+/* Hide light-to-dark toggle in dark mode */
+[data-theme="dark"] .light-to-dark-toggle {
+    display: none;
+}
+
+/* Show dark-to-light toggle in dark mode */
+[data-theme="dark"] .dark-to-light-toggle {
+    display: block;
 }
 
 /* Text Overlay */
