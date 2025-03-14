@@ -195,6 +195,62 @@ body {
     background-color: var(--page-background);
 }
 
+
+/*Page specific editions###################################################################################################### */
+/*Page 1 layout code*/
+/* Container for the entire layout */
+.page1 {
+    display: flex; /* Use Flexbox */
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between left and right containers */
+    padding: 20px; /* Optional: Add padding */
+}
+
+/* Left Image */
+.page1-left-image img {
+    width: 100%; /* Make the image responsive */
+    max-width: 500px; /* Set a max width for the left image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Right Image Container */
+.page1-right-image-container {
+    position: relative; /* Needed for absolute positioning of text */
+    max-width: 300px; /* Set a max width for the right image */
+}
+
+/* Right Image */
+.page1-right-image-container img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below the image */
+}
+
+/* Text Overlay */
+.page1-text-overlay {
+    position: absolute; /* Position text over the image */
+    left: 0;
+    right: 0;
+    text-align: center; /* Center the text horizontally */
+    color: white; /* Text color */
+    font-family: Arial, sans-serif; /* Customize font */
+    font-size: 20px; /* Customize font size */
+    font-weight: bold; /* Make text bold */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px; /* Add padding for better readability */
+}
+
+/* Top Text */
+.page1-text-overlay.page1-top-text {
+    top: 0; /* Position at the top of the image */
+}
+
+/* Bottom Text */
+.page1-text-overlay.page1-bottom-text {
+    bottom: 0; /* Position at the bottom of the image */
+}
+
+
 /* Logo and Right-Aligned Text */
 .logo-section {
     align-self: flex-end;
