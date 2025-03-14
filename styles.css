@@ -89,7 +89,7 @@ body {
 
 /* Hide dark buttons by default */
 .dark-button, .light-selected-button,
-.dark-selected-button .light-theme-toggle{
+.dark-selected-button, .light-theme-toggle{
     display: none;
 }
 
