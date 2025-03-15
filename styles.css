@@ -265,15 +265,16 @@ body {
     padding: 5px; /* Add padding for better readability */
     border-radius: 5px; /* Add rounded corners */
 }
-
-/* Top Text */
+/*Top Text*/
 .page1-text-overlay.page1-top-text {
-    align-self: flex-start; /* Align to the top */
+    position: relative;
+    bottom: 10px;
 }
 
 /* Bottom Text */
 .page1-text-overlay.page1-bottom-text {
-    align-self: flex-end; /* Align to the bottom */
+    position:relative; 
+    bottom: 60px;
 }
 
 [data-theme="dark"] .darkLogo,
