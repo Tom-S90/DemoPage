@@ -214,7 +214,7 @@ body {
     align-items: flex-start; /* Align items to the top */
     gap: 20px; /* Space between left and right containers */
     padding: 20px; /* Add padding */
-    width: 100%; /* Ensure the container takes full width */
+    width: 100vw; /* Ensure the container takes full width */
 }
 .page1-titleText{
     position: relative;
