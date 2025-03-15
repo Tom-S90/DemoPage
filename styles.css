@@ -233,6 +233,13 @@ body {
     width: 100%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
 }
+/* Right Image Container */
+ .page1-right-image-container {
+     flex: 1; /* Allow the right container to take up available space */
+     max-width: 300px; /* Set a max width for the right image */
+     position: relative; /* Needed for absolute positioning of text */
+ }
+ 
 
 /* Right Image */
 .page1-right-image-container img {
