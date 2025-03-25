@@ -54,20 +54,11 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
                 <img src="assets/dark/navbar.png" alt="Page 6" class="nav-button dark-button">
                 <img src="assets/dark/navbarSelected.png" alt="Page 6" class="nav-button dark-selected-button">
                 <img src="assets/light/navbarSelected.png" alt="Page 6" class="nav-button light-selected-button">
-                <span class="button-text">Forum</span>
-            </div>
-            <div class="nav-button-container" onclick="goToPage(7)">
-                <img src="assets/light/navbar.png" alt="Page 7" class="nav-button light-button">
-                <img src="assets/dark/navbar.png" alt="Page 7" class="nav-button dark-button">
-                <img src="assets/dark/navbarSelected.png" alt="Page 7" class="nav-button dark-selected-button">
-                <img src="assets/light/navbarSelected.png" alt="Page 7" class="nav-button light-selected-button">
                 <span class="button-text">Tienda</span>
             </div>
         </div>
         <div class="theme-toggle-container">
-            <!-- Light theme toggle (switches to dark) -->
             <img src="assets/light/themeToggle.png" id="light-to-dark-toggle" alt="Theme Toggle" class="light-to-dark-toggle">
-            <!-- Dark theme toggle (switches to light) -->
             <img src="assets/dark/themeToggle.png" id="dark-to-light-toggle" alt="Theme Toggle" class="dark-to-light-toggle">
         </div>
     </div>
@@ -76,28 +67,63 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
     <div class="container" id="container">
         <!-- Page 1 -->
         <div class="page page1">
-            <p class="page1-titleText">//**Bienvenido a </p>
-            <!-- Left Image -->
-            <div class="page1-left-image">
-                <img src="assets/light/logo.png" class="lightLogo" alt="Logo">
-                <img src="assets/dark/logo.png" class="darkLogo" alt="Logo">
-            </div>
-
-            <!-- Right Container -->
-            <div class="page1-right-image-container">
-                <!-- Right Image -->
-                <div class="page1-right-image">
+            <!-- Container 1: Left and Right Images -->
+            <div class="container-1">
+                <div class="left-image">
+                    <img src="assets/light/logo.png" class="lightLogo" alt="Logo">
+                    <img src="assets/dark/logo.png" class="darkLogo" alt="Logo">
+                </div>
+                <div class="right-image">
                     <img src="assets/light/mundogrid.png" class="lightRightP1" alt="Right Image">
                     <img src="assets/dark/mundogrid.png" class="darkRightP1" alt="Right Image">
-                    <div class="page1-text-right-image-container">
-                        <div class="page1-text-overlay page1-top-text">Mapa de contaminación lumínica</div>
-                        <div class="page1-text-overlay page1-bottom-text">Descubre cuáles son las ciudades que 
-                        más riesgo tienen de verse afectadas
-                        por la contaminación lumínica en el futuro</div>
+                    <div class="text-overlay">
+                        <div class="top-text">Mapa de contaminación lumínica</div>
+                        <div class="bottom-text">Descubre cuáles son las ciudades que más riesgo tienen de verse afectadas por la contaminación lumínica en el futuro</div>
                     </div>
-                    
                 </div>
             </div>
+
+            <!-- Container 2: 3 Images Side by Side -->
+            <div class="container-2">
+                <h2 class="section-title">Título de la Sección</h2>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="assets/light/image1.jpg" alt="Image 1">
+                        <p>Texto debajo de la imagen 1</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="assets/light/image2.jpg" alt="Image 2">
+                        <p>Texto debajo de la imagen 2</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="assets/light/image3.jpg" alt="Image 3">
+                        <p>Texto debajo de la imagen 3</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container 3: Marquee, Scrollable Text, Marquee -->
+            <div class="container-3">
+                <div class="marquee">Texto en movimiento (Marquee Superior)</div>
+                <div class="scrollable-text">
+                    <p>Este es un texto largo que se desplazará verticalmente. Puedes agregar más contenido aquí para que el desplazamiento sea visible.</p>
+                </div>
+                <div class="marquee">Texto en movimiento (Marquee Inferior)</div>
+            </div>
+
+            <!-- Container 4: Subscribe Functionality -->
+            <div class="container-4">
+                <h2>Suscríbete</h2>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Ingresa tu correo electrónico" required>
+                    <button type="submit">Suscribirse</button>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2023 Tu Sitio Web. Todos los derechos reservados.</p>
+            </footer>
         </div>
 
         <!-- Page 2 -->
@@ -109,7 +135,6 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
         <div class="page page3">
             <!-- Logo and Right-Aligned Text -->
             <div class="logo-section">
-                <img src="Assets/logo.png" alt="Logo" class="logo1">
                 <p class="right-text">Text aligned to the right under the logo</p>
             </div>
 
@@ -119,7 +144,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
 
         <!-- Page 4 -->
         <div class="page page4">
-            <h1>Page 4</h1>
+            <h1>Podcast</h1>
         </div>
 
         <!-- Page 5 -->
@@ -130,11 +155,6 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
         <!-- Page 6 -->
         <div class="page page6">
             <h1>Page 6</h1>
-        </div>
-
-        <!-- Page 7 -->
-        <div class="page page7">
-            <h1>Page 7</h1>
         </div>
     </div>
 
