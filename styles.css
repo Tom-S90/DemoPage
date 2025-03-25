@@ -254,8 +254,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
+    color: var(--text-color);
 }
 
 .top-text, .bottom-text {
