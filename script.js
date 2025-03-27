@@ -324,3 +324,56 @@ async function fetchMockVideos(type) {
     
     renderVideoList(mockResponse.items, type === 'podcast' ? podcastList : videoList, type);
 }
+
+// Subscribe Popup Functions
+function openSubscribePopup() {
+    document.getElementById('subscribe-popup').classList.add('active');
+}
+
+function closeSubscribePopup() {
+    document.getElementById('subscribe-popup').classList.remove('active');
+}
+
+// Content Popup Functions
+function openContentPopup(content) {
+    const popupBody = document.getElementById('content-popup-body');
+    popupBody.innerHTML = content;
+    document.getElementById('content-popup').classList.add('active');
+}
+
+function closeContentPopup() {
+    document.getElementById('content-popup').classList.remove('active');
+}
+
+// Handle form submission
+document.querySelector('.subscribe-form-popup').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = this.querySelector('input[type="text"]').value;
+    const email = this.querySelector('input[type="email"]').value;
+    
+    if (name && validateEmail(email)) {
+        alert(`Gracias por suscribirte, ${name}! Te hemos enviado un correo a ${email}`);
+        this.reset();
+        closeSubscribePopup();
+    } else {
+        alert('Por favor ingresa un nombre y correo electrónico válidos');
+    }
+});
+
+// Set up click handlers for the image buttons
+document.addEventListener('DOMContentLoaded', () => {
+    // Right image button
+    document.querySelectorAll('.right-image-button').forEach(button => {
+        button.addEventListener('click', () => {
+            openContentPopup('<h2>Mapa de contaminación lumínica</h2><p>Contenido detallado sobre el mapa de contaminación lumínica...</p>');
+        });
+    });
+
+    // Orb buttons
+    document.querySelectorAll('.orb-button').forEach((button, index) => {
+        button.addEventListener('click', () => {
+            const titles = ['Resplandor del cielo', 'Sobreconsumo', 'Deslumbramiento'];
+            openContentPopup(`<h2>${titles[index]}</h2><p>Contenido detallado sobre ${titles[index]}...</p>`);
+        });
+    });
+});
