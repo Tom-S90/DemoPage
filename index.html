@@ -84,13 +84,13 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <div class="container-2">
                 <h2 class="section-title">// Tipos de contaminación lumínica //</h2>
                 <div class="image-grid">
-                    <div class="image-item orb-button">
+                    <div class="image-item orb-button" data-popup-content="orb1-content">
                         <img src="assets/dark/InicioOrb1.png" alt="Image 1">
                     </div>
-                    <div class="image-item orb-button">
+                    <div class="image-item orb-button" data-popup-content="orb2-content">
                         <img src="assets/dark/InicioOrb2.png" alt="Image 2">
                     </div>
-                    <div class="image-item orb-button">
+                    <div class="image-item orb-button" data-popup-content="orb3-content">
                         <img src="assets/dark/InicioOrb3.png" alt="Image 3">
                     </div>
                 </div>
@@ -114,13 +114,22 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <div class="container-4">
                 <img src="assets/dark/SubscribeBox.png" alt="Subscribe Box" class="subscribe-box-image">
                 <div class="subscribe-box-content">
+                    <h2>¡Se parte de The MoonTower Society hoy!</h2>
                     <button class="subscribe-button" onclick="openSubscribePopup()">Suscribete</button>
                 </div>
             </div>
 
             <!-- Footer -->
             <footer class="footer">
-                <p>&copy; Aviso de privacidad</p>
+                <img src="assets/dark/FooterImage.png" alt="Footer Background" class="footer-image">
+                <div class="footer-content">
+                    <button class="footer-center-button" data-popup-content="disclaimer-content"></button>
+                    <div class="footer-social-buttons">
+                        <button class="social-button instagram" onclick="window.open('https://instagram.com')"></button>
+                        <button class="social-button facebook" onclick="window.open('https://facebook.com')"></button>
+                        <button class="social-button twitter" onclick="window.open('https://twitter.com')"></button>
+                    </div>
+                </div>
             </footer>
         </div>
 
@@ -169,17 +178,18 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <button onclick="closePopup()">X</button>
         </div>
     </div>
+<!-- Video Popup (unchanged) -->
+    <div id="video-popup" class="video-popup">
+        <!-- ... (previous popup code remains the same) ... -->
+    </div>
 
     <!-- New Subscribe Popup -->
     <div id="subscribe-popup" class="subscribe-popup">
         <div class="subscribe-popup-content">
             <button onclick="closeSubscribePopup()" class="close-subscribe-popup">X</button>
-            <h2>Suscríbete a nuestra newsletter</h2>
-            <form class="subscribe-form-popup">
-                <input type="text" placeholder="Nombre" required>
-                <input type="email" placeholder="Correo electrónico" required>
-                <button type="submit">Enviar</button>
-            </form>
+            <div id="subscribe-popup-html">
+                <!-- Content will be loaded from hidden HTML -->
+            </div>
         </div>
     </div>
 
@@ -187,7 +197,46 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
     <div id="content-popup" class="content-popup">
         <div class="content-popup-content">
             <button onclick="closeContentPopup()" class="close-content-popup">X</button>
-            <div id="content-popup-body"></div>
+            <div id="content-popup-html"></div>
+        </div>
+    </div>
+
+    <!-- Hidden HTML for popup contents -->
+    <div id="popup-contents" style="display:none;">
+        <!-- Right image content -->
+        <div id="right-image-content">
+            <h2>Mapa de contaminación lumínica</h2>
+            <p>Contenido detallado sobre el mapa de contaminación lumínica...</p>
+        </div>
+
+        <!-- Orb contents -->
+        <div id="orb1-content">
+            <h2>Resplandor del cielo</h2>
+            <p>Contenido detallado sobre el resplandor del cielo...</p>
+        </div>
+        <div id="orb2-content">
+            <h2>Sobreconsumo</h2>
+            <p>Contenido detallado sobre el sobreconsumo...</p>
+        </div>
+        <div id="orb3-content">
+            <h2>Deslumbramiento</h2>
+            <p>Contenido detallado sobre el deslumbramiento...</p>
+        </div>
+
+        <!-- Disclaimer content -->
+        <div id="disclaimer-content">
+            <h2>Disclaimer</h2>
+            <p>Everything input on this page is confidential and will not be used for purpose given this is a student project.</p>
+        </div>
+
+        <!-- Subscribe form -->
+        <div id="subscribe-content">
+            <h2>Suscríbete a nuestra newsletter</h2>
+            <form class="subscribe-form-popup">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <button type="submit">Enviar</button>
+            </form>
         </div>
     </div>
 
