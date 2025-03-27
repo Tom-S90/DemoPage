@@ -1,6 +1,7 @@
-e<!-- Personal Notes
+<!-- Personal Notes
 Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 100%);
 -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +66,6 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
 
     <!-- Page Container -->
     <div class="container" id="container">
-        <div class="container" id="container">
         <!-- Page 1 -->
         <div class="page page1">
             <!-- Container 1: Left and Right Images -->
@@ -114,6 +114,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <div class="container-4">
                 <img src="assets/dark/SubscribeBox.png" alt="Subscribe Box" class="subscribe-box-image">
                 <div class="subscribe-box-content">
+                    <h2>¡Se parte de The MoonTower Society hoy!</h2>
                     <button class="subscribe-button" onclick="openSubscribePopup()">Suscribete</button>
                 </div>
             </div>
@@ -143,7 +144,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <!-- Logo and Right-Aligned Text -->
             <div class="logo-section">
                 <h1>Videos</h1>
-                <img src= "assets/dark/TripPlanets.png">
+                <!--img src="assets/dark/TripPlanets.png" alt="Trip Planets"-->
             </div>
 
             <!-- Video List -->
@@ -153,7 +154,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
         <!-- Page 4 -->
         <div class="page page4">
             <h1>Podcasts</h1>
-            <img src="assets/dark/TripPlanets.png">
+            <!--img src="assets/dark/TripPlanets.png" alt="Trip Planets"-->
             
             <!-- Podcast List -->
             <div id="podcast-list" class="video-list"></div>
@@ -177,22 +178,18 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <button onclick="closePopup()">X</button>
         </div>
     </div>
-<!-- Video Popup (unchanged) -->
-    <div id="video-popup" class="video-popup">
-        <!-- ... (previous popup code remains the same) ... -->
-    </div>
 
-    <!-- New Subscribe Popup -->
+    <!-- Subscribe Popup -->
     <div id="subscribe-popup" class="subscribe-popup">
         <div class="subscribe-popup-content">
             <button onclick="closeSubscribePopup()" class="close-subscribe-popup">X</button>
             <div id="subscribe-popup-html">
-                <!-- Content will be loaded from hidden HTML -->
+                <!-- Content loaded from hidden HTML -->
             </div>
         </div>
     </div>
 
-    <!-- New Content Popup (for right image and orbs) -->
+    <!-- Content Popup -->
     <div id="content-popup" class="content-popup">
         <div class="content-popup-content">
             <button onclick="closeContentPopup()" class="close-content-popup">X</button>
@@ -205,21 +202,21 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
         <!-- Right image content -->
         <div id="right-image-content">
             <h2>Mapa de contaminación lumínica</h2>
-            <p>Contenido detallado sobre el mapa de contaminación lumínica...</p>
+            <p>Contenido por agregar...</p>
         </div>
 
         <!-- Orb contents -->
         <div id="orb1-content">
             <h2>Resplandor del cielo</h2>
-            <p>Contenido detallado sobre el resplandor del cielo...</p>
+            <p>Contenido por agregar...</p>
         </div>
         <div id="orb2-content">
             <h2>Sobreconsumo</h2>
-            <p>Contenido detallado sobre el sobreconsumo...</p>
+            <p>Contenido por agregar...</p>
         </div>
         <div id="orb3-content">
             <h2>Deslumbramiento</h2>
-            <p>Contenido detallado sobre el deslumbramiento...</p>
+            <p>Contenido por agregar...<p>
         </div>
 
         <!-- Disclaimer content -->
