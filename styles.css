@@ -356,17 +356,6 @@ body {
 }
 
 /* Container 4: Subscribe Functionality */
-.container-4 {
-    width: 100%;
-    max-width: 1200px;
-    margin-bottom: 40px;
-    text-align: center;
-    padding: 30px;
-    background-color: var(--accent-color);
-    color: white;
-    border-radius: 10px;
-}
-
 .container-4 h2 {
     margin-bottom: 20px;
     font-size: 1.8rem;
@@ -440,6 +429,7 @@ body {
 
 /* Subscribe Box */
 .container-4 {
+    background-color: var(--page-background);
     position: relative;
     width: 100%;
     max-width: 1200px;
@@ -455,14 +445,14 @@ body {
 
 .subscribe-box-content {
     position: absolute;
-    top: 50%;
+    top: 78%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
 }
 
 .subscribe-button {
-    padding: 12px 30px;
+    padding: 1px 10px;
     background-color: var(--accent-color);
     color: white;
     border: none;
