@@ -411,7 +411,6 @@ body {
     color: var(--theme-toggle-text);
     margin-top: auto; /* Push footer to bottom */
 }
-/* Add these new styles to your CSS file */
 
 /* Marquee Image Container */
 .marquee-image-container {
