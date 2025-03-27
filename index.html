@@ -65,6 +65,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
 
     <!-- Page Container -->
     <div class="container" id="container">
+        <div class="container" id="container">
         <!-- Page 1 -->
         <div class="page page1">
             <!-- Container 1: Left and Right Images -->
@@ -74,8 +75,8 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
                     <img src="assets/dark/logo.png" class="darkLogo" alt="Logo">
                 </div>
                 <div class="right-image">
-                    <img src="assets/light/InicioTopRight.png" class="lightRightP1" alt="Right Image">
-                    <img src="assets/dark/InicioTopRight.png" class="darkRightP1" alt="Right Image">
+                    <img src="assets/light/InicioTopRight.png" class="lightRightP1 right-image-button" alt="Right Image">
+                    <img src="assets/dark/InicioTopRight.png" class="darkRightP1 right-image-button" alt="Right Image">
                 </div>
             </div>
 
@@ -83,36 +84,39 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <div class="container-2">
                 <h2 class="section-title">// Tipos de contaminación lumínica //</h2>
                 <div class="image-grid">
-                    <div class="image-item">
+                    <div class="image-item orb-button">
                         <img src="assets/dark/InicioOrb1.png" alt="Image 1">
                     </div>
-                    <div class="image-item">
+                    <div class="image-item orb-button">
                         <img src="assets/dark/InicioOrb2.png" alt="Image 2">
                     </div>
-                    <div class="image-item">
+                    <div class="image-item orb-button">
                         <img src="assets/dark/InicioOrb3.png" alt="Image 3">
                     </div>
                 </div>
             </div>
 
-            <!-- Container 3: Marquee, Scrollable Text, Marquee -->
+            <!-- Container 3: Marquee, Image, Marquee -->
             <div class="container-3">
                 <div class="marquee"> / Marí@ gOnZ_ALEZ / NicoLE ClARk / TiM_othy King / SiLvia RaMIrez / Jo5é_Hern@nd3z / Ri_CAR_do Tor_RES / @MeliSSa_An_derSon / JoHN_MillER </div>
                 
-                <div class="scrollable-text">
-                    <img src= "assets/dark/InicioTextBox.png" alt="Scrollable Text Box">
-                    <p>Desde su origen, la contaminación lumínica ha evolucionado significativamente. En las últimas décadas, ha aumentado debido al desarrollo tecnológico y al uso generalizado de iluminación LED, que aunque es eficiente energéticamente, puede ser más intensa y perjudicial para el medio ambiente si no se utiliza adecuadamente.</p>
+                <div class="marquee-image-container">
+                    <img src="assets/dark/InicioTextBox.png" alt="Content Image" class="marquee-image">
+                    <div class="marquee-image-text">
+                        <p>Desde su origen, la contaminación lumínica ha evolucionado significativamente. En las últimas décadas, ha aumentado debido al desarrollo tecnológico y al uso generalizado de iluminación LED, que aunque es eficiente energéticamente, puede ser más intensa y perjudicial para el medio ambiente si no se utiliza adecuadamente.</p>
+                    </div>
                 </div>
+                
                 <div class="marquee"> / Marí@ gOnZ_ALEZ / NicoLE ClARk / TiM_othy King / SiLvia RaMIrez / Jo5é_Hern@nd3z / Ri_CAR_do Tor_RES / @MeliSSa_An_derSon / JoHN_MillER </div>
             </div>
 
             <!-- Container 4: Subscribe Functionality -->
             <div class="container-4">
-                <h2>¡Se parte de The MoonTower Society hoy!</h2>
-                <form class="subscribe-form">
-                    <input type="email" placeholder="Ingresa tu correo electrónico" required>
-                    <button type="submit">Suscribete</button>
-                </form>
+                <img src="assets/dark/SubscribeBox.png" alt="Subscribe Box" class="subscribe-box-image">
+                <div class="subscribe-box-content">
+                    <h2>¡Se parte de The MoonTower Society hoy!</h2>
+                    <button class="subscribe-button" onclick="openSubscribePopup()">Suscribete</button>
+                </div>
             </div>
 
             <!-- Footer -->
@@ -160,6 +164,27 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
         <div class="popup-content">
             <div id="video-frame-container"></div>
             <button onclick="closePopup()">X</button>
+        </div>
+    </div>
+
+    <!-- New Subscribe Popup -->
+    <div id="subscribe-popup" class="subscribe-popup">
+        <div class="subscribe-popup-content">
+            <button onclick="closeSubscribePopup()" class="close-subscribe-popup">X</button>
+            <h2>Suscríbete a nuestra newsletter</h2>
+            <form class="subscribe-form-popup">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- New Content Popup (for right image and orbs) -->
+    <div id="content-popup" class="content-popup">
+        <div class="content-popup-content">
+            <button onclick="closeContentPopup()" class="close-content-popup">X</button>
+            <div id="content-popup-body"></div>
         </div>
     </div>
 
