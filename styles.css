@@ -61,6 +61,26 @@ body {
 }
 
 /* ==================== */
+/* GENERAL PAGE VISIBILITY CHANGE */
+/* ==================== */
+
+.light-mode-element {
+    display: block;
+}
+
+.dark-mode-element {
+    display: none;
+}
+
+[data-theme="dark"] .light-mode-element {
+    display: none;
+}
+
+[data-theme="dark"] .dark-mode-element {
+    display: block;
+}
+
+/* ==================== */
 /* NAVIGATION BAR */
 /* ==================== */
 .nav-bar {
@@ -93,36 +113,6 @@ body {
 .nav-button {
     width: 125px;
     height: auto;
-    display: block;
-}
-
-/* Button visibility control */
-.dark-button, .light-selected-button,
-.dark-selected-button, .dark-to-light-toggle {
-    display: none;
-}
-
-[data-theme="dark"] .light-button {
-    display: none;
-}
-
-[data-theme="dark"] .dark-button {
-    display: block;
-}
-
-[data-theme="dark"] .light-theme-toggle {
-    display: block;
-}
-
-[data-theme="dark"] .dark-theme-toggle {
-    display: none;
-}
-
-[data-theme="dark"] .light-to-dark-toggle {
-    display: none;
-}
-
-[data-theme="dark"] .dark-to-light-toggle {
     display: block;
 }
 
