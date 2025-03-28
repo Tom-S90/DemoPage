@@ -230,13 +230,6 @@ function cacheData(cacheKey, data) {
 function renderVideoList(videos, containerElement, type) {
     containerElement.innerHTML = '';
 
-    // Add title
-    const titleElement = document.createElement('h2');
-    titleElement.textContent = type === 'podcast' ? 'Latest Podcast Episodes' : 'Featured Videos';
-    titleElement.style.marginBottom = '20px';
-    titleElement.style.color = 'var(--accent-color)';
-    containerElement.appendChild(titleElement);
-
     // Render each video
     videos.forEach(video => {
         const videoItem = createVideoItem(video, type);
@@ -265,19 +258,6 @@ function createVideoItem(video, type) {
     videoItem.addEventListener('click', () => openVideoPopup(video.snippet.resourceId.videoId));
     
     return videoItem;
-}
-
-function createTypeBadge(type) {
-    const typeBadge = document.createElement('span');
-    typeBadge.textContent = type === 'podcast' ? 'PODCAST' : 'VIDEO';
-    typeBadge.style.display = 'inline-block';
-    typeBadge.style.backgroundColor = 'var(--accent-color)';
-    typeBadge.style.color = 'white';
-    typeBadge.style.padding = '2px 8px';
-    typeBadge.style.borderRadius = '4px';
-    typeBadge.style.fontSize = '0.8rem';
-    typeBadge.style.marginBottom = '8px';
-    return typeBadge;
 }
 
 function createVideoTitle(titleText) {
