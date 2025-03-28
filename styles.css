@@ -21,7 +21,6 @@
     --text-overlay-color: black;
     --container-bg: #f5f5f5;
     --border-color: #ddd;
-    --accent-color: #4a6fa5;
     --general: #DBB92A;
 }
 
@@ -45,7 +44,6 @@
     --text-overlay-color: white;
     --container-bg: #2a2a2a;
     --border-color: #444;
-    --accent-color: #6d8cc7;
 }
 
 * {
@@ -352,15 +350,15 @@ body {
 
 .page1 .subscribe-box-content {
     position: absolute;
-    top: 50%;
+    top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
 }
 
 .page1 .subscribe-button {
-    padding: 12px 30px;
-    background-color: var(--accent-color);
+    padding: 1px 10px;
+    background-color: var(--general);
     color: white;
     border: none;
     border-radius: 4px;
