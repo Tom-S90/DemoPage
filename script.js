@@ -1,9 +1,16 @@
-// Cache keys for storing API responses
+/* ==================== */
+/* CONSTANTS AND CONFIG */
+/* ==================== */
 const CACHE_KEY_VIDEOS = 'youtube_videos_cache';
 const CACHE_KEY_PODCASTS = 'youtube_podcasts_cache';
-const CACHE_EXPIRY = 24 * 60 * 60 * 1000; // Cache expires after 24 hours
+const CACHE_EXPIRY = 24 * 60 * 60 * 1000; // 24 hours
+const YOUTUBE_API_KEY = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
+const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
+const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
 
-// DOM Elements
+/* ==================== */
+/* DOM ELEMENTS */
+/* ==================== */
 const lightToDarkToggle = document.getElementById('light-to-dark-toggle');
 const darkToLightToggle = document.getElementById('dark-to-light-toggle');
 const body = document.body;
@@ -14,58 +21,105 @@ const videoPopup = document.getElementById('video-popup');
 const videoFrameContainer = document.getElementById('video-frame-container');
 const subscribeForm = document.querySelector('.subscribe-form');
 
-// Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    // Set first nav button as active
+/* ==================== */
+/* INITIALIZATION */
+/* ==================== */
+document.addEventListener('DOMContentLoaded', initializeApp);
+
+function initializeApp() {
+    setActiveNavButton();
+    initializeTheme();
+    initializeMarquees();
+    setupEventListeners();
+    fetchContent();
+    setupImageButtonHandlers();
+}
+
+function setActiveNavButton() {
     document.querySelector('.nav-button-container').classList.add('active');
-    
-    // Initialize theme
+}
+
+function initializeTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     body.setAttribute('data-theme', savedTheme);
     updateThemeToggle();
-    
-    // Initialize marquees
-    initializeMarquees();
-    
-    // Set up event listeners
-    setupEventListeners();
-    
-    // Fetch content
+}
+
+function fetchContent() {
     fetchVideos();
     fetchPodcasts();
-});
+}
 
-// Setup event listeners
+/* ==================== */
+/* EVENT HANDLERS */
+/* ==================== */
 function setupEventListeners() {
-    // Theme toggles
+    setupThemeToggles();
+    setupNavButtons();
+    setupSubscribeForm();
+}
+
+function setupThemeToggles() {
     lightToDarkToggle.addEventListener('click', toggleTheme);
     darkToLightToggle.addEventListener('click', toggleTheme);
-    
-    // Navigation buttons
+}
+
+function setupNavButtons() {
     const navButtons = document.querySelectorAll('.nav-button-container');
     navButtons.forEach((button, index) => {
         button.addEventListener('click', () => goToPage(index + 1));
     });
-    
-    // Subscribe form
+}
+
+function setupSubscribeForm() {
     if (subscribeForm) {
         subscribeForm.addEventListener('submit', handleSubscribe);
     }
 }
 
-// Page navigation
+function setupImageButtonHandlers() {
+    // Right image button
+    document.querySelectorAll('.right-image-button').forEach(button => {
+        button.addEventListener('click', () => {
+            openContentPopup('right-image-content');
+        });
+    });
+
+    // Orb buttons
+    document.querySelectorAll('.orb-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const contentId = this.getAttribute('data-popup-content');
+            openContentPopup(contentId);
+        });
+    });
+
+    // Footer center button
+    document.querySelector('.footer-center-button')?.addEventListener('click', () => {
+        openContentPopup('disclaimer-content');
+    });
+}
+
+/* ==================== */
+/* PAGE FUNCTIONALITY */
+/* ==================== */
 function goToPage(pageNumber) {
+    updateActiveNavButton(pageNumber);
+    scrollToPage(pageNumber);
+}
+
+function updateActiveNavButton(pageNumber) {
     const buttons = document.querySelectorAll('.nav-button-container');
-    
-    // Update active button
     buttons.forEach(button => button.classList.remove('active'));
     buttons[pageNumber - 1].classList.add('active');
-    
-    // Scroll to page
+}
+
+function scrollToPage(pageNumber) {
     container.style.transform = `translateX(-${(pageNumber - 1) * 100}vw)`;
 }
 
-// Theme management
+/* ==================== */
+/* THEME MANAGEMENT */
+/* ==================== */
 function toggleTheme() {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -76,18 +130,14 @@ function toggleTheme() {
 
 function updateThemeToggle() {
     const currentTheme = body.getAttribute('data-theme');
-    if (currentTheme === 'dark') {
-        darkToLightToggle.style.display = 'block';
-        lightToDarkToggle.style.display = 'none';
-    } else {
-        darkToLightToggle.style.display = 'none';
-        lightToDarkToggle.style.display = 'block';
-    }
+    darkToLightToggle.style.display = currentTheme === 'dark' ? 'block' : 'none';
+    lightToDarkToggle.style.display = currentTheme === 'dark' ? 'none' : 'block';
 }
 
-// Video functionality
+/* ==================== */
+/* CONTENT FETCHING */
+/* ==================== */
 async function fetchVideos() {
-    // Check cache first
     const cachedData = getCachedData(CACHE_KEY_VIDEOS);
     if (cachedData) {
         renderVideoList(cachedData, videoList, 'video');
@@ -95,10 +145,7 @@ async function fetchVideos() {
     }
 
     try {
-        const apiKey = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
-        const playlistId = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6'; // Replace with your video playlist ID
-        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${playlistId}&part=snippet&maxResults=5`;
-
+        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${YOUTUBE_API_KEY}&playlistId=${VIDEO_PLAYLIST_ID}&part=snippet&maxResults=5`;
         const response = await fetch(apiUrl);
         const data = await response.json();
 
@@ -107,19 +154,15 @@ async function fetchVideos() {
             renderVideoList(data.items, videoList, 'video');
         } else {
             console.error('No videos found');
-            // Fallback to mock data if needed
             // fetchMockVideos('video');
         }
     } catch (error) {
         console.error('Error fetching videos:', error);
-        // Fallback to mock data if needed
         // fetchMockVideos('video');
     }
 }
 
-// Podcast functionality
 async function fetchPodcasts() {
-    // Check cache first
     const cachedData = getCachedData(CACHE_KEY_PODCASTS);
     if (cachedData) {
         renderVideoList(cachedData, podcastList, 'podcast');
@@ -127,10 +170,7 @@ async function fetchPodcasts() {
     }
 
     try {
-        const apiKey = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
-        const playlistId = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
-        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${playlistId}&part=snippet&maxResults=5`;
-
+        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${YOUTUBE_API_KEY}&playlistId=${PODCAST_PLAYLIST_ID}&part=snippet&maxResults=5`;
         const response = await fetch(apiUrl);
         const data = await response.json();
 
@@ -139,16 +179,17 @@ async function fetchPodcasts() {
             renderVideoList(data.items, podcastList, 'podcast');
         } else {
             console.error('No podcasts found');
-            // Fallback to mock data if needed
             // fetchMockVideos('podcast');
         }
     } catch (error) {
         console.error('Error fetching podcasts:', error);
-        // Fallback to mock data if needed
         // fetchMockVideos('podcast');
     }
 }
 
+/* ==================== */
+/* CACHE MANAGEMENT */
+/* ==================== */
 function getCachedData(cacheKey) {
     const cachedData = localStorage.getItem(cacheKey);
     if (!cachedData) return null;
@@ -170,53 +211,87 @@ function cacheData(cacheKey, data) {
     localStorage.setItem(cacheKey, JSON.stringify(cache));
 }
 
+/* ==================== */
+/* CONTENT RENDERING */
+/* ==================== */
 function renderVideoList(videos, containerElement, type) {
     containerElement.innerHTML = '';
 
-    // Add a title specific to the content type
+    // Add title
     const titleElement = document.createElement('h2');
     titleElement.textContent = type === 'podcast' ? 'Latest Podcast Episodes' : 'Featured Videos';
     titleElement.style.marginBottom = '20px';
     titleElement.style.color = 'var(--accent-color)';
     containerElement.appendChild(titleElement);
 
+    // Render each video
     videos.forEach(video => {
-        const videoItem = document.createElement('div');
-        videoItem.classList.add('video-item');
-
-        const thumbnail = document.createElement('img');
-        thumbnail.src = video.snippet.thumbnails.medium.url;
-        thumbnail.alt = video.snippet.title;
-
-        const videoText = document.createElement('div');
-        videoText.classList.add('video-text');
-
-        const title = document.createElement('h3');
-        title.textContent = video.snippet.title;
-
-        const description = document.createElement('p');
-        description.textContent = video.snippet.description;
-
-        // Add type indicator
-        const typeBadge = document.createElement('span');
-        typeBadge.textContent = type === 'podcast' ? 'PODCAST' : 'VIDEO';
-        typeBadge.style.display = 'inline-block';
-        typeBadge.style.backgroundColor = 'var(--accent-color)';
-        typeBadge.style.color = 'white';
-        typeBadge.style.padding = '2px 8px';
-        typeBadge.style.borderRadius = '4px';
-        typeBadge.style.fontSize = '0.8rem';
-        typeBadge.style.marginBottom = '8px';
-
-        videoText.append(typeBadge, title, description);
-        videoItem.append(thumbnail, videoText);
+        const videoItem = createVideoItem(video, type);
         containerElement.appendChild(videoItem);
-
-        videoItem.addEventListener('click', () => openVideoPopup(video.snippet.resourceId.videoId));
     });
 }
 
+function createVideoItem(video, type) {
+    const videoItem = document.createElement('div');
+    videoItem.classList.add('video-item');
+
+    const thumbnail = document.createElement('img');
+    thumbnail.src = video.snippet.thumbnails.medium.url;
+    thumbnail.alt = video.snippet.title;
+
+    const videoText = document.createElement('div');
+    videoText.classList.add('video-text');
+
+    const typeBadge = createTypeBadge(type);
+    const title = createVideoTitle(video.snippet.title);
+    const description = createVideoDescription(video.snippet.description);
+
+    videoText.append(typeBadge, title, description);
+    videoItem.append(thumbnail, videoText);
+    
+    videoItem.addEventListener('click', () => openVideoPopup(video.snippet.resourceId.videoId));
+    
+    return videoItem;
+}
+
+function createTypeBadge(type) {
+    const typeBadge = document.createElement('span');
+    typeBadge.textContent = type === 'podcast' ? 'PODCAST' : 'VIDEO';
+    typeBadge.style.display = 'inline-block';
+    typeBadge.style.backgroundColor = 'var(--accent-color)';
+    typeBadge.style.color = 'white';
+    typeBadge.style.padding = '2px 8px';
+    typeBadge.style.borderRadius = '4px';
+    typeBadge.style.fontSize = '0.8rem';
+    typeBadge.style.marginBottom = '8px';
+    return typeBadge;
+}
+
+function createVideoTitle(titleText) {
+    const title = document.createElement('h3');
+    title.textContent = titleText;
+    return title;
+}
+
+function createVideoDescription(descriptionText) {
+    const description = document.createElement('p');
+    description.textContent = descriptionText;
+    return description;
+}
+
+/* ==================== */
+/* POPUP FUNCTIONALITY */
+/* ==================== */
+// Video Popup
 function openVideoPopup(videoId) {
+    const iframe = createVideoIframe(videoId);
+    videoFrameContainer.innerHTML = '';
+    videoFrameContainer.appendChild(iframe);
+    showPopup(videoPopup);
+    setupPopupCloseHandlers(videoPopup, closePopup);
+}
+
+function createVideoIframe(videoId) {
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     iframe.width = '100%';
@@ -224,53 +299,109 @@ function openVideoPopup(videoId) {
     iframe.frameBorder = '0';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
-
-    videoFrameContainer.innerHTML = '';
-    videoFrameContainer.appendChild(iframe);
-    videoPopup.classList.add('active');
-
-    // Close when clicking outside the popup content
-    videoPopup.addEventListener('click', (e) => {
-        if (e.target === videoPopup) closePopup();
-    });
-
-    // Close with Escape key
-    document.addEventListener('keydown', function handleEscape(e) {
-        if (e.key === 'Escape') {
-            closePopup();
-            document.removeEventListener('keydown', handleEscape);
-        }
-    });
+    return iframe;
 }
 
 function closePopup() {
     videoFrameContainer.innerHTML = '';
-    videoPopup.classList.remove('active');
+    hidePopup(videoPopup);
 }
 
-// Marquee functionality
+// Subscribe Popup
+function openSubscribePopup() {
+    const popupContent = document.getElementById('subscribe-content').innerHTML;
+    document.getElementById('subscribe-popup-html').innerHTML = popupContent;
+    showPopup(subscribePopup);
+    
+    const form = document.querySelector('#subscribe-popup .subscribe-form-popup');
+    if (form) {
+        form.addEventListener('submit', handleSubscribeFormSubmit);
+    }
+}
+
+function closeSubscribePopup() {
+    hidePopup(subscribePopup);
+}
+
+function handleSubscribeFormSubmit(e) {
+    e.preventDefault();
+    const name = this.querySelector('input[type="text"]').value;
+    const email = this.querySelector('input[type="email"]').value;
+    
+    if (name && validateEmail(email)) {
+        alert(`Gracias por suscribirte, ${name}! Te hemos enviado un correo a ${email}`);
+        this.reset();
+        closeSubscribePopup();
+    } else {
+        alert('Por favor ingresa un nombre y correo electrónico válidos');
+    }
+}
+
+// Content Popup
+function openContentPopup(contentId) {
+    const content = document.getElementById(contentId).innerHTML;
+    document.getElementById('content-popup-html').innerHTML = content;
+    showPopup(contentPopup);
+    setupPopupCloseHandlers(contentPopup, closeContentPopup);
+}
+
+function closeContentPopup() {
+    hidePopup(contentPopup);
+}
+
+// Generic Popup Functions
+function showPopup(popupElement) {
+    popupElement.classList.add('active');
+}
+
+function hidePopup(popupElement) {
+    popupElement.classList.remove('active');
+}
+
+function setupPopupCloseHandlers(popupElement, closeFunction) {
+    // Click outside
+    popupElement.addEventListener('click', (e) => {
+        if (e.target === popupElement) closeFunction();
+    });
+
+    // Escape key
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeFunction();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
+}
+
+/* ==================== */
+/* MARQUEE FUNCTIONALITY */
+/* ==================== */
 function initializeMarquees() {
     const marquees = document.querySelectorAll('.marquee');
     marquees.forEach(marquee => {
-        // Create span element if not already present
-        let span = marquee.querySelector('span');
-        if (!span) {
-            span = document.createElement('span');
-            span.textContent = marquee.textContent;
-            marquee.innerHTML = '';
-            marquee.appendChild(span);
-        }
-        
-        // Duplicate content for seamless looping
-        span.innerHTML += span.innerHTML;
-        
-        // Set animation duration based on content length
-        const duration = span.textContent.length / 10;
-        span.style.animationDuration = `${duration}s`;
+        let span = marquee.querySelector('span') || createMarqueeSpan(marquee);
+        setupMarqueeAnimation(span);
     });
 }
 
-// Form handling
+function createMarqueeSpan(marquee) {
+    const span = document.createElement('span');
+    span.textContent = marquee.textContent;
+    marquee.innerHTML = '';
+    marquee.appendChild(span);
+    return span;
+}
+
+function setupMarqueeAnimation(span) {
+    span.innerHTML += span.innerHTML;
+    const duration = span.textContent.length / 10;
+    span.style.animationDuration = `${duration}s`;
+}
+
+/* ==================== */
+/* FORM HANDLING */
+/* ==================== */
 function handleSubscribe(e) {
     e.preventDefault();
     const emailInput = e.target.querySelector('input[type="email"]');
@@ -289,7 +420,9 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-// Mock data for testing
+/* ==================== */
+/* MOCK DATA (DEV ONLY) */
+/* ==================== */
 async function fetchMockVideos(type) {
     await new Promise(resolve => setTimeout(resolve, 1000));
     
@@ -324,56 +457,3 @@ async function fetchMockVideos(type) {
     
     renderVideoList(mockResponse.items, type === 'podcast' ? podcastList : videoList, type);
 }
-
-// Subscribe Popup Functions
-function openSubscribePopup() {
-    document.getElementById('subscribe-popup').classList.add('active');
-}
-
-function closeSubscribePopup() {
-    document.getElementById('subscribe-popup').classList.remove('active');
-}
-
-// Content Popup Functions
-function openContentPopup(content) {
-    const popupBody = document.getElementById('content-popup-body');
-    popupBody.innerHTML = content;
-    document.getElementById('content-popup').classList.add('active');
-}
-
-function closeContentPopup() {
-    document.getElementById('content-popup').classList.remove('active');
-}
-
-// Handle form submission
-document.querySelector('.subscribe-form-popup').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = this.querySelector('input[type="text"]').value;
-    const email = this.querySelector('input[type="email"]').value;
-    
-    if (name && validateEmail(email)) {
-        alert(`Gracias por suscribirte, ${name}! Te hemos enviado un correo a ${email}`);
-        this.reset();
-        closeSubscribePopup();
-    } else {
-        alert('Por favor ingresa un nombre y correo electrónico válidos');
-    }
-});
-
-// Set up click handlers for the image buttons
-document.addEventListener('DOMContentLoaded', () => {
-    // Right image button
-    document.querySelectorAll('.right-image-button').forEach(button => {
-        button.addEventListener('click', () => {
-            openContentPopup('<h2>Mapa de contaminación lumínica</h2><p>Contenido detallado sobre el mapa de contaminación lumínica...</p>');
-        });
-    });
-
-    // Orb buttons
-    document.querySelectorAll('.orb-button').forEach((button, index) => {
-        button.addEventListener('click', () => {
-            const titles = ['Resplandor del cielo', 'Sobreconsumo', 'Deslumbramiento'];
-            openContentPopup(`<h2>${titles[index]}</h2><p>Contenido detallado sobre ${titles[index]}...</p>`);
-        });
-    });
-});
