@@ -127,7 +127,7 @@ body {
     text-align: center;
     pointer-events: none;
 }
-
+/* NAVBAR-SPECIFIC THEME TOGGLES (Bc it's silly sometimes ig, idk. It works. DON'T touch)*/
 .nav-button-container.active .button-text {
     color: var(--text-color);
 }
