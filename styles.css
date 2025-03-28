@@ -22,6 +22,7 @@
     --container-bg: #f5f5f5;
     --border-color: #ddd;
     --general: #DBB92A;
+    --accent-color: #4CAF50;
 }
 
 [data-theme="dark"] {
@@ -61,9 +62,8 @@ body {
 }
 
 /* ==================== */
-/* GENERAL PAGE VISIBILITY CHANGE */
+/* GENERAL ELEMENT VISIBILITY */
 /* ==================== */
-
 .light-mode-element {
     display: block;
 }
@@ -281,6 +281,7 @@ body {
     padding: 15px;
     border-radius: 8px;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .page1 .image-item:hover {
@@ -293,10 +294,6 @@ body {
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 10px;
-}
-
-.page1 .orb-button {
-    cursor: pointer;
 }
 
 /* Container 3: Marquee, Image, Marquee */
@@ -469,8 +466,47 @@ body {
 /* ==================== */
 /* PAGE 2: ARTICULOS */
 /* ==================== */
-.page2 {
-    /* Add specific styles for Page 2 here */
+.page2 .articles-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.page2 h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+.page2 .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.page2 .article-item {
+    background-color: var(--container-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.page2 .article-item:hover {
+    transform: translateY(-5px);
+}
+
+.page2 .article-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.page2 .article-item h3 {
+    padding: 15px;
+    text-align: center;
+    color: var(--text-color);
 }
 
 /* ==================== */
@@ -480,28 +516,23 @@ body {
     padding-top: 100px;
 }
 
-.page3 .logo-section {
+.page3 .videos-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.page3 h1 {
     text-align: center;
     margin-bottom: 30px;
-}
-
-.page3 .logo-section h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
 }
 
-.page3 .logo-section img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Video List */
 .page3 .video-list {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
     margin-top: 20px;
 }
 
@@ -554,21 +585,20 @@ body {
 /* ==================== */
 .page4 {
     padding-top: 100px;
-    text-align: center;
+}
+
+.page4 .podcasts-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
 }
 
 .page4 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.page4 img {
-    max-width: 100%;
-    height: auto;
+    text-align: center;
     margin-bottom: 30px;
+    font-size: 2.5rem;
 }
 
-/* Podcast List uses same styles as video-list */
 .page4 .video-list {
     width: 100%;
     max-width: 1200px;
@@ -578,15 +608,103 @@ body {
 /* ==================== */
 /* PAGE 5: BLOGS */
 /* ==================== */
-.page5 {
-    /* Add specific styles for Page 5 here */
+.page5 .blogs-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.page5 h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+.page5 .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.page5 .blog-item {
+    background-color: var(--container-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.page5 .blog-item:hover {
+    transform: translateY(-5px);
+}
+
+.page5 .blog-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.page5 .blog-item h3 {
+    padding: 15px;
+    text-align: center;
+    color: var(--text-color);
 }
 
 /* ==================== */
 /* PAGE 6: TIENDA */
 /* ==================== */
-.page6 {
-    /* Add specific styles for Page 6 here */
+.page6 .store-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.page6 h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+.page6 .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.page6 .product-item {
+    background-color: var(--container-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+.page6 .product-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.page6 .product-item h3 {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.page6 .buy-button {
+    padding: 8px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.page6 .buy-button:hover {
+    background-color: var(--button-hover-background);
 }
 
 /* ==================== */
@@ -602,6 +720,9 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -625,11 +746,11 @@ body {
     max-width: 800px;
     color: var(--popup-text);
     margin: 20px auto;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .content-popup-content {
-    max-height: 90%;
-    overflow-y: auto;
     transform: translateY(100%);
     transition: transform 0.3s ease-in-out;
 }
@@ -664,6 +785,17 @@ body {
     font-weight: bold;
 }
 
+/* Popup Button Styles */
+.popup-button {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.popup-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
 /* Subscribe Form in Popup */
 .subscribe-form-popup input {
     display: block;
@@ -692,4 +824,65 @@ body {
 .subscribe-form-popup button:hover {
     background-color: var(--button-hover-background);
     color: var(--button-hover-text);
+}
+
+/* ==================== */
+/* RESPONSIVE DESIGN */
+/* ==================== */
+@media (max-width: 768px) {
+    .container {
+        width: 600vw;
+    }
+
+    .page {
+        padding-top: 120px;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .button-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-button-container {
+        margin-bottom: 5px;
+    }
+
+    .theme-toggle-container {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .page1 .container-1 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .page1 .left-image,
+    .page1 .right-image {
+        max-width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .page3 .video-item,
+    .page4 .video-item {
+        flex-direction: column;
+    }
+
+    .page3 .video-item img,
+    .page4 .video-item img {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .page2 .article-grid,
+    .page5 .blog-grid,
+    .page6 .product-grid {
+        grid-template-columns: 1fr;
+    }
 }
