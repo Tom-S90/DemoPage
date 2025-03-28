@@ -736,6 +736,23 @@ body {
     display: block;
 }
 
+/* Blog Image Visibility BC for some fucking reason it doesnt hide with the general code >:v */
+.blog-image.light-mode-element {
+    display: block;
+}
+
+.blog-image.dark-mode-element {
+    display: none;
+}
+
+[data-theme="dark"] .blog-image.light-mode-element {
+    display: none;
+}
+
+[data-theme="dark"] .blog-image.dark-mode-element {
+    display: block;
+}
+
 /* ==================== */
 /* PAGE 6: TIENDA */
 /* ==================== */
