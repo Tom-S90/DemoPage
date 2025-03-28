@@ -80,23 +80,33 @@ function setupSubscribeForm() {
 function setupImageButtonHandlers() {
     // Right image button
     document.querySelectorAll('.right-image-button').forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             openContentPopup('right-image-content');
         });
     });
 
     // Orb buttons
     document.querySelectorAll('.orb-button').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
             const contentId = this.getAttribute('data-popup-content');
-            openContentPopup(contentId);
+            if (contentId) {
+                openContentPopup(contentId);
+            } else {
+                console.error('No data-popup-content attribute found');
+            }
         });
     });
 
     // Footer center button
-    document.querySelector('.footer-center-button')?.addEventListener('click', () => {
-        openContentPopup('disclaimer-content');
-    });
+    const footerButton = document.querySelector('.footer-center-button');
+    if (footerButton) {
+        footerButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContentPopup('disclaimer-content');
+        });
+    }
 }
 
 /* ==================== */
@@ -339,7 +349,14 @@ function handleSubscribeFormSubmit(e) {
 
 // Content Popup
 function openContentPopup(contentId) {
-    const content = document.getElementById(contentId).innerHTML;
+    console.log('Opening popup for:', contentId); // Debug line
+    const contentElement = document.getElementById(contentId);
+    if (!contentElement) {
+        console.error('Content element not found:', contentId);
+        return;
+    }
+    
+    const content = contentElement.innerHTML;
     document.getElementById('content-popup-html').innerHTML = content;
     showPopup(contentPopup);
     setupPopupCloseHandlers(contentPopup, closeContentPopup);
