@@ -428,7 +428,12 @@ body {
     border: none;
     cursor: pointer;
     z-index: 2;
-    font-size: 1.0rem;
+    font-size:1rem;
+    transition: none !important;
+}
+
+.page1 .footer-center-button:hover {
+    transform: translate(-50%, -50%) !important;
 }
 
 .page1 .footer-social-buttons {
