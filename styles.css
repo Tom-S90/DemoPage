@@ -116,6 +116,36 @@ body {
     display: block;
 }
 
+/* Button visibility control */
+.dark-button, .light-selected-button,
+.dark-selected-button, .dark-to-light-toggle {
+    display: none;
+}
+
+[data-theme="dark"] .light-button {
+    display: none;
+}
+
+[data-theme="dark"] .dark-button {
+    display: block;
+}
+
+[data-theme="dark"] .light-theme-toggle {
+    display: block;
+}
+
+[data-theme="dark"] .dark-theme-toggle {
+    display: none;
+}
+
+[data-theme="dark"] .light-to-dark-toggle {
+    display: none;
+}
+
+[data-theme="dark"] .dark-to-light-toggle {
+    display: block;
+}
+
 .button-text {
     position: absolute;
     top: 50%;
@@ -127,7 +157,7 @@ body {
     text-align: center;
     pointer-events: none;
 }
-/* NAVBAR-SPECIFIC THEME TOGGLES (Bc it's silly sometimes ig, idk. It works. DON'T touch)*/
+
 .nav-button-container.active .button-text {
     color: var(--text-color);
 }
