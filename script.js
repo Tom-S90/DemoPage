@@ -73,19 +73,9 @@ function setupNavButtons() {
     });
 }
 
-function setupSubscribeButton() {
-    if (subscribeButton) {
-        subscribeButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            openSubscribePopup();
-        });
-    }
-}
-
 function setupButtonHandlers() {
-    // Setup all popup buttons - including subscribe button
+    // Setup all popup buttons
     document.querySelectorAll('.popup-button').forEach(button => {
-        // Remove any existing click handlers to prevent duplicates
         button.removeEventListener('click', handlePopupButtonClick);
         button.addEventListener('click', handlePopupButtonClick);
     });
@@ -99,7 +89,6 @@ function setupButtonHandlers() {
     });
 }
 
-// New dedicated handler for popup buttons
 function handlePopupButtonClick(e) {
     e.preventDefault();
     const contentId = this.getAttribute('data-popup-content');
@@ -153,7 +142,7 @@ function updateThemeToggle() {
 async function fetchVideos() {
     const cachedData = getCachedData(CACHE_KEY_VIDEOS);
     if (cachedData) {
-        renderVideoList(cachedData, videoList, 'video');
+        renderVideoList(cachedData, videoList);
         return;
     }
 
@@ -164,21 +153,21 @@ async function fetchVideos() {
 
         if (data.items) {
             cacheData(CACHE_KEY_VIDEOS, data.items);
-            renderVideoList(data.items, videoList, 'video');
+            renderVideoList(data.items, videoList);
         } else {
             console.error('No videos found');
-            fetchMockVideos('video');
+            fetchMockVideos();
         }
     } catch (error) {
         console.error('Error fetching videos:', error);
-        fetchMockVideos('video');
+        fetchMockVideos();
     }
 }
 
 async function fetchPodcasts() {
     const cachedData = getCachedData(CACHE_KEY_PODCASTS);
     if (cachedData) {
-        renderVideoList(cachedData, podcastList, 'podcast');
+        renderVideoList(cachedData, podcastList);
         return;
     }
 
@@ -189,14 +178,14 @@ async function fetchPodcasts() {
 
         if (data.items) {
             cacheData(CACHE_KEY_PODCASTS, data.items);
-            renderVideoList(data.items, podcastList, 'podcast');
+            renderVideoList(data.items, podcastList);
         } else {
             console.error('No podcasts found');
-            fetchMockVideos('podcast');
+            fetchMockPodcasts();
         }
     } catch (error) {
         console.error('Error fetching podcasts:', error);
-        fetchMockVideos('podcast');
+        fetchMockPodcasts();
     }
 }
 
@@ -227,64 +216,44 @@ function cacheData(cacheKey, data) {
 /* ==================== */
 /* CONTENT RENDERING */
 /* ==================== */
-function renderVideoList(videos, containerElement, type) {
+function renderVideoList(items, containerElement) {
     containerElement.innerHTML = '';
 
-    // Render each video
-    videos.forEach(video => {
-        const videoItem = createVideoItem(video, type);
-        containerElement.appendChild(videoItem);
+    items.forEach(item => {
+        const itemElement = createMediaItem(item);
+        containerElement.appendChild(itemElement);
     });
 }
 
-function createVideoItem(video, type) {
-    const videoItem = document.createElement('div');
-    videoItem.classList.add('video-item');
+function createMediaItem(media) {
+    const item = document.createElement('div');
+    item.classList.add('video-item');
 
     const thumbnail = document.createElement('img');
-    thumbnail.src = video.snippet.thumbnails.medium.url;
-    thumbnail.alt = video.snippet.title;
+    thumbnail.src = media.snippet.thumbnails.medium.url;
+    thumbnail.alt = media.snippet.title;
 
-    const videoText = document.createElement('div');
-    videoText.classList.add('video-text');
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('video-text');
 
-    const typeBadge = createTypeBadge(type);
-    const title = createVideoTitle(video.snippet.title);
-    const description = createVideoDescription(video.snippet.description);
-
-    videoText.append(typeBadge, title, description);
-    videoItem.append(thumbnail, videoText);
-    
-    videoItem.addEventListener('click', () => openVideoPopup(video.snippet.resourceId.videoId));
-    
-    return videoItem;
-}
-
-function createVideoTitle(titleText) {
     const title = document.createElement('h3');
-    title.textContent = titleText;
-    return title;
-}
+    title.textContent = media.snippet.title;
 
-function createVideoDescription(descriptionText) {
     const description = document.createElement('p');
-    description.textContent = descriptionText;
-    return description;
+    description.textContent = media.snippet.description;
+
+    textContainer.append(title, description);
+    item.append(thumbnail, textContainer);
+    
+    item.addEventListener('click', () => openVideoPopup(media.snippet.resourceId.videoId));
+    
+    return item;
 }
 
 /* ==================== */
 /* POPUP FUNCTIONALITY */
 /* ==================== */
-// Video Popup
 function openVideoPopup(videoId) {
-    const iframe = createVideoIframe(videoId);
-    videoFrameContainer.innerHTML = '';
-    videoFrameContainer.appendChild(iframe);
-    showPopup(videoPopup);
-    setupPopupCloseHandlers(videoPopup, closePopup);
-}
-
-function createVideoIframe(videoId) {
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     iframe.width = '100%';
@@ -292,7 +261,11 @@ function createVideoIframe(videoId) {
     iframe.frameBorder = '0';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
-    return iframe;
+
+    videoFrameContainer.innerHTML = '';
+    videoFrameContainer.appendChild(iframe);
+    showPopup(videoPopup);
+    setupPopupCloseHandlers(videoPopup, closePopup);
 }
 
 function closePopup() {
@@ -300,7 +273,6 @@ function closePopup() {
     hidePopup(videoPopup);
 }
 
-// Subscribe Popup
 function openSubscribePopup() {
     const popupContent = document.getElementById('subscribe-content').innerHTML;
     document.getElementById('subscribe-popup-html').innerHTML = popupContent;
@@ -330,7 +302,6 @@ function handleSubscribeFormSubmit(e) {
     }
 }
 
-// Content Popup
 function openContentPopup(contentId) {
     const contentElement = document.getElementById(contentId);
     if (!contentElement) {
@@ -348,7 +319,6 @@ function closeContentPopup() {
     hidePopup(contentPopup);
 }
 
-// Generic Popup Functions
 function showPopup(popupElement) {
     popupElement.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -360,12 +330,10 @@ function hidePopup(popupElement) {
 }
 
 function setupPopupCloseHandlers(popupElement, closeFunction) {
-    // Click outside
     popupElement.addEventListener('click', (e) => {
         if (e.target === popupElement) closeFunction();
     });
 
-    // Escape key
     const handleEscape = (e) => {
         if (e.key === 'Escape') {
             closeFunction();
@@ -411,15 +379,15 @@ function validateEmail(email) {
 /* ==================== */
 /* MOCK DATA (DEV ONLY) */
 /* ==================== */
-async function fetchMockVideos(type) {
+async function fetchMockVideos() {
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     const mockResponse = {
         items: [
             {
                 snippet: {
-                    title: `Sample ${type === 'podcast' ? 'Podcast' : 'Video'} 1`,
-                    description: `This is a sample ${type} description.`,
+                    title: "Understanding Light Pollution",
+                    description: "An introduction to the effects of artificial light at night.",
                     thumbnails: {
                         medium: { url: 'https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg' }
                     },
@@ -430,8 +398,8 @@ async function fetchMockVideos(type) {
             },
             {
                 snippet: {
-                    title: `Sample ${type === 'podcast' ? 'Podcast' : 'Video'} 2`,
-                    description: `This is another sample ${type} description.`,
+                    title: "Solutions for Dark Skies",
+                    description: "How we can reduce light pollution in our communities.",
                     thumbnails: {
                         medium: { url: 'https://img.youtube.com/vi/yPYZpwSpKmA/mqdefault.jpg' }
                     },
@@ -443,5 +411,40 @@ async function fetchMockVideos(type) {
         ]
     };
     
-    renderVideoList(mockResponse.items, type === 'podcast' ? podcastList : videoList, type);
+    renderVideoList(mockResponse.items, videoList);
+}
+
+async function fetchMockPodcasts() {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const mockResponse = {
+        items: [
+            {
+                snippet: {
+                    title: "Light Pollution Podcast Ep. 1",
+                    description: "Interview with a light pollution researcher.",
+                    thumbnails: {
+                        medium: { url: 'https://img.youtube.com/vi/tgbNymZ7vqY/mqdefault.jpg' }
+                    },
+                    resourceId: {
+                        videoId: 'tgbNymZ7vqY'
+                    }
+                }
+            },
+            {
+                snippet: {
+                    title: "Urban Lighting Solutions",
+                    description: "How cities can implement better lighting policies.",
+                    thumbnails: {
+                        medium: { url: 'https://img.youtube.com/vi/zpOULjyy-n8/mqdefault.jpg' }
+                    },
+                    resourceId: {
+                        videoId: 'zpOULjyy-n8'
+                    }
+                }
+            }
+        ]
+    };
+    
+    renderVideoList(mockResponse.items, podcastList);
 }
