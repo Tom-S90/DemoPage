@@ -496,8 +496,6 @@ body {
 
 .page2 .article-item {
     background-color: var(--page-background);
-    border-color: red;
-    border: solid 2px;
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
@@ -514,8 +512,7 @@ body {
 }
 
 .page2 .article-item h3 {
-    padding: 15px;
-    text-align: center;
+    text-align: left;
     color: var(--text-color);
 }
 
@@ -698,8 +695,6 @@ body {
 
 .page5 .blog-item {
     background-color: var(--page-background);
-    border: 2px solid var(--text-color); /* Added border */
-    border-radius: 8px; /* Added rounded corners */
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
@@ -710,7 +705,6 @@ body {
 
 .page5 .blog-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Added subtle shadow on hover */
 }
 
 .page5 .blog-item h3 {
@@ -727,6 +721,7 @@ body {
 .page5 .blog-item .image-container {
     margin-top: auto; /* Pushes image to bottom */
     width: 100%;
+    border: solid 1px;
 }
 
 .page5 .blog-item img {
