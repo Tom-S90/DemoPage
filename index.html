@@ -75,8 +75,8 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
                     <img src="assets/dark/logo.png" class="dark-mode-element" alt="Logo">
                 </div>
                 <div class="right-image">
-                    <img src="assets/light/InicioTopRight.png" class="light-mode-element right-image-button" alt="Right Image">
-                    <img src="assets/dark/InicioTopRight.png" class="dark-mode-element right-image-button" alt="Right Image">
+                    <img src="assets/light/InicioTopRight.png" class="light-mode-element right-image-button popup-button" alt="Right Image" data-popup-content="right-image-content">
+                    <img src="assets/dark/InicioTopRight.png" class="dark-mode-element right-image-button popup-button" alt="Right Image" data-popup-content="right-image-content">
                 </div>
             </div>
 
@@ -84,15 +84,15 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <div class="container-2">
                 <h2 class="section-title">// Tipos de contaminación lumínica //</h2>
                 <div class="image-grid">
-                    <div class="image-item orb-button" data-popup-content="orb1-content">
-                        <img src="assets/light/InicioOrb1.png" alt="Image 1" class="light-mode-element" >
+                    <div class="image-item popup-button orb-button" data-popup-content="orb1-content">
+                        <img src="assets/light/InicioOrb1.png" alt="Image 1" class="light-mode-element">
                         <img src="assets/dark/InicioOrb1.png" alt="Image 1" class="dark-mode-element">
                     </div>
-                    <div class="image-item orb-button" data-popup-content="orb2-content">
+                    <div class="image-item popup-button orb-button" data-popup-content="orb2-content">
                         <img src="assets/light/InicioOrb2.png" alt="Image 2" class="light-mode-element">
                         <img src="assets/dark/InicioOrb2.png" alt="Image 2" class="dark-mode-element">
                     </div>
-                    <div class="image-item orb-button" data-popup-content="orb3-content">
+                    <div class="image-item popup-button orb-button" data-popup-content="orb3-content">
                         <img src="assets/light/InicioOrb3.png" alt="Image 3" class="light-mode-element">
                         <img src="assets/dark/InicioOrb3.png" alt="Image 3" class="dark-mode-element">
                     </div>
@@ -104,7 +104,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
                 <div class="marquee"> / Marí@ gOnZ_ALEZ / NicoLE ClARk / TiM_othy King / SiLvia RaMIrez / Jo5é_Hern@nd3z / Ri_CAR_do Tor_RES / @MeliSSa_An_derSon / JoHN_MillER </div>
                 
                 <div class="marquee-image-container">
-                    <img src="assets/light/InicioTextBox.png" alt="Content Image" class="marquee-image light-mode-element"">
+                    <img src="assets/light/InicioTextBox.png" alt="Content Image" class="marquee-image light-mode-element">
                     <img src="assets/dark/InicioTextBox.png" alt="Content Image" class="marquee-image dark-mode-element">
                     <div class="marquee-image-text">
                         <p>Desde su origen, la contaminación lumínica ha evolucionado significativamente. En las últimas décadas, ha aumentado debido al desarrollo tecnológico y al uso generalizado de iluminación LED, que aunque es eficiente energéticamente, puede ser más intensa y perjudicial para el medio ambiente si no se utiliza adecuadamente.</p>
@@ -116,10 +116,10 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
 
             <!-- Container 4: Subscribe Functionality -->
             <div class="container-4">
-                <img src="assets/light/SubscribeBox.png" alt="Subscribe Box" class="subscribe-box-image light-mode-element"">
+                <img src="assets/light/SubscribeBox.png" alt="Subscribe Box" class="subscribe-box-image light-mode-element">
                 <img src="assets/dark/SubscribeBox.png" alt="Subscribe Box" class="subscribe-box-image dark-mode-element">
                 <div class="subscribe-box-content">
-                    <button class="subscribe-button" id="subscribe-button">Suscribete</button>
+                    <button class="subscribe-button popup-button" id="subscribe-button" data-popup-content="subscribe-content">Suscribete</button>
                 </div>
             </div>
 
@@ -127,7 +127,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
             <footer class="footer">
                 <img src="assets/both/Footer.png" alt="Footer Background" class="footer-image">
                 <div class="footer-content">
-                    <button class="footer-center-button" data-popup-content="disclaimer-content"></button>
+                    <button class="footer-center-button popup-button" data-popup-content="disclaimer-content"></button>
                     <div class="footer-social-buttons">
                         <button class="social-button instagram" onclick="window.open('https://instagram.com')"></button>
                         <button class="social-button facebook" onclick="window.open('https://facebook.com')"></button>
@@ -139,39 +139,82 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
 
         <!-- Page 2 -->
         <div class="page page2">
-            <h1>Page 2</h1>
+            <div class="articles-container">
+                <h1>Artículos</h1>
+                <div class="article-grid">
+                    <div class="article-item popup-button" data-popup-content="article1-content">
+                        <img src="assets/light/Article1.png" class="light-mode-element" alt="Article 1">
+                        <img src="assets/dark/Article1.png" class="dark-mode-element" alt="Article 1">
+                        <h3>Impacto en la fauna</h3>
+                    </div>
+                    <div class="article-item popup-button" data-popup-content="article2-content">
+                        <img src="assets/light/Article2.png" class="light-mode-element" alt="Article 2">
+                        <img src="assets/dark/Article2.png" class="dark-mode-element" alt="Article 2">
+                        <h3>Soluciones urbanas</h3>
+                    </div>
+                    <div class="article-item popup-button" data-popup-content="article3-content">
+                        <img src="assets/light/Article3.png" class="light-mode-element" alt="Article 3">
+                        <img src="assets/dark/Article3.png" class="dark-mode-element" alt="Article 3">
+                        <h3>Legislación actual</h3>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Page 3 -->
         <div class="page page3">
-            <p>//**Informate ...</p>
-            <!-- Logo and Right-Aligned Text -->
-            <div class="logo-section">
+            <div class="videos-container">
                 <h1>Videos</h1>
-                <!--img src="assets/dark/TripPlanets.png" alt="Trip Planets"-->
+                <div id="video-list" class="video-list"></div>
             </div>
-
-            <!-- Video List -->
-            <div id="video-list" class="video-list"></div>
         </div>
 
         <!-- Page 4 -->
         <div class="page page4">
-            <h1>Podcasts</h1>
-            <!--img src="assets/dark/TripPlanets.png" alt="Trip Planets"-->
-            
-            <!-- Podcast List -->
-            <div id="podcast-list" class="video-list"></div>
+            <div class="podcasts-container">
+                <h1>Podcasts</h1>
+                <div id="podcast-list" class="video-list"></div>
+            </div>
         </div>
 
         <!-- Page 5 -->
         <div class="page page5">
-            <h1>Page 5</h1>
+            <div class="blogs-container">
+                <h1>Blogs</h1>
+                <div class="blog-grid">
+                    <div class="blog-item popup-button" data-popup-content="blog1-content">
+                        <img src="assets/light/Blog1.png" class="light-mode-element" alt="Blog 1">
+                        <img src="assets/dark/Blog1.png" class="dark-mode-element" alt="Blog 1">
+                        <h3>Experiencias personales</h3>
+                    </div>
+                    <div class="blog-item popup-button" data-popup-content="blog2-content">
+                        <img src="assets/light/Blog2.png" class="light-mode-element" alt="Blog 2">
+                        <img src="assets/dark/Blog2.png" class="dark-mode-element" alt="Blog 2">
+                        <h3>Investigaciones</h3>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Page 6 -->
         <div class="page page6">
-            <h1>Page 6</h1>
+            <div class="store-container">
+                <h1>Tienda</h1>
+                <div class="product-grid">
+                    <div class="product-item">
+                        <img src="assets/light/Product1.png" class="light-mode-element" alt="Product 1">
+                        <img src="assets/dark/Product1.png" class="dark-mode-element" alt="Product 1">
+                        <h3>Lámparas ecológicas</h3>
+                        <button class="buy-button">Comprar</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="assets/light/Product2.png" class="light-mode-element" alt="Product 2">
+                        <img src="assets/dark/Product2.png" class="dark-mode-element" alt="Product 2">
+                        <h3>Filtros para luz</h3>
+                        <button class="buy-button">Comprar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -187,9 +230,7 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
     <div id="subscribe-popup" class="subscribe-popup">
         <div class="subscribe-popup-content">
             <button onclick="closeSubscribePopup()" class="close-subscribe-popup">X</button>
-            <div id="subscribe-popup-html">
-                <!-- Content loaded from hidden HTML -->
-            </div>
+            <div id="subscribe-popup-html"></div>
         </div>
     </div>
 
@@ -220,7 +261,31 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
         </div>
         <div id="orb3-content">
             <h2>Deslumbramiento</h2>
-            <p>Contenido por agregar...<p>
+            <p>Contenido por agregar...</p>
+        </div>
+
+        <!-- Article contents -->
+        <div id="article1-content">
+            <h2>Impacto en la fauna</h2>
+            <p>Contenido del artículo sobre cómo afecta la contaminación lumínica a los animales...</p>
+        </div>
+        <div id="article2-content">
+            <h2>Soluciones urbanas</h2>
+            <p>Contenido del artículo sobre posibles soluciones para ciudades...</p>
+        </div>
+        <div id="article3-content">
+            <h2>Legislación actual</h2>
+            <p>Contenido del artículo sobre leyes relacionadas con la contaminación lumínica...</p>
+        </div>
+
+        <!-- Blog contents -->
+        <div id="blog1-content">
+            <h2>Experiencias personales</h2>
+            <p>Contenido del blog personal sobre experiencias con contaminación lumínica...</p>
+        </div>
+        <div id="blog2-content">
+            <h2>Investigaciones</h2>
+            <p>Contenido del blog sobre investigaciones recientes...</p>
         </div>
 
         <!-- Disclaimer content -->
