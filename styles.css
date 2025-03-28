@@ -453,15 +453,15 @@ body {
 }
 
 .page1 .social-button.instagram {
-    background-image: url('assets/social/instagram.png');
+    background-image: url('assets/both/Instagram.png');
 }
 
 .page1 .social-button.facebook {
-    background-image: url('assets/social/facebook.png');
+    background-image: url('assets/both/Facebook.png');
 }
 
 .page1 .social-button.twitter {
-    background-image: url('assets/social/twitter.png');
+    background-image: url('assets/both/Twitter.png');
 }
 
 /* ==================== */
