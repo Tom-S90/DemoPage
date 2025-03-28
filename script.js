@@ -20,6 +20,8 @@ const podcastList = document.getElementById('podcast-list');
 const videoPopup = document.getElementById('video-popup');
 const videoFrameContainer = document.getElementById('video-frame-container');
 const subscribeForm = document.querySelector('.subscribe-form');
+const contentPopup = document.getElementById('content-popup');
+const subscribePopup = document.getElementById('subscribe-popup');
 
 /* ==================== */
 /* INITIALIZATION */
@@ -319,9 +321,20 @@ function closePopup() {
 
 // Subscribe Popup
 function openSubscribePopup() {
-    const popupContent = document.getElementById('subscribe-content').innerHTML;
-    document.getElementById('subscribe-popup-html').innerHTML = popupContent;
-    showPopup(subscribePopup);
+    if (!subscribePopup) {
+        console.error('Subscribe popup not found');
+        return;
+    }
+    
+    const popupHtml = document.getElementById('subscribe-popup-html');
+    if (!popupHtml) {
+        console.error('Subscribe popup HTML container not found');
+        return;
+    }
+    
+    const content = document.getElementById('subscribe-content').innerHTML;
+    popupHtml.innerHTML = content;
+    subscribePopup.classList.add('active');
     
     const form = document.querySelector('#subscribe-popup .subscribe-form-popup');
     if (form) {
@@ -329,50 +342,49 @@ function openSubscribePopup() {
     }
 }
 
-function closeSubscribePopup() {
-    hidePopup(subscribePopup);
-}
-
-function handleSubscribeFormSubmit(e) {
-    e.preventDefault();
-    const name = this.querySelector('input[type="text"]').value;
-    const email = this.querySelector('input[type="email"]').value;
-    
-    if (name && validateEmail(email)) {
-        alert(`Gracias por suscribirte, ${name}! Te hemos enviado un correo a ${email}`);
-        this.reset();
-        closeSubscribePopup();
-    } else {
-        alert('Por favor ingresa un nombre y correo electrónico válidos');
-    }
-}
-
 // Content Popup
 function openContentPopup(contentId) {
-    console.log('Attempting to open:', contentId);
+    if (!contentPopup) {
+        console.error('Content popup not found');
+        return;
+    }
     
-    // Verify content exists
     const contentElement = document.getElementById(contentId);
     if (!contentElement) {
-        console.error('Content not found:', contentId);
+        console.error('Content element not found:', contentId);
         return;
     }
-
-    // Verify popup container exists
+    
     const popupHtml = document.getElementById('content-popup-html');
     if (!popupHtml) {
-        console.error('Popup container not found');
+        console.error('Popup HTML container not found');
         return;
     }
-
-    // Load content
+    
     popupHtml.innerHTML = contentElement.innerHTML;
-    
-    // Show popup
-    const contentPopup = document.getElementById('content-popup');
-    contentPopup.style.display = 'flex'; // Force flex display
     contentPopup.classList.add('active');
-    
+    setupPopupCloseHandlers(contentPopup, closeContentPopup);
+}
+
+// Close functions
+function closePopup() {
+    if (videoPopup && videoFrameContainer) {
+        videoFrameContainer.innerHTML = '';
+        videoPopup.classList.remove('active');
+    }
+}
+
+function closeSubscribePopup() {
+    if (subscribePopup) {
+        subscribePopup.classList.remove('active');
+    }
+}
+
+function closeContentPopup() {
+    if (contentPopup) {
+        contentPopup.classList.remove('active');
+    }
+}
     // Add close handlers
     setupPopupCloseHandlers(contentPopup, closeContentPopup);
 }
@@ -406,6 +418,15 @@ function setupPopupCloseHandlers(popupElement, closeFunction) {
         }
     };
     document.addEventListener('keydown', handleEscape);
+}
+
+function setupEventListeners() {
+    setupThemeToggles();
+    setupNavButtons();
+    setupSubscribeForm();
+    
+    // Add this line
+    document.getElementById('subscribe-button')?.addEventListener('click', openSubscribePopup);
 }
 
 /* ==================== */
