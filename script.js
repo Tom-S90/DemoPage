@@ -349,21 +349,38 @@ function handleSubscribeFormSubmit(e) {
 
 // Content Popup
 function openContentPopup(contentId) {
-    console.log('Opening popup for:', contentId); // Debug line
+    console.log('Attempting to open:', contentId);
+    
+    // Verify content exists
     const contentElement = document.getElementById(contentId);
     if (!contentElement) {
-        console.error('Content element not found:', contentId);
+        console.error('Content not found:', contentId);
         return;
     }
+
+    // Verify popup container exists
+    const popupHtml = document.getElementById('content-popup-html');
+    if (!popupHtml) {
+        console.error('Popup container not found');
+        return;
+    }
+
+    // Load content
+    popupHtml.innerHTML = contentElement.innerHTML;
     
-    const content = contentElement.innerHTML;
-    document.getElementById('content-popup-html').innerHTML = content;
-    showPopup(contentPopup);
+    // Show popup
+    const contentPopup = document.getElementById('content-popup');
+    contentPopup.style.display = 'flex'; // Force flex display
+    contentPopup.classList.add('active');
+    
+    // Add close handlers
     setupPopupCloseHandlers(contentPopup, closeContentPopup);
 }
 
 function closeContentPopup() {
-    hidePopup(contentPopup);
+    const contentPopup = document.getElementById('content-popup');
+    contentPopup.classList.remove('active');
+    contentPopup.style.display = 'none';
 }
 
 // Generic Popup Functions
