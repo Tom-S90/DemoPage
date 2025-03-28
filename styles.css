@@ -311,7 +311,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
-    color: white;
+    color: var(--text-color);
     padding: 10px 0;
     font-size: 18px;
     font-weight: bold;
