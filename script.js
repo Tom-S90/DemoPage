@@ -19,7 +19,9 @@ const videoList = document.getElementById('video-list');
 const podcastList = document.getElementById('podcast-list');
 const videoPopup = document.getElementById('video-popup');
 const videoFrameContainer = document.getElementById('video-frame-container');
-const subscribeForm = document.querySelector('.subscribe-form');
+const subscribeButton = document.getElementById('subscribe-button');
+const subscribePopup = document.getElementById('subscribe-popup');
+const contentPopup = document.getElementById('content-popup');
 
 /* ==================== */
 /* INITIALIZATION */
@@ -32,11 +34,12 @@ function initializeApp() {
     initializeMarquees();
     setupEventListeners();
     fetchContent();
-    setupImageButtonHandlers();
+    setupButtonHandlers();
 }
 
 function setActiveNavButton() {
-    document.querySelector('.nav-button-container').classList.add('active');
+    const buttons = document.querySelectorAll('.nav-button-container');
+    buttons[0].classList.add('active');
 }
 
 function initializeTheme() {
@@ -56,7 +59,7 @@ function fetchContent() {
 function setupEventListeners() {
     setupThemeToggles();
     setupNavButtons();
-    setupSubscribeForm();
+    setupSubscribeButton();
 }
 
 function setupThemeToggles() {
@@ -71,42 +74,34 @@ function setupNavButtons() {
     });
 }
 
-function setupSubscribeForm() {
-    if (subscribeForm) {
-        subscribeForm.addEventListener('submit', handleSubscribe);
+function setupSubscribeButton() {
+    if (subscribeButton) {
+        subscribeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            openSubscribePopup();
+        });
     }
 }
 
-function setupImageButtonHandlers() {
-    // Right image button
-    document.querySelectorAll('.right-image-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            openContentPopup('right-image-content');
-        });
-    });
-
-    // Orb buttons
-    document.querySelectorAll('.orb-button').forEach(button => {
+function setupButtonHandlers() {
+    // Setup all popup buttons
+    document.querySelectorAll('.popup-button').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             const contentId = this.getAttribute('data-popup-content');
             if (contentId) {
                 openContentPopup(contentId);
-            } else {
-                console.error('No data-popup-content attribute found');
             }
         });
     });
 
-    // Footer center button
-    const footerButton = document.querySelector('.footer-center-button');
-    if (footerButton) {
-        footerButton.addEventListener('click', (e) => {
+    // Setup buy buttons in store
+    document.querySelectorAll('.buy-button').forEach(button => {
+        button.addEventListener('click', function(e) {
             e.preventDefault();
-            openContentPopup('disclaimer-content');
+            alert('Product added to cart!');
         });
-    }
+    });
 }
 
 /* ==================== */
@@ -164,11 +159,11 @@ async function fetchVideos() {
             renderVideoList(data.items, videoList, 'video');
         } else {
             console.error('No videos found');
-            // fetchMockVideos('video');
+            fetchMockVideos('video');
         }
     } catch (error) {
         console.error('Error fetching videos:', error);
-        // fetchMockVideos('video');
+        fetchMockVideos('video');
     }
 }
 
@@ -189,11 +184,11 @@ async function fetchPodcasts() {
             renderVideoList(data.items, podcastList, 'podcast');
         } else {
             console.error('No podcasts found');
-            // fetchMockVideos('podcast');
+            fetchMockVideos('podcast');
         }
     } catch (error) {
         console.error('Error fetching podcasts:', error);
-        // fetchMockVideos('podcast');
+        fetchMockVideos('podcast');
     }
 }
 
@@ -349,7 +344,6 @@ function handleSubscribeFormSubmit(e) {
 
 // Content Popup
 function openContentPopup(contentId) {
-    console.log('Opening popup for:', contentId); // Debug line
     const contentElement = document.getElementById(contentId);
     if (!contentElement) {
         console.error('Content element not found:', contentId);
@@ -369,10 +363,12 @@ function closeContentPopup() {
 // Generic Popup Functions
 function showPopup(popupElement) {
     popupElement.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 function hidePopup(popupElement) {
     popupElement.classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
 function setupPopupCloseHandlers(popupElement, closeFunction) {
@@ -419,19 +415,6 @@ function setupMarqueeAnimation(span) {
 /* ==================== */
 /* FORM HANDLING */
 /* ==================== */
-function handleSubscribe(e) {
-    e.preventDefault();
-    const emailInput = e.target.querySelector('input[type="email"]');
-    const email = emailInput.value.trim();
-    
-    if (email && validateEmail(email)) {
-        alert(`Thank you for subscribing with ${email}`);
-        e.target.reset();
-    } else {
-        alert('Please enter a valid email address');
-    }
-}
-
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
