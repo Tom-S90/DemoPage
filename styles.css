@@ -595,27 +595,18 @@ body {
 /* ==================== */
 /* PAGE 4: PODCASTS */
 /* ==================== */
-.page4 {
-    padding-top: 100px;
-}
-
-.page4 .videos-container {
-    width: 100%;
-    max-width: 1200px;
+.page4 .podcasts-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 20px;
-}
-
-.page4 h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5rem;
 }
 
 .page4 .video-list {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-top: 20px;
 }
 
@@ -624,19 +615,26 @@ body {
     align-items: flex-start;
     margin-bottom: 20px;
     cursor: pointer;
-    width: 100%;
+    width: 90%;
+    max-width: 800px;
     background-color: var(--video-item-background);
-    padding: 10px;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.page4 .video-item:hover {
+    transform: scale(1.02);
 }
 
 .page4 .video-item img {
-    width: 250px;
-    height: 140px;
+    width: 200px;
+    height: 120px;
     border-radius: 8px;
     margin-right: 20px;
     flex-shrink: 0;
+    object-fit: cover;
 }
 
 .page4 .video-item .video-text {
@@ -661,6 +659,22 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page4 .video-item {
+        flex-direction: column;
+        width: 95%;
+    }
+    
+    .page4 .video-item img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
 }
 
 /* ==================== */
