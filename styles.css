@@ -737,19 +737,19 @@ body {
 }
 
 /* Blog Image Visibility BC for some fucking reason it doesnt hide with the general code >:v */
-.blog-image.light-mode-element {
+.blog-item .image-container .light-mode-element {
     display: block;
 }
 
-.blog-image.dark-mode-element {
+.blog-item .image-container .dark-mode-element {
     display: none;
 }
 
-[data-theme="dark"] .blog-image.light-mode-element {
+[data-theme="dark"] .blog-item .image-container .light-mode-element {
     display: none;
 }
 
-[data-theme="dark"] .blog-image.dark-mode-element {
+[data-theme="dark"] .blog-item .image-container .dark-mode-element {
     display: block;
 }
 
