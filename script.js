@@ -59,7 +59,6 @@ function fetchContent() {
 function setupEventListeners() {
     setupThemeToggles();
     setupNavButtons();
-    setupSubscribeButton();
 }
 
 function setupThemeToggles() {
@@ -84,15 +83,11 @@ function setupSubscribeButton() {
 }
 
 function setupButtonHandlers() {
-    // Setup all popup buttons
+    // Setup all popup buttons - including subscribe button
     document.querySelectorAll('.popup-button').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const contentId = this.getAttribute('data-popup-content');
-            if (contentId) {
-                openContentPopup(contentId);
-            }
-        });
+        // Remove any existing click handlers to prevent duplicates
+        button.removeEventListener('click', handlePopupButtonClick);
+        button.addEventListener('click', handlePopupButtonClick);
     });
 
     // Setup buy buttons in store
@@ -102,6 +97,19 @@ function setupButtonHandlers() {
             alert('Product added to cart!');
         });
     });
+}
+
+// New dedicated handler for popup buttons
+function handlePopupButtonClick(e) {
+    e.preventDefault();
+    const contentId = this.getAttribute('data-popup-content');
+    if (contentId) {
+        if (contentId === 'subscribe-content') {
+            openSubscribePopup();
+        } else {
+            openContentPopup(contentId);
+        }
+    }
 }
 
 /* ==================== */
