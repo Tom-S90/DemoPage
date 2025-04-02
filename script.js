@@ -101,31 +101,6 @@ function handlePopupButtonClick(e) {
     }
 }
 
-// Update your close functions to handle clicks on the image button
-function setupPopupCloseHandlers(popupElement, closeFunction) {
-    // Close when clicking outside content
-    popupElement.addEventListener('click', (e) => {
-        if (e.target === popupElement) {
-            closeFunction();
-        }
-    });
-    
-    // Close when clicking the close button
-    const closeBtn = popupElement.querySelector('.popup-close-button');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeFunction);
-    }
-
-    // Close with Escape key
-    const handleEscape = (e) => {
-        if (e.key === 'Escape') {
-            closeFunction();
-            document.removeEventListener('keydown', handleEscape);
-        }
-    };
-    document.addEventListener('keydown', handleEscape);
-}
-
 /* ==================== */
 /* PAGE FUNCTIONALITY */
 /* ==================== */
@@ -150,9 +125,17 @@ function scrollToPage(pageNumber) {
 function toggleTheme() {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    body.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeToggle();
+    
+    // Add click animation
+    const switchElement = document.querySelector('.light-switch');
+    switchElement.classList.add('clicked');
+    
+    setTimeout(() => {
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeToggle();
+        switchElement.classList.remove('clicked');
+    }, 300);
 }
 
 function updateThemeToggle() {
@@ -212,26 +195,6 @@ async function fetchPodcasts() {
         console.error('Error fetching podcasts:', error);
         fetchMockPodcasts();
     }
-}
-
-
-/* ==================== */
-/* THEME TOGGLE ANIMATION FUNCTIONALITY */
-/* ==================== */
-function toggleTheme() {
-    const currentTheme = body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    // Add click animation
-    const switchElement = document.querySelector('.light-switch');
-    switchElement.classList.add('clicked');
-    
-    setTimeout(() => {
-        body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeToggle();
-        switchElement.classList.remove('clicked');
-    }, 300);
 }
 
 /* ==================== */
@@ -322,6 +285,7 @@ function openSubscribePopup() {
     const popupContent = document.getElementById('subscribe-content').innerHTML;
     document.getElementById('subscribe-popup-html').innerHTML = popupContent;
     showPopup(subscribePopup);
+    setupPopupCloseHandlers(subscribePopup, closeSubscribePopup);
     
     const form = document.querySelector('#subscribe-popup .subscribe-form-popup');
     if (form) {
@@ -356,30 +320,12 @@ function openContentPopup(contentId) {
     
     const content = contentElement.innerHTML;
     document.getElementById('content-popup-html').innerHTML = content;
-    
-    const popup = document.getElementById('content-popup');
-    popup.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Close when clicking outside content
-    popup.addEventListener('click', function(e) {
-        if (e.target === popup) {
-            closeContentPopup();
-        }
-    });
-    
-    // Close with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeContentPopup();
-        }
-    });
+    showPopup(contentPopup);
+    setupPopupCloseHandlers(contentPopup, closeContentPopup);
 }
 
 function closeContentPopup() {
-    const popup = document.getElementById('content-popup');
-    popup.classList.remove('active');
-    document.body.style.overflow = 'auto';
+    hidePopup(contentPopup);
 }
 
 function showPopup(popupElement) {
@@ -393,10 +339,24 @@ function hidePopup(popupElement) {
 }
 
 function setupPopupCloseHandlers(popupElement, closeFunction) {
+    // Close when clicking outside content
     popupElement.addEventListener('click', (e) => {
-        if (e.target === popupElement) closeFunction();
+        if (e.target === popupElement) {
+            closeFunction();
+        }
     });
+    
+    // Close when clicking the close button
+    const closeBtn = popupElement.querySelector('.popup-close-button');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeFunction();
+        });
+    }
 
+    // Close with Escape key
     const handleEscape = (e) => {
         if (e.key === 'Escape') {
             closeFunction();
@@ -424,21 +384,6 @@ function initializeMarquees() {
         span.style.animationDuration = `${duration}s`;
     });
 }
-
-function createMarqueeSpan(marquee) {
-    const span = document.createElement('span');
-    span.textContent = marquee.textContent;
-    marquee.innerHTML = '';
-    marquee.appendChild(span);
-    return span;
-}
-
-function setupMarqueeAnimation(span) {
-    span.innerHTML += span.innerHTML;
-    const duration = span.textContent.length / 10;
-    span.style.animationDuration = `${duration}s`;
-}
-
 
 /* ==================== */
 /* FORM HANDLING */
