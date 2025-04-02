@@ -189,6 +189,26 @@ async function fetchPodcasts() {
     }
 }
 
+
+/* ==================== */
+/* THEME TOGGLE ANIMATION FUNCTIONALITY */
+/* ==================== */
+function toggleTheme() {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Add click animation
+    const switchElement = document.querySelector('.light-switch');
+    switchElement.classList.add('clicked');
+    
+    setTimeout(() => {
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeToggle();
+        switchElement.classList.remove('clicked');
+    }, 300);
+}
+
 /* ==================== */
 /* CACHE MANAGEMENT */
 /* ==================== */
@@ -349,8 +369,16 @@ function setupPopupCloseHandlers(popupElement, closeFunction) {
 function initializeMarquees() {
     const marquees = document.querySelectorAll('.marquee');
     marquees.forEach(marquee => {
-        let span = marquee.querySelector('span') || createMarqueeSpan(marquee);
-        setupMarqueeAnimation(span);
+        // Clone the content for seamless looping
+        const content = marquee.textContent.trim();
+        marquee.innerHTML = '';
+        const span = document.createElement('span');
+        span.textContent = content + ' ' + content; // Duplicate content
+        marquee.appendChild(span);
+        
+        // Calculate duration based on content length
+        const duration = content.length / 5;
+        span.style.animationDuration = `${duration}s`;
     });
 }
 
@@ -367,21 +395,7 @@ function setupMarqueeAnimation(span) {
     const duration = span.textContent.length / 10;
     span.style.animationDuration = `${duration}s`;
 }
-function initializeMarquees() {
-    const marquees = document.querySelectorAll('.marquee');
-    marquees.forEach(marquee => {
-        // Clone the content for seamless looping
-        const content = marquee.textContent.trim();
-        marquee.innerHTML = '';
-        const span = document.createElement('span');
-        span.textContent = content + ' ' + content; // Duplicate content
-        marquee.appendChild(span);
-        
-        // Calculate duration based on content length
-        const duration = content.length / 5;
-        span.style.animationDuration = `${duration}s`;
-    });
-}
+
 
 /* ==================== */
 /* FORM HANDLING */
