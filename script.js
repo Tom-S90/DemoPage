@@ -331,12 +331,30 @@ function openContentPopup(contentId) {
     
     const content = contentElement.innerHTML;
     document.getElementById('content-popup-html').innerHTML = content;
-    showPopup(contentPopup);
-    setupPopupCloseHandlers(contentPopup, closeContentPopup);
+    
+    const popup = document.getElementById('content-popup');
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Close when clicking outside content
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+            closeContentPopup();
+        }
+    });
+    
+    // Close with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeContentPopup();
+        }
+    });
 }
 
 function closeContentPopup() {
-    hidePopup(contentPopup);
+    const popup = document.getElementById('content-popup');
+    popup.classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
 function showPopup(popupElement) {
