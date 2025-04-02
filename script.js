@@ -367,6 +367,21 @@ function setupMarqueeAnimation(span) {
     const duration = span.textContent.length / 10;
     span.style.animationDuration = `${duration}s`;
 }
+function initializeMarquees() {
+    const marquees = document.querySelectorAll('.marquee');
+    marquees.forEach(marquee => {
+        // Clone the content for seamless looping
+        const content = marquee.textContent.trim();
+        marquee.innerHTML = '';
+        const span = document.createElement('span');
+        span.textContent = content + ' ' + content; // Duplicate content
+        marquee.appendChild(span);
+        
+        // Calculate duration based on content length
+        const duration = content.length / 5;
+        span.style.animationDuration = `${duration}s`;
+    });
+}
 
 /* ==================== */
 /* FORM HANDLING */
