@@ -886,8 +886,10 @@ body {
     transition: transform 0.3s ease-in-out;
     font-family: 'Gelato Extra Light';
 }
-.content-popup-content h2{
+
+.content-popup-content h2 {
     font-family: 'Gelato Bold';
+}
 
 .content-popup.active .content-popup-content {
     transform: translateY(0);
@@ -900,9 +902,8 @@ body {
     border: 5px solid white;
 }
 
-.close-subscribe-popup,
-.close-content-popup,
-.video-popup {
+/* POPUP CLOSE BUTTON STYLES */
+.popup-close-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -915,7 +916,7 @@ body {
     border: none;
     padding: 0;
 }
-    
+
 .popup-close-button img {
     width: 100%;
     height: 100%;
@@ -923,19 +924,14 @@ body {
     display: block;
 }
 
-/*Rotates the X in the close button*/
 .popup-close-button:hover {
-    animation: rotateClose 0.5s ease;
-}
-@keyframes rotateClose {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(90deg); }
+    transform: scale(1.1);
 }
 
 .popup-close-button:active {
     transform: scale(0.95);
 }
-    
+
 /* Popup Button Styles */
 .popup-button {
     cursor: pointer;
@@ -976,7 +972,6 @@ body {
     background-color: var(--button-hover-background);
     color: var(--button-hover-text);
 }
-
 /* ==================== */
 /* RESPONSIVE DESIGN */
 /* ==================== */
