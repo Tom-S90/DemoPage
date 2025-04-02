@@ -101,6 +101,31 @@ function handlePopupButtonClick(e) {
     }
 }
 
+// Update your close functions to handle clicks on the image button
+function setupPopupCloseHandlers(popupElement, closeFunction) {
+    // Close when clicking outside content
+    popupElement.addEventListener('click', (e) => {
+        if (e.target === popupElement) {
+            closeFunction();
+        }
+    });
+    
+    // Close when clicking the close button
+    const closeBtn = popupElement.querySelector('.popup-close-button');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeFunction);
+    }
+
+    // Close with Escape key
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeFunction();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
+}
+
 /* ==================== */
 /* PAGE FUNCTIONALITY */
 /* ==================== */
