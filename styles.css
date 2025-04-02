@@ -65,6 +65,34 @@ body {
     font-family: 'Gelato Extra Light';
     src: url("assets/fonts/Gelato/GelatoTypewriter-ExtraLight.otf");
 }
+@font-face {
+    font-family: 'Gelato Bold';
+    src: url("assets/fonts/Gelato/GelatoTypewriter-Bold.otf");
+}
+@font-face {
+    font-family: 'Gelato Regular';
+    src: url("assets/fonts/Gelato/GelatoTypewriter-Regular.otf");
+}
+@font-face {
+    font-family: 'Avant Garde Bold Condensed';
+    src: url("assets/fonts/AvantGarde/AvantGardeBoldCondensed.otf");
+}
+@font-face {
+    font-family: 'Avant Garde Demi Condensed';
+    src: url("assets/fonts/AvantGarde/AvantGardeDemiCondensed.otf");
+}
+@font-face {
+    font-family: 'Avant Garde Book Condensed';
+    src: url("assets/fonts/AvantGarde/AvantGardeBookCondensed.otf");
+}
+@font-face {
+    font-family: 'Avant Garde CE Book';
+    src: url("assets/fonts/AvantGarde/AvantGardeCEBook.otf");
+}
+@font-face {
+    font-family: 'Kilimanjaro';
+    src: url("assets/fonts/KailimanjaroSans-Regular.ttf");
+}
 
 /* ==================== */
 /* GENERAL ELEMENT VISIBILITY */
