@@ -237,15 +237,19 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
     <!-- Video Popup -->
     <div id="video-popup" class="video-popup">
         <div class="popup-content">
+            <div class="popup-close-button">
+                <img src="assets/both/ExitButton.png" alt="Close">
+            </div>
             <div id="video-frame-container"></div>
-            <button onclick="closePopup()">X</button>
         </div>
     </div>
 
     <!-- Subscribe Popup -->
     <div id="subscribe-popup" class="subscribe-popup">
         <div class="subscribe-popup-content">
-            <button onclick="closeSubscribePopup()" class="close-subscribe-popup">X</button>
+            <div class="popup-close-button">
+                <img src="assets/both/ExitButton.png" alt="Close">
+            </div>
             <div id="subscribe-popup-html"></div>
         </div>
     </div>
@@ -253,7 +257,9 @@ Button shape modifier = clip-path: polygon(0 35%, 15% 0, 100% 0, 100% 100%, 0 10
     <!-- Content Popup -->
     <div id="content-popup" class="content-popup">
         <div class="content-popup-content">
-            <button onclick="closeContentPopup()" class="close-content-popup">X</button>
+            <div class="popup-close-button">
+                <img src="assets/both/ExitButton.png" alt="Close">
+            </div>
             <div id="content-popup-html"></div>
         </div>
     </div>
