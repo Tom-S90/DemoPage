@@ -54,11 +54,16 @@
 }
 
 body {
-    font-family: 'Courier New', monospace;
+    font-family: 'Gelato Extra Light';
     overflow-x: hidden;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+}
+
+@font-face {
+    font-family: 'Gelato Extra Light';
+    src: url("assets/fonts/Gelato/GelatoTypewriter-ExtraLight.otf");
 }
 
 /* ==================== */
