@@ -597,9 +597,26 @@ body {
 /* ==================== */
 /* PAGE 2: ARTICULOS */
 /* ==================== */
+<<<<<<< HEAD
 .page2 {
     padding-top: 100px;
     background-color: var(--page-background);
+=======
+
+
+.page2 .articles-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    background-image: var(--articles-grid-light);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+[data-theme="dark"] .page2 .articles-container {
+    background-image: var(--articles-grid-dark);
+>>>>>>> parent of 0762425 (Update styles.css)
 }
 
 .page2 .articles-container {
@@ -613,6 +630,7 @@ body {
 }
 
 .page2 .article-item {
+<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -621,11 +639,17 @@ body {
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
+=======
+    background-color: var(--page-background);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+>>>>>>> parent of 0762425 (Update styles.css)
     cursor: pointer;
 }
 
 .page2 .article-item:hover {
     transform: translateY(-5px);
+<<<<<<< HEAD
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
@@ -659,11 +683,24 @@ body {
     margin: 0 0 10px 0;
     font-size: 1.3rem;
     font-family: 'Gelato Bold';
+=======
+}
+
+.page2 .article-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.page2 .article-item h3 {
+    text-align: left;
+>>>>>>> parent of 0762425 (Update styles.css)
     color: var(--text-color);
     text-align: center;
     line-height: 1.3;
 }
 
+<<<<<<< HEAD
 .page2 .article-item p {
     margin: 0;
     font-size: 0.9rem;
@@ -673,6 +710,8 @@ body {
     opacity: 0.8;
 }
 
+=======
+>>>>>>> parent of 0762425 (Update styles.css)
 /* ==================== */
 /* PAGE 3: VIDEOS */
 /* ==================== */
