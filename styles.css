@@ -337,28 +337,31 @@ body {
     border-radius: 8px;
 }
 
+/* Replace the existing marquee styles with these */
 .page1 .marquee {
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    color: var(--text-color);
-    padding: 10px 0;
-    font-size: 18px;
-    font-weight: bold;
     position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 30px;
+    margin: 10px 0;
 }
 
-.page1 .marquee span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 15s linear infinite;
+.page1 .marquee-content {
     position: absolute;
     white-space: nowrap;
+    will-change: transform;
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
 }
 
+.page1 .marquee-content span {
+    padding-right: 50px; /* Space between duplicates */
+}
+
+/* Animation moves the content by its full width */
 @keyframes marquee {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+    100% { transform: translateX(-50%); }
 }
 
 .page1 .marquee-image-container {
