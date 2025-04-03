@@ -221,6 +221,48 @@ body {
     right: 20px;
     z-index: 1000;
     cursor: pointer;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.light-switch {
+    position: relative;
+    width: 10px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.switch-cord {
+    width: 30px;
+    height: auto;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+/* Cord styling */
+.light-switch::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    width: 2px;
+    height: 40px;
+    background-color: #333;
+    z-index: 1;
+}
+
+[data-theme="dark"] .light-switch::before {
+    background-color: #ccc;
+}
+
+/* Pull animation */
+.light-switch.clicked .switch-cord {
+    transform: translateY(15px);
+    transition: transform 0.2s cubic-bezier(0.68, -0.55, 0, 1.48);
 }
 
 /* ==================== */
