@@ -593,14 +593,12 @@ body {
 /* ==================== */
 /* PAGE 2: ARTICULOS */
 /* ==================== */
-
-
 .page2 .articles-container {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 20px;
     background-image: var(--articles-grid-light);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -632,8 +630,6 @@ body {
 }
 
 .page2 .article-item {
-    background-color: var(--page-background);
-    overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
@@ -652,6 +648,7 @@ body {
     text-align: left;
     color: var(--text-color);
 }
+
 
 /* ==================== */
 /* PAGE 3: VIDEOS */
