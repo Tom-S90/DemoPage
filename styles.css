@@ -722,12 +722,14 @@ body {
 
 .page4 .video-item h3 {
     font-size: 18px;
+    font-family: 'Gelato Bold';
     margin: 0 0 10px 0;
     color: var(--video-title-color);
 }
 
 .page4 .video-item p {
     font-size: 14px;
+    font-family: 'Gelato Extra Light';
     color: var(--video-description-color);
     margin: 0;
     display: -webkit-box;
