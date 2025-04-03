@@ -1060,7 +1060,6 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    transform: none !important;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     display: flex;
@@ -1071,35 +1070,35 @@ body {
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
+.popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.popup-content {
+    position: relative;
+    background-color: var(--popup-background);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    color: var(--popup-text);
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 2;
+    margin: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
 .video-popup.active,
 .subscribe-popup.active,
 .content-popup.active {
     visibility: visible;
     opacity: 1;
-}
-.popup-content,
-.subscribe-popup-content,
-.content-popup-content {
-    position: relative; /* Reset positioning */
-    transform: none !important; /* Remove transforms */
-    width: 90%;
-    max-width: 800px;
-    margin: 0 auto; /* Center horizontally */
-}
-
-.popup-content,
-.subscribe-popup-content,
-.content-popup-content {
-    background-color: var(--popup-background);
-    padding: 30px;
-    border-radius: 10px;
-    position: relative;
-    width: 90%;
-    max-width: 800px;
-    color: var(--popup-text);
-    margin: 20px auto;
-    max-height: 90vh;
-    overflow-y: auto;
 }
 
 .content-popup-content {
