@@ -48,9 +48,28 @@
     --text-overlay-color: white;
     --container-bg: #2a2a2a;
     --border-color: #444;
-    --articles-grid-light: url('assets/dark/ArticlesLayoutBackground.png');
-    --blogs-grid-light: url('assets/dark/BlogsLayoutBackground.png');
-    --store-grid-light: url('assets/dark/StoreLayoutBackground.png');
+    --articles-grid-dark: url('assets/dark/ArticlesLayoutBackground.png');
+    --blogs-grid-dark: url('assets/dark/BlogsLayoutBackground.png');
+    --store-grid-dark: url('assets/dark/StoreLayoutBackground.png');
+}
+
+.grid-bg-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat;
+    background-size: auto;
+    z-index: 0;
+    opacity: 0.15;
+    pointer-events: none;
 }
 
 * {
@@ -223,8 +242,8 @@ body {
 
 .theme-toggle-container {
     position: absolute;
-    top: 70px;
-    right: 20px;
+    top: 60px;
+    right: 80px;
     z-index: 1000;
     cursor: pointer;
     height: 80px;
@@ -560,26 +579,7 @@ body {
 /* ==================== */
 /* PAGE 2: ARTICULOS */
 /* ==================== */
-.grid-bg-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 
-.grid-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-repeat: repeat;
-    background-size: auto;
-    z-index: 0;
-    opacity: 0.15;
-    pointer-events: none;
-}
-
-/* Articles Page Grid */
 .page2 .articles-container {
     position: relative;
 }
