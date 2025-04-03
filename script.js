@@ -126,16 +126,22 @@ function toggleTheme() {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
-    // Add click animation
     const switchElement = document.querySelector('.light-switch');
+    
+    // Add pull animation
     switchElement.classList.add('clicked');
     
     setTimeout(() => {
+        // Change theme after animation starts
         body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeToggle();
-        switchElement.classList.remove('clicked');
-    }, 300);
+        
+        // Reset animation after completion
+        setTimeout(() => {
+            switchElement.classList.remove('clicked');
+        }, 300);
+    }, 50);
 }
 
 function updateThemeToggle() {
