@@ -378,22 +378,20 @@ function initializeMarquees() {
         const container = document.createElement('div');
         container.className = 'marquee-content';
         
-        // Create two identical spans
-        const span1 = document.createElement('span');
-        const span2 = document.createElement('span');
+        // Create two spans with the content
+        for (let i = 0; i < 2; i++) {
+            const span = document.createElement('span');
+            span.textContent = originalContent;
+            container.appendChild(span);
+        }
         
-        span1.textContent = originalContent;
-        span2.textContent = originalContent;
-        
-        container.appendChild(span1);
-        container.appendChild(span2);
+        marquee.appendChild(container);
         
         // Calculate duration based on content width
-        const contentWidth = span1.offsetWidth;
-        const duration = (contentWidth / 100) * 2; // Adjust speed factor as needed
+        const contentWidth = container.firstChild.offsetWidth;
+        const duration = (contentWidth / 100) * 1.5; // Adjust multiplier for speed
         
         container.style.animationDuration = `${duration}s`;
-        marquee.appendChild(container);
     });
 }
 
