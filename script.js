@@ -372,16 +372,26 @@ function setupPopupCloseHandlers(popupElement, closeFunction) {
 function initializeMarquees() {
     const marquees = document.querySelectorAll('.marquee');
     marquees.forEach(marquee => {
-        // Clone the content for seamless looping
         const content = marquee.textContent.trim();
         marquee.innerHTML = '';
-        const span = document.createElement('span');
-        span.textContent = content + ' ' + content; // Duplicate content
-        marquee.appendChild(span);
+        
+        // Create two spans with the same content for seamless looping
+        const span1 = document.createElement('span');
+        const span2 = document.createElement('span');
+        
+        span1.textContent = content;
+        span2.textContent = content;
+        
+        marquee.appendChild(span1);
+        marquee.appendChild(span2);
         
         // Calculate duration based on content length
         const duration = content.length / 5;
-        span.style.animationDuration = `${duration}s`;
+        span1.style.animationDuration = `${duration * 2}s`;
+        span2.style.animationDuration = `${duration * 2}s`;
+        
+        // Offset the second span
+        span2.style.left = '100%';
     });
 }
 
