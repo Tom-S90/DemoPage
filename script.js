@@ -3,7 +3,7 @@
 /* ==================== */
 const CACHE_KEY_VIDEOS = 'youtube_videos_cache';
 const CACHE_KEY_PODCASTS = 'youtube_podcasts_cache';
-const CACHE_EXPIRY = 60 * 60 * 1000; // 24 hours
+const CACHE_EXPIRY = 60 * 60 * 1000;
 const YOUTUBE_API_KEY = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
 const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
 const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
@@ -151,6 +151,99 @@ function updateThemeToggle() {
 }
 
 /* ==================== */
+/* POPUP FUNCTIONALITY */
+/* ==================== */
+function openVideoPopup(videoId) {
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    iframe.width = '100%';
+    iframe.height = '400';
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+
+    videoFrameContainer.innerHTML = '';
+    videoFrameContainer.appendChild(iframe);
+    showPopup(videoPopup);
+    setupPopupCloseHandlers(videoPopup, closeVideoPopup);
+}
+
+function closeVideoPopup() {
+    videoFrameContainer.innerHTML = '';
+    hidePopup(videoPopup);
+}
+
+function openSubscribePopup() {
+    const popupContent = document.getElementById('subscribe-content').innerHTML;
+    document.getElementById('subscribe-popup-html').innerHTML = popupContent;
+    showPopup(subscribePopup);
+    setupPopupCloseHandlers(subscribePopup, closeSubscribePopup);
+    
+    const form = document.querySelector('#subscribe-popup .subscribe-form-popup');
+    if (form) {
+        form.addEventListener('submit', handleSubscribeFormSubmit);
+    }
+}
+
+function closeSubscribePopup() {
+    hidePopup(subscribePopup);
+}
+
+function openContentPopup(contentId) {
+    const contentElement = document.getElementById(contentId);
+    if (!contentElement) {
+        console.error('Content element not found:', contentId);
+        return;
+    }
+    
+    const content = contentElement.innerHTML;
+    document.getElementById('content-popup-html').innerHTML = content;
+    showPopup(contentPopup);
+    setupPopupCloseHandlers(contentPopup, closeContentPopup);
+}
+
+function closeContentPopup() {
+    hidePopup(contentPopup);
+}
+
+function showPopup(popupElement) {
+    popupElement.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function hidePopup(popupElement) {
+    popupElement.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+function setupPopupCloseHandlers(popupElement, closeFunction) {
+    // Close when clicking outside content
+    const overlay = popupElement.querySelector('.popup-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', closeFunction);
+    }
+    
+    // Close when clicking the close button
+    const closeBtn = popupElement.querySelector('.popup-close-button');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeFunction();
+        });
+    }
+
+    // Close with Escape key
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeFunction();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
+}
+
+/* ==================== */
 /* CONTENT FETCHING */
 /* ==================== */
 async function fetchVideos() {
@@ -265,44 +358,8 @@ function createMediaItem(media) {
 }
 
 /* ==================== */
-/* POPUP FUNCTIONALITY */
+/* FORM HANDLING */
 /* ==================== */
-function openVideoPopup(videoId) {
-    const iframe = document.createElement('iframe');
-    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    iframe.width = '100%';
-    iframe.height = '400';
-    iframe.frameBorder = '0';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowFullscreen = true;
-
-    videoFrameContainer.innerHTML = '';
-    videoFrameContainer.appendChild(iframe);
-    showPopup(videoPopup);
-    setupPopupCloseHandlers(videoPopup, closePopup);
-}
-
-function closePopup() {
-    videoFrameContainer.innerHTML = '';
-    hidePopup(videoPopup);
-}
-
-function openSubscribePopup() {
-    const popupContent = document.getElementById('subscribe-content').innerHTML;
-    document.getElementById('subscribe-popup-html').innerHTML = popupContent;
-    showPopup(subscribePopup);
-    setupPopupCloseHandlers(subscribePopup, closeSubscribePopup);
-    
-    const form = document.querySelector('#subscribe-popup .subscribe-form-popup');
-    if (form) {
-        form.addEventListener('submit', handleSubscribeFormSubmit);
-    }
-}
-
-function closeSubscribePopup() {
-    hidePopup(subscribePopup);
-}
-
 function handleSubscribeFormSubmit(e) {
     e.preventDefault();
     const name = this.querySelector('input[type="text"]').value;
@@ -317,59 +374,9 @@ function handleSubscribeFormSubmit(e) {
     }
 }
 
-function openContentPopup(contentId) {
-    const contentElement = document.getElementById(contentId);
-    if (!contentElement) {
-        console.error('Content element not found:', contentId);
-        return;
-    }
-    
-    const content = contentElement.innerHTML;
-    document.getElementById('content-popup-html').innerHTML = content;
-    showPopup(contentPopup);
-    setupPopupCloseHandlers(contentPopup, closeContentPopup);
-}
-
-function closeContentPopup() {
-    hidePopup(contentPopup);
-}
-
-function showPopup(popupElement) {
-    popupElement.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function hidePopup(popupElement) {
-    popupElement.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-function setupPopupCloseHandlers(popupElement, closeFunction) {
-    // Close when clicking outside content
-    popupElement.addEventListener('click', (e) => {
-        if (e.target === popupElement) {
-            closeFunction();
-        }
-    });
-    
-    // Close when clicking the close button
-    const closeBtn = popupElement.querySelector('.popup-close-button');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closeFunction();
-        });
-    }
-
-    // Close with Escape key
-    const handleEscape = (e) => {
-        if (e.key === 'Escape') {
-            closeFunction();
-            document.removeEventListener('keydown', handleEscape);
-        }
-    };
-    document.addEventListener('keydown', handleEscape);
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
 }
 
 /* ==================== */
@@ -399,14 +406,6 @@ function initializeMarquees() {
         
         container.style.animationDuration = `${duration}s`;
     });
-}
-
-/* ==================== */
-/* FORM HANDLING */
-/* ==================== */
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
 }
 
 /* ==================== */
