@@ -301,7 +301,7 @@ body {
 /* Pull animation */
 .light-switch.clicked .switch-cord {
     transform: translateY(15px);
-    transition: transform 0.2s cubic-bezier(0.68, -0.55, 0, 1.48);
+    transition: transform 0.2s cubic-bezier(0.24, 0.73, 0, 1.48);
 }
 
 /* ==================== */
