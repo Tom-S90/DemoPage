@@ -3,7 +3,7 @@
 /* ==================== */
 const CACHE_KEY_VIDEOS = 'youtube_videos_cache';
 const CACHE_KEY_PODCASTS = 'youtube_podcasts_cache';
-const CACHE_EXPIRY = 60 * 60 * 1000;
+const CACHE_EXPIRY = 60 * 60 * 1000; // 24 hours
 const YOUTUBE_API_KEY = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
 const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
 const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
@@ -17,11 +17,7 @@ const body = document.body;
 const container = document.getElementById('container');
 const videoList = document.getElementById('video-list');
 const podcastList = document.getElementById('podcast-list');
-const videoPopup = document.getElementById('video-popup');
-const videoFrameContainer = document.getElementById('video-frame-container');
 const subscribeButton = document.getElementById('subscribe-button');
-const subscribePopup = document.getElementById('subscribe-popup');
-const contentPopup = document.getElementById('content-popup');
 
 /* ==================== */
 /* INITIALIZATION */
@@ -76,7 +72,6 @@ function setupNavButtons() {
 function setupButtonHandlers() {
     // Setup all popup buttons
     document.querySelectorAll('.popup-button').forEach(button => {
-        button.removeEventListener('click', handlePopupButtonClick);
         button.addEventListener('click', handlePopupButtonClick);
     });
 
@@ -92,11 +87,13 @@ function setupButtonHandlers() {
 function handlePopupButtonClick(e) {
     e.preventDefault();
     const contentId = this.getAttribute('data-popup-content');
+    const pageNumber = this.getAttribute('data-page') || 1;
+    
     if (contentId) {
         if (contentId === 'subscribe-content') {
-            openSubscribePopup();
+            openSubscribePopup(pageNumber);
         } else {
-            openContentPopup(contentId);
+            openContentPopup(contentId, pageNumber);
         }
     }
 }
@@ -153,7 +150,13 @@ function updateThemeToggle() {
 /* ==================== */
 /* POPUP FUNCTIONALITY */
 /* ==================== */
-function openVideoPopup(videoId) {
+function openVideoPopup(videoId, pageNumber) {
+    const page = document.querySelector(`.page${pageNumber}`);
+    if (!page) return;
+
+    const popup = page.querySelector('.video-popup');
+    const frameContainer = page.querySelector('.video-frame-container');
+
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     iframe.width = '100%';
@@ -162,61 +165,83 @@ function openVideoPopup(videoId) {
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
 
-    videoFrameContainer.innerHTML = '';
-    videoFrameContainer.appendChild(iframe);
-    showPopup(videoPopup);
-    setupPopupCloseHandlers(videoPopup, closeVideoPopup);
+    frameContainer.innerHTML = '';
+    frameContainer.appendChild(iframe);
+    showPopup(popup);
+    setupPopupCloseHandlers(popup, () => closeVideoPopup(pageNumber));
 }
 
-function closeVideoPopup() {
-    videoFrameContainer.innerHTML = '';
-    hidePopup(videoPopup);
-}
+function closeVideoPopup(pageNumber) {
+    const page = document.querySelector(`.page${pageNumber}`);
+    if (!page) return;
 
-function openSubscribePopup() {
-    const popupContent = document.getElementById('subscribe-content').innerHTML;
-    document.getElementById('subscribe-popup-html').innerHTML = popupContent;
-    showPopup(subscribePopup);
-    setupPopupCloseHandlers(subscribePopup, closeSubscribePopup);
+    const popup = page.querySelector('.video-popup');
+    const frameContainer = page.querySelector('.video-frame-container');
     
-    const form = document.querySelector('#subscribe-popup .subscribe-form-popup');
+    frameContainer.innerHTML = '';
+    hidePopup(popup);
+}
+
+function openSubscribePopup(pageNumber) {
+    const page = document.querySelector(`.page${pageNumber}`);
+    if (!page) return;
+
+    const popup = page.querySelector('.content-popup');
+    const contentContainer = page.querySelector('.content-popup-html');
+    const popupContent = document.getElementById('subscribe-content').innerHTML;
+    
+    contentContainer.innerHTML = popupContent;
+    showPopup(popup);
+    setupPopupCloseHandlers(popup, () => closeContentPopup(pageNumber));
+    
+    const form = page.querySelector('.subscribe-form-popup');
     if (form) {
         form.addEventListener('submit', handleSubscribeFormSubmit);
     }
 }
 
-function closeSubscribePopup() {
-    hidePopup(subscribePopup);
-}
+function openContentPopup(contentId, pageNumber) {
+    const page = document.querySelector(`.page${pageNumber}`);
+    if (!page) return;
 
-function openContentPopup(contentId) {
     const contentElement = document.getElementById(contentId);
+    const popup = page.querySelector('.content-popup');
+    const contentContainer = page.querySelector('.content-popup-html');
+
     if (!contentElement) {
         console.error('Content element not found:', contentId);
         return;
     }
     
     const content = contentElement.innerHTML;
-    document.getElementById('content-popup-html').innerHTML = content;
-    showPopup(contentPopup);
-    setupPopupCloseHandlers(contentPopup, closeContentPopup);
+    contentContainer.innerHTML = content;
+    showPopup(popup);
+    setupPopupCloseHandlers(popup, () => closeContentPopup(pageNumber));
 }
 
-function closeContentPopup() {
-    hidePopup(contentPopup);
+function closeContentPopup(pageNumber) {
+    const page = document.querySelector(`.page${pageNumber}`);
+    if (!page) return;
+
+    const popup = page.querySelector('.content-popup');
+    hidePopup(popup);
 }
 
 function showPopup(popupElement) {
+    if (!popupElement) return;
     popupElement.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function hidePopup(popupElement) {
+    if (!popupElement) return;
     popupElement.classList.remove('active');
     document.body.style.overflow = 'auto';
 }
 
 function setupPopupCloseHandlers(popupElement, closeFunction) {
+    if (!popupElement) return;
+    
     // Close when clicking outside content
     const overlay = popupElement.querySelector('.popup-overlay');
     if (overlay) {
@@ -249,7 +274,7 @@ function setupPopupCloseHandlers(popupElement, closeFunction) {
 async function fetchVideos() {
     const cachedData = getCachedData(CACHE_KEY_VIDEOS);
     if (cachedData) {
-        renderVideoList(cachedData, videoList);
+        renderVideoList(cachedData, videoList, 3); // Page 3 for videos
         return;
     }
 
@@ -260,7 +285,7 @@ async function fetchVideos() {
 
         if (data.items) {
             cacheData(CACHE_KEY_VIDEOS, data.items);
-            renderVideoList(data.items, videoList);
+            renderVideoList(data.items, videoList, 3); // Page 3 for videos
         } else {
             console.error('No videos found');
             fetchMockVideos();
@@ -274,7 +299,7 @@ async function fetchVideos() {
 async function fetchPodcasts() {
     const cachedData = getCachedData(CACHE_KEY_PODCASTS);
     if (cachedData) {
-        renderVideoList(cachedData, podcastList);
+        renderVideoList(cachedData, podcastList, 4); // Page 4 for podcasts
         return;
     }
 
@@ -285,7 +310,7 @@ async function fetchPodcasts() {
 
         if (data.items) {
             cacheData(CACHE_KEY_PODCASTS, data.items);
-            renderVideoList(data.items, podcastList);
+            renderVideoList(data.items, podcastList, 4); // Page 4 for podcasts
         } else {
             console.error('No podcasts found');
             fetchMockPodcasts();
@@ -323,16 +348,16 @@ function cacheData(cacheKey, data) {
 /* ==================== */
 /* CONTENT RENDERING */
 /* ==================== */
-function renderVideoList(items, containerElement) {
+function renderVideoList(items, containerElement, pageNumber) {
     containerElement.innerHTML = '';
 
     items.forEach(item => {
-        const itemElement = createMediaItem(item);
+        const itemElement = createMediaItem(item, pageNumber);
         containerElement.appendChild(itemElement);
     });
 }
 
-function createMediaItem(media) {
+function createMediaItem(media, pageNumber) {
     const item = document.createElement('div');
     item.classList.add('video-item');
 
@@ -352,7 +377,7 @@ function createMediaItem(media) {
     textContainer.append(title, description);
     item.append(thumbnail, textContainer);
     
-    item.addEventListener('click', () => openVideoPopup(media.snippet.resourceId.videoId));
+    item.addEventListener('click', () => openVideoPopup(media.snippet.resourceId.videoId, pageNumber));
     
     return item;
 }
@@ -368,7 +393,8 @@ function handleSubscribeFormSubmit(e) {
     if (name && validateEmail(email)) {
         alert(`Gracias por suscribirte, ${name}! Te hemos enviado un correo a ${email}`);
         this.reset();
-        closeSubscribePopup();
+        const pageNumber = this.closest('.page').className.match(/page(\d)/)[1];
+        closeContentPopup(pageNumber);
     } else {
         alert('Por favor ingresa un nombre y correo electrónico válidos');
     }
@@ -443,7 +469,7 @@ async function fetchMockVideos() {
         ]
     };
     
-    renderVideoList(mockResponse.items, videoList);
+    renderVideoList(mockResponse.items, videoList, 3); // Page 3 for videos
 }
 
 async function fetchMockPodcasts() {
@@ -478,5 +504,5 @@ async function fetchMockPodcasts() {
         ]
     };
     
-    renderVideoList(mockResponse.items, podcastList);
+    renderVideoList(mockResponse.items, podcastList, 4); // Page 4 for podcasts
 }
