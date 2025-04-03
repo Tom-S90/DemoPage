@@ -600,7 +600,7 @@ body {
     grid-template-rows: repeat(2, 1fr);
     gap: 20px;
     background-image: var(--articles-grid-light);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -632,25 +632,50 @@ body {
 }
 
 .page2 .article-item {
-    background-color: var(--page-background);
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Take full height of grid cell */
     transition: transform 0.3s ease;
     cursor: pointer;
+    background-color: var(--page-background);
+    border: 1px solid var(--border-color);
 }
 
-.page2 .article-item:hover {
-    transform: translateY(-5px);
+.page2 .article-image-container {
+    flex: 1; /* Take up remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    overflow: hidden;
+    padding: 10px;
 }
 
-.page2 .article-item img {
+.page2 .article-image-container img {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    max-height: 200px; /* Limit image height */
+    object-fit: contain;
+}
+
+.page2 .article-text-container {
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Push content to bottom */
+    min-height: 100px; /* Ensure consistent text container height */
 }
 
 .page2 .article-item h3 {
-    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
     color: var(--text-color);
+}
+
+.page2 .article-item p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin: 0;
 }
 
 /* ==================== */
