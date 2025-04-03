@@ -375,23 +375,18 @@ function initializeMarquees() {
         const content = marquee.textContent.trim();
         marquee.innerHTML = '';
         
-        // Create two spans with the same content for seamless looping
-        const span1 = document.createElement('span');
-        const span2 = document.createElement('span');
+        // Create container for marquee content
+        const container = document.createElement('div');
+        container.className = 'marquee-content';
         
-        span1.textContent = content;
-        span2.textContent = content;
-        
-        marquee.appendChild(span1);
-        marquee.appendChild(span2);
+        // Duplicate content for seamless looping
+        container.textContent = content + ' ' + content; // Double the content
         
         // Calculate duration based on content length
         const duration = content.length / 5;
-        span1.style.animationDuration = `${duration * 2}s`;
-        span2.style.animationDuration = `${duration * 2}s`;
+        container.style.animationDuration = `${duration}s`;
         
-        // Offset the second span
-        span2.style.left = '100%';
+        marquee.appendChild(container);
     });
 }
 
