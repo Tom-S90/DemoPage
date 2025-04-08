@@ -347,6 +347,9 @@ body {
 }
 
 .page1 .left-image {
+    position: relative;
+    top:75px;
+    right: 75px;
     max-width: 25vw;
 }
 
@@ -513,14 +516,14 @@ body {
 }
 
 /* Footer */
-.page1 .footer {
+.footer {
     position: relative;
     width: 100%;
     height: 150px;
     margin-top: 40px;
 }
 
-.page1 .footer-image {
+.footer-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -529,7 +532,7 @@ body {
     left: 0;
 }
 
-.page1 .footer-content {
+.footer-content {
     position: relative;
     height: 100%;
     display: flex;
@@ -538,7 +541,7 @@ body {
     padding: 0 40px;
 }
 
-.page1 .footer-center-button {
+.footer-center-button {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -553,17 +556,17 @@ body {
     transition: none !important;
 }
 
-.page1 .footer-center-button:hover {
+.footer-center-button:hover {
     transform: translate(-50%, -50%) !important;
 }
 
-.page1 .footer-social-buttons {
+.footer-social-buttons {
     display: flex;
     gap: 15px;
     margin-left: auto;
 }
 
-.page1 .social-button {
+.social-button {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -574,20 +577,20 @@ body {
     transition: transform 0.3s ease;
 }
 
-.page1 .social-button:hover {
+.social-button:hover {
     transform: scale(1.1);
 }
 
-.page1 .social-button.instagram {
-    background-image: url('assets/both/Instagram.png');
+.social-button.instagram {
+    background-image: url('assets/both/FooterWorld.png');
 }
 
-.page1 .social-button.facebook {
-    background-image: url('assets/both/Facebook.png');
+.social-button.facebook {
+    background-image: url('assets/both/FooterFacebook.png');
 }
 
-.page1 .social-button.twitter {
-    background-image: url('assets/both/X.png');
+.social-button.twitter {
+    background-image: url('assets/both/FooterInstagram.png');
 }
 .footer-logo {
     width:10vw;
@@ -702,30 +705,61 @@ body {
     opacity: 0.8;
 }
 
-/* Positioning Controls to move entire grid */
+/* Positioning Controls to move entire grid (Don't touch unless absolutely necessary)*/
 .page2 .articles-grid {
     margin: 0 50px;
     padding: 0px; 
 }
 
-/* For some fucking reason, 2nd is the 1st, 3rd is the 2nd, etc. (2=1 3=2 4=3 5=4)!?!?!?  */
-.page2 .article-card:nth-child(2) {
-    position: relative;
-    top:30px;
+.page2 .grid-text {
+    position: absolute;
+    z-index: 2; /* Above the grid background but below articles */
+    font-family: 'Gelato Extra Light';
+    color: var(--text-color);
+    text-align: center;
 }
 
-.page2 .article-card:nth-child(3) {
-    position: relative;
-    top:30px;
+/* Top middle text */
+.page2 .top-text {
+    left: 50%;
+    top:-15px;
+    transform: translateX(-50%);
+    width: 60%;
+    font-size: 1.5rem;
+    font-family: 'Avant Garde Book Condensed';    
 }
+
+/* Center text */
+.page2 .center-text {
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    font-size: 1.5rem;
+    font-family: 'Avant Garde Book Condensed';
+}
+
+/* For fucks sake, the damn children objects are fucked up. Real quick just in case: 4=1 5=2 6=3 7=4. GL future me.*/
 .page2 .article-card:nth-child(4) {
     position: relative;
-    top:60px;
+    top: 30px;
 }
+
 .page2 .article-card:nth-child(5) {
     position: relative;
-    top:60px;
+    top: 30px;
 }
+
+.page2 .article-card:nth-child(6) {
+    position: relative;
+    top: 60px;
+}
+
+.page2 .article-card:nth-child(7) {
+    position: relative;
+    top: 60px;
+}
+
 /* ==================== */
 /* PAGE 3: VIDEOS */
 /* ==================== */
