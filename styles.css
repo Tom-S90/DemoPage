@@ -589,6 +589,10 @@ body {
 .page1 .social-button.twitter {
     background-image: url('assets/both/X.png');
 }
+.footer-logo {
+    width:10vw;
+}
+
 /* ==================== */
 /* PAGE 2: ARTICULOS */
 /* ==================== */
