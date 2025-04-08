@@ -24,8 +24,72 @@ const subscribePopup = document.getElementById('subscribe-popup');
 const contentPopup = document.getElementById('content-popup');
 
 /* ==================== */
+/* SHOPPING CART CLASS */
+/* ==================== */
+class ShoppingCart {
+    constructor() {
+        this.items = [];
+        this.loadCart();
+    }
+    
+    addItem(id, name, price, quantity = 1) {
+        const existingItem = this.items.find(item => item.id === id);
+        
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            this.items.push({ id, name, price: parseFloat(price), quantity });
+        }
+        
+        this.saveCart();
+        this.updateCartDisplay();
+    }
+    
+    removeItem(id) {
+        this.items = this.items.filter(item => item.id !== id);
+        this.saveCart();
+        this.updateCartDisplay();
+    }
+    
+    updateQuantity(id, newQuantity) {
+        const item = this.items.find(item => item.id === id);
+        
+        if (item) {
+            if (newQuantity <= 0) {
+                this.removeItem(id);
+            } else {
+                item.quantity = newQuantity;
+                this.saveCart();
+                this.updateCartDisplay();
+            }
+        }
+    }
+    
+    getTotal() {
+        return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
+    
+    saveCart() {
+        localStorage.setItem('shoppingCart', JSON.stringify(this.items));
+    }
+    
+    loadCart() {
+        const savedCart = localStorage.getItem('shoppingCart');
+        this.items = savedCart ? JSON.parse(savedCart) : [];
+    }
+    
+    clearCart() {
+        this.items = [];
+        this.saveCart();
+        this.updateCartDisplay();
+    }
+}
+
+/* ==================== */
 /* INITIALIZATION */
 /* ==================== */
+const cart = new ShoppingCart();
+
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 function initializeApp() {
@@ -35,6 +99,7 @@ function initializeApp() {
     setupEventListeners();
     fetchContent();
     setupButtonHandlers();
+    initializeCart();
 }
 
 function setActiveNavButton() {
@@ -74,13 +139,11 @@ function setupNavButtons() {
 }
 
 function setupButtonHandlers() {
-    // Setup all popup buttons
     document.querySelectorAll('.popup-button').forEach(button => {
         button.removeEventListener('click', handlePopupButtonClick);
         button.addEventListener('click', handlePopupButtonClick);
     });
 
-    // Setup buy buttons in store
     document.querySelectorAll('.buy-button').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
@@ -92,12 +155,14 @@ function setupButtonHandlers() {
 function handlePopupButtonClick(e) {
     e.preventDefault();
     const contentId = this.getAttribute('data-popup-content');
-    if (contentId) {
-        if (contentId === 'subscribe-content') {
-            openSubscribePopup();
-        } else {
-            openContentPopup(contentId);
-        }
+    
+    if (contentId === 'subscribe-content') {
+        openSubscribePopup();
+    } else if (contentId === 'cart-popup-content') {
+        updateCartDisplay();
+        openContentPopup(contentId);
+    } else {
+        openContentPopup(contentId);
     }
 }
 
@@ -127,17 +192,13 @@ function toggleTheme() {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
     const switchElement = document.querySelector('.light-switch');
-    
-    // Add pull animation
     switchElement.classList.add('clicked');
     
     setTimeout(() => {
-        // Change theme after animation starts
         body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeToggle();
         
-        // Reset animation after completion
         setTimeout(() => {
             switchElement.classList.remove('clicked');
         }, 300);
@@ -265,6 +326,134 @@ function createMediaItem(media) {
 }
 
 /* ==================== */
+/* CART FUNCTIONALITY */
+/* ==================== */
+function initializeCart() {
+    setupAddToCartButtons();
+    setupViewCartButton();
+    setupCheckoutButton();
+    updateCartDisplay();
+}
+
+function setupAddToCartButtons() {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            const price = this.getAttribute('data-price');
+            
+            cart.addItem(id, name, price);
+            
+            // Show feedback
+            const feedback = document.createElement('div');
+            feedback.textContent = 'Added to cart!';
+            feedback.style.position = 'absolute';
+            feedback.style.bottom = '10px';
+            feedback.style.left = '50%';
+            feedback.style.transform = 'translateX(-50%)';
+            feedback.style.backgroundColor = 'var(--accent-color)';
+            feedback.style.color = 'white';
+            feedback.style.padding = '5px 10px';
+            feedback.style.borderRadius = '5px';
+            feedback.style.zIndex = '10';
+            
+            this.parentElement.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.remove();
+            }, 1000);
+        });
+    });
+}
+
+function updateCartDisplay() {
+    const cartItemsList = document.getElementById('cart-items-list');
+    const cartTotal = document.getElementById('cart-total');
+    
+    if (!cartItemsList) return;
+    
+    cartItemsList.innerHTML = '';
+    
+    if (cart.items.length === 0) {
+        cartItemsList.innerHTML = '<p>Your cart is empty</p>';
+        cartTotal.textContent = 'Total: $0.00';
+        return;
+    }
+    
+    cart.items.forEach(item => {
+        const cartItemElement = document.createElement('div');
+        cartItemElement.className = 'cart-item';
+        cartItemElement.innerHTML = `
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>$${item.price.toFixed(2)} each</p>
+            </div>
+            <div class="cart-item-controls">
+                <button class="decrease-quantity" data-id="${item.id}">-</button>
+                <span>${item.quantity}</span>
+                <button class="increase-quantity" data-id="${item.id}">+</button>
+                <button class="remove-item" data-id="${item.id}">×</button>
+            </div>
+        `;
+        
+        cartItemsList.appendChild(cartItemElement);
+    });
+    
+    cartTotal.textContent = `Total: $${cart.getTotal().toFixed(2)}`;
+    
+    setupCartItemControls();
+}
+
+function setupCartItemControls() {
+    document.querySelectorAll('.decrease-quantity').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const item = cart.items.find(item => item.id === id);
+            if (item) {
+                cart.updateQuantity(id, item.quantity - 1);
+            }
+        });
+    });
+    
+    document.querySelectorAll('.increase-quantity').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const item = cart.items.find(item => item.id === id);
+            if (item) {
+                cart.updateQuantity(id, item.quantity + 1);
+            }
+        });
+    });
+    
+    document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            cart.removeItem(id);
+        });
+    });
+}
+
+function setupViewCartButton() {
+    const viewCartButton = document.getElementById('view-cart-button');
+    if (viewCartButton) {
+        viewCartButton.addEventListener('click', function() {
+            openContentPopup('cart-popup-content');
+        });
+    }
+}
+
+function setupCheckoutButton() {
+    const checkoutButton = document.getElementById('checkout-button');
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', function() {
+            alert(`Thank you for your purchase! Total: $${cart.getTotal().toFixed(2)}`);
+            cart.clearCart();
+            closeContentPopup();
+        });
+    }
+}
+
+/* ==================== */
 /* POPUP FUNCTIONALITY */
 /* ==================== */
 function openVideoPopup(videoId) {
@@ -345,14 +534,12 @@ function hidePopup(popupElement) {
 }
 
 function setupPopupCloseHandlers(popupElement, closeFunction) {
-    // Close when clicking outside content
     popupElement.addEventListener('click', (e) => {
         if (e.target === popupElement) {
             closeFunction();
         }
     });
     
-    // Close when clicking the close button
     const closeBtn = popupElement.querySelector('.popup-close-button');
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
@@ -362,7 +549,6 @@ function setupPopupCloseHandlers(popupElement, closeFunction) {
         });
     }
 
-    // Close with Escape key
     const handleEscape = (e) => {
         if (e.key === 'Escape') {
             closeFunction();
@@ -384,7 +570,6 @@ function initializeMarquees() {
         const container = document.createElement('div');
         container.className = 'marquee-content';
         
-        // Create two spans with the content
         for (let i = 0; i < 2; i++) {
             const span = document.createElement('span');
             span.textContent = originalContent;
@@ -393,9 +578,8 @@ function initializeMarquees() {
         
         marquee.appendChild(container);
         
-        // Calculate duration based on content width
         const contentWidth = container.firstChild.offsetWidth;
-        const duration = (contentWidth / 100) * 1.5; // Adjust multiplier for speed
+        const duration = (contentWidth / 100) * 1.5;
         
         container.style.animationDuration = `${duration}s`;
     });
