@@ -42,13 +42,14 @@ class ShoppingCart {
         }
         
         this.saveCart();
-        this.updateCartDisplay();
+        this.updateCartDisplay(); // Automatically update display
+        this.showAddToCartFeedback(id);
     }
     
     removeItem(id) {
         this.items = this.items.filter(item => item.id !== id);
         this.saveCart();
-        this.updateCartDisplay();
+        this.updateCartDisplay(); // Automatically update display
     }
     
     updateQuantity(id, newQuantity) {
@@ -60,7 +61,7 @@ class ShoppingCart {
             } else {
                 item.quantity = newQuantity;
                 this.saveCart();
-                this.updateCartDisplay();
+                this.updateCartDisplay(); // Automatically update display
             }
         }
     }
