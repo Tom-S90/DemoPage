@@ -89,13 +89,88 @@ class ShoppingCart {
         const button = document.querySelector(`.add-to-cart[data-id="${id}"]`);
         if (!button) return;
         
-        button.textContent = 'Added!';
+        const originalContent = button.innerHTML;
+        button.innerHTML = 'Added!';
         button.style.backgroundColor = '#4CAF50';
         
         setTimeout(() => {
-            button.textContent = 'Add to Cart';
+            button.innerHTML = originalContent;
             button.style.backgroundColor = '';
         }, 1000);
+    }
+    
+    updateCartDisplay() {
+        const cartItemsList = document.getElementById('cart-items-list');
+        const cartTotal = document.getElementById('cart-total');
+        
+        if (!cartItemsList) return;
+        
+        cartItemsList.innerHTML = '';
+        
+        if (this.items.length === 0) {
+            cartItemsList.innerHTML = '<p class="empty-cart-message">Your cart is empty</p>';
+            cartTotal.textContent = 'Total: $0.00';
+            return;
+        }
+        
+        this.items.forEach(item => {
+            const cartItemElement = document.createElement('div');
+            cartItemElement.className = 'cart-item';
+            cartItemElement.innerHTML = `
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <p>$${item.price.toFixed(2)} each</p>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="decrease-quantity" data-id="${item.id}">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="increase-quantity" data-id="${item.id}">+</button>
+                    <button class="remove-item" data-id="${item.id}">×</button>
+                </div>
+                <div class="cart-item-total">
+                    $${(item.price * item.quantity).toFixed(2)}
+                </div>
+            `;
+            
+            cartItemsList.appendChild(cartItemElement);
+        });
+        
+        cartTotal.textContent = `Total: $${this.getTotal().toFixed(2)}`;
+        
+        // Reattach event listeners to new buttons
+        this.setupCartItemControls();
+    }
+    
+    setupCartItemControls() {
+        document.querySelectorAll('.decrease-quantity').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = button.getAttribute('data-id');
+                const item = this.items.find(item => item.id === id);
+                if (item) {
+                    this.updateQuantity(id, item.quantity - 1);
+                }
+            });
+        });
+        
+        document.querySelectorAll('.increase-quantity').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = button.getAttribute('data-id');
+                const item = this.items.find(item => item.id === id);
+                if (item) {
+                    this.updateQuantity(id, item.quantity + 1);
+                }
+            });
+        });
+        
+        document.querySelectorAll('.remove-item').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = button.getAttribute('data-id');
+                this.removeItem(id);
+            });
+        });
     }
 }
 
@@ -114,6 +189,9 @@ function initializeApp() {
     fetchContent();
     setupButtonHandlers();
     initializeCart();
+    setupAddToCartButtons();
+    setupViewCartButton();
+    setupCheckoutButton();
 }
 
 function setActiveNavButton() {
@@ -132,6 +210,45 @@ function fetchContent() {
     fetchPodcasts();
 }
 
+function setupAddToCartButtons() {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            const price = this.getAttribute('data-price');
+            
+            cart.addItem(id, name, price);
+        });
+    });
+}
+
+function setupViewCartButton() {
+    const viewCartButton = document.getElementById('view-cart-button');
+    if (viewCartButton) {
+        viewCartButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            openContentPopup('cart-popup-content');
+        });
+    }
+}
+
+function setupCheckoutButton() {
+    const checkoutButton = document.getElementById('checkout-button');
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (cart.items.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            alert(`Thank you for your purchase! Total: $${cart.getTotal().toFixed(2)}`);
+            cart.clearCart();
+            closeContentPopup();
+        });
+    }
+}
 /* ==================== */
 /* EVENT HANDLERS */
 /* ==================== */
