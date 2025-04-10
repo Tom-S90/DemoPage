@@ -1077,12 +1077,13 @@ body {
 
 .page6 .add-to-cart-text {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 40%;
+    transform: translate(-40%, -40%);
     color: black;
     font-family: 'Gelato Extra Light';
     pointer-events: none;
+    font-size: .8rem;
 }
 
 .page6 .add-to-cart img {
@@ -1091,7 +1092,7 @@ body {
     transition: transform 0.3s;
 }
 
-.page6 .add-to-cart:hover img {
+.page6 .add-to-cart:hover{
     transform: scale(1.1);
 }
 
@@ -1124,12 +1125,12 @@ body {
 }
 
 #view-cart-button img {
-    width: 150px;
+    width: 250px;
     height: auto;
     transition: transform 0.3s;
 }
 
-#view-cart-button:hover img {
+#view-cart-button:hover{
     transform: scale(1.1);
 }
 
@@ -1272,71 +1273,64 @@ body {
 /* ==================== */
 /* CART POPUP STYLES */
 /* ==================== */
-#cart-popup-content .cart-container {
+.cart-container {
     display: flex;
-    flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-height: 80vh;
 }
 
-/* Cart items list */
-#cart-popup-content .cart-items {
-    flex: 1;
+.cart-items {
+    flex: 0 0 55%;
+    max-height: 60vh;
     overflow-y: auto;
     padding-right: 10px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
-    max-height: 60vh;
 }
 
-#cart-popup-content .cart-items h2 {
-    font-family: 'Gelato Bold';
-    color: var(--text-color);
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-/* Individual cart item */
 .cart-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
+    gap: 15px;
+    padding: 15px 0;
     border-bottom: 1px solid var(--border-color);
-    gap: 10px;
+    align-items: center;
 }
 
 .cart-item:last-child {
     border-bottom: none;
 }
 
-.cart-item-info {
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.cart-item-details {
     flex: 1;
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.cart-item-info h4 {
+.cart-item-name {
     font-family: 'Gelato Bold';
-    color: var(--text-color);
-    margin: 0 0 5px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: white;
+    margin: 0;
+    font-size: 1.1rem;
 }
 
-.cart-item-info p {
+.cart-item-price {
     font-family: 'Gelato Extra Light';
-    color: var(--text-color);
+    color: white;
     margin: 0;
     font-size: 0.9rem;
-    opacity: 0.8;
 }
 
 .cart-item-controls {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    margin-top: 5px;
 }
 
 .cart-item-controls button {
@@ -1359,50 +1353,72 @@ body {
     color: var(--button-hover-text);
 }
 
-.cart-item-controls span {
+.cart-item-quantity {
     min-width: 25px;
     text-align: center;
     font-family: 'Gelato Bold';
 }
 
-.cart-item-total {
-    font-family: 'Gelato Bold';
-    min-width: 70px;
-    text-align: right;
-    padding-left: 10px;
+.cart-summary {
+    flex: 1;
+    background-image: url('assets/both/whiteSquare.png');
+    background-size: cover;
+    background-position: center;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    position: relative;
 }
 
-/* Cart summary section */
-#cart-popup-content .cart-summary {
-    padding: 20px 0 0 0;
-    border-top: 1px solid var(--border-color);
+.cart-summary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    z-index: 0;
 }
 
-#cart-popup-content .cart-summary h2 {
+.cart-summary-content {
+    position: relative;
+    z-index: 1;
+}
+
+.cart-summary-title {
+    font-family: 'Kilimanjaro';
+    font-size: 3rem;
+    margin: 0 0 20px 0;
+    text-align: center;
+    color: white;
+}
+
+.cart-summary-total {
     font-family: 'Gelato Bold';
-    color: var(--text-color);
-    margin-bottom: 15px;
+    font-size: 1.5rem;
+    margin: 15px 0;
     text-align: center;
 }
 
-#cart-total {
-    font-family: 'Gelato Bold';
+.cart-summary-shipping {
+    font-family: 'Gelato Extra Light';
     font-size: 1.2rem;
-    color: var(--text-color);
+    margin: 15px 0;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-/* Checkout button */
 #checkout-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 0 auto;
+    margin-top: 30px;
+    position: relative;
     display: block;
     width: 150px;
-    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #checkout-button .checkout-text {
@@ -1421,15 +1437,14 @@ body {
     transition: transform 0.3s;
 }
 
-#checkout-button:hover img {
+#checkout-button:hover{
     transform: scale(1.05);
 }
 
-/* Empty cart message */
 .empty-cart-message {
     text-align: center;
     font-family: 'Gelato Extra Light';
-    color: var(--text-color);
+    color: white;
     padding: 20px 0;
 }
 
