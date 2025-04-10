@@ -4,7 +4,7 @@
 /* ==================== */
 const CACHE_KEY_VIDEOS = 'youtube_videos_cache';
 const CACHE_KEY_PODCASTS = 'youtube_podcasts_cache';
-const CACHE_EXPIRY = 60 * 60 * 1000; // 24 hours
+const CACHE_EXPIRY = 60 * 60 * 1000;
 const YOUTUBE_API_KEY = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
 const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
 const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
@@ -28,8 +28,9 @@ const subscribePopup = document.getElementById('subscribe-popup');
 const contentPopup = document.getElementById('content-popup');
 
 /* ==================== */
-/* DEBUGGING TOOLS */
+/* DEBUGGING TOOLS DON'T ACTIVATE UNLESS NECESSARY, SLOWS DOWN PAGE. */
 /* ==================== */
+/*
 function debugLog(message, data = null) {
     if (DEBUG_MODE) {
         console.log(`[DEBUG] ${message}`, data || '');
@@ -90,7 +91,7 @@ function updateDebugStatus(message) {
         setTimeout(() => statusElement.textContent = '', 2000);
     }
 }
-
+*/
 /* ==================== */
 /* SHOPPING CART CLASS */
 /* ==================== */
