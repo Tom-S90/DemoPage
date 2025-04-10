@@ -9,8 +9,8 @@ const YOUTUBE_API_KEY = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
 const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
 const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
 
-// //debug mode flag
-const //debug_MODE = true;
+// debug mode flag
+const debug_MODE = false;
 
 /* ==================== */
 /* DOM ELEMENTS */
@@ -28,70 +28,69 @@ const subscribePopup = document.getElementById('subscribe-popup');
 const contentPopup = document.getElementById('content-popup');
 
 /* ==================== */
-/* //debugGING TOOLS DON'T ACTIVATE UNLESS NECESSARY, SLOWS DOWN PAGE. */
+/* debugGING TOOLS DON'T ACTIVATE UNLESS NECESSARY, SLOWS DOWN PAGE. */
 /* ==================== */
-/*
-function //debugLog(message, data = null) {
-    if (//debug_MODE) {
-        console.log(`[//debug] ${message}`, data || '');
+
+function debugLog(message, data = null) {
+    if (debug_MODE) {
+        console.log(`[debug] ${message}`, data || '');
     }
 }
 
-function show//debugPanel() {
-    if (!//debug_MODE) return;
+function showdebugPanel() {
+    if (!debug_MODE) return;
     
-    const //debugPanel = document.createElement('div');
-    //debugPanel.id = '//debug-panel';
-    //debugPanel.style.position = 'fixed';
-    //debugPanel.style.bottom = '10px';
-    //debugPanel.style.right = '10px';
-    //debugPanel.style.backgroundColor = 'rgba(0,0,0,0.7)';
-    //debugPanel.style.color = 'white';
-    //debugPanel.style.padding = '10px';
-    //debugPanel.style.zIndex = '9999';
-    //debugPanel.style.borderRadius = '5px';
-    //debugPanel.style.fontFamily = 'monospace';
-    //debugPanel.style.fontSize = '12px';
+    const debugPanel = document.createElement('div');
+    debugPanel.id = 'debug-panel';
+    debugPanel.style.position = 'fixed';
+    debugPanel.style.bottom = '10px';
+    debugPanel.style.right = '10px';
+    debugPanel.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    debugPanel.style.color = 'white';
+    debugPanel.style.padding = '10px';
+    debugPanel.style.zIndex = '9999';
+    debugPanel.style.borderRadius = '5px';
+    debugPanel.style.fontFamily = 'monospace';
+    debugPanel.style.fontSize = '12px';
     
-    //debugPanel.innerHTML = `
-        <h3 style="margin:0 0 5px 0;">//debug Panel</h3>
-        <button id="//debug-clear-cart" style="margin:2px;">Clear Cart</button>
-        <button id="//debug-add-test-item" style="margin:2px;">Add Test Item</button>
-        <button id="//debug-log-cart" style="margin:2px;">Log Cart</button>
-        <button id="//debug-toggle-theme" style="margin:2px;">Toggle Theme</button>
-        <div id="//debug-status" style="margin-top:5px;"></div>
+    debugPanel.innerHTML = `
+        <h3 style="margin:0 0 5px 0;">debug Panel</h3>
+        <button id="debug-clear-cart" style="margin:2px;">Clear Cart</button>
+        <button id="debug-add-test-item" style="margin:2px;">Add Test Item</button>
+        <button id="debug-log-cart" style="margin:2px;">Log Cart</button>
+        <button id="debug-toggle-theme" style="margin:2px;">Toggle Theme</button>
+        <div id="debug-status" style="margin-top:5px;"></div>
     `;
     
-    document.body.appendChild(//debugPanel);
+    document.body.appendChild(debugPanel);
     
-    // //debug button handlers
-    document.getElementById('//debug-clear-cart').addEventListener('click', () => {
+    // debug button handlers
+    document.getElementById('debug-clear-cart').addEventListener('click', () => {
         cart.clearCart();
-        update//debugStatus('Cart cleared');
+        updatedebugStatus('Cart cleared');
     });
     
-    document.getElementById('//debug-add-test-item').addEventListener('click', () => {
-        cart.addItem('//debug-1', '//debug Item', '9.99');
-        update//debugStatus('Test item added');
+    document.getElementById('debug-add-test-item').addEventListener('click', () => {
+        cart.addItem('debug-1', 'debug Item', '9.99');
+        updatedebugStatus('Test item added');
     });
     
-    document.getElementById('//debug-log-cart').addEventListener('click', () => {
-        //debugLog('Current Cart:', cart.items);
-        update//debugStatus('Cart logged to console');
+    document.getElementById('debug-log-cart').addEventListener('click', () => {
+        debugLog('Current Cart:', cart.items);
+        updatedebugStatus('Cart logged to console');
     });
     
-    document.getElementById('//debug-toggle-theme').addEventListener('click', toggleTheme);
+    document.getElementById('debug-toggle-theme').addEventListener('click', toggleTheme);
 }
 
-function update//debugStatus(message) {
-    if (!//debug_MODE) return;
-    const statusElement = document.getElementById('//debug-status');
+function updatedebugStatus(message) {
+    if (!debug_MODE) return;
+    const statusElement = document.getElementById('debug-status');
     if (statusElement) {
         statusElement.textContent = message;
         setTimeout(() => statusElement.textContent = '', 2000);
     }
 }
-*/
 /* ==================== */
 /* SHOPPING CART CLASS */
 /* ==================== */
@@ -100,17 +99,17 @@ class ShoppingCart {
         this.items = [];
         this.loadCart();
         this.setupCartEventListeners();
-        //debugLog('Cart initialized', this.items);
+        debugLog('Cart initialized', this.items);
     }
     
     addItem(id, name, price, quantity = 1) {
-        //debugLog(`Adding item: ${name} (ID: ${id})`, {price, quantity});
+        debugLog(`Adding item: ${name} (ID: ${id})`, {price, quantity});
         
         const existingItem = this.items.find(item => item.id === id);
         
         if (existingItem) {
             existingItem.quantity += quantity;
-            //debugLog(`Item exists, updated quantity to ${existingItem.quantity}`);
+            debugLog(`Item exists, updated quantity to ${existingItem.quantity}`);
         } else {
             this.items.push({ 
                 id, 
@@ -118,7 +117,7 @@ class ShoppingCart {
                 price: parseFloat(price), 
                 quantity 
             });
-            //debugLog('New item added to cart');
+            debugLog('New item added to cart');
         }
         
         this.saveCart();
@@ -128,7 +127,7 @@ class ShoppingCart {
     }
     
     removeItem(id) {
-        //debugLog(`Removing item with ID: ${id}`);
+        debugLog(`Removing item with ID: ${id}`);
         this.items = this.items.filter(item => item.id !== id);
         this.saveCart();
         this.updateCartDisplay();
@@ -136,7 +135,7 @@ class ShoppingCart {
     }
     
     updateQuantity(id, newQuantity) {
-        //debugLog(`Updating quantity for item ${id} to ${newQuantity}`);
+        debugLog(`Updating quantity for item ${id} to ${newQuantity}`);
         const item = this.items.find(item => item.id === id);
         
         if (item) {
@@ -153,23 +152,23 @@ class ShoppingCart {
     
     getTotal() {
         const total = this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
-        //debugLog('Calculating cart total', {total});
+        debugLog('Calculating cart total', {total});
         return total;
     }
     
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.items));
-        //debugLog('Cart saved to localStorage', this.items);
+        debugLog('Cart saved to localStorage', this.items);
     }
     
     loadCart() {
         const savedCart = localStorage.getItem('shoppingCart');
         this.items = savedCart ? JSON.parse(savedCart) : [];
-        //debugLog('Cart loaded from localStorage', this.items);
+        debugLog('Cart loaded from localStorage', this.items);
     }
     
     clearCart() {
-        //debugLog('Clearing cart');
+        debugLog('Clearing cart');
         this.items = [];
         this.saveCart();
         this.updateCartDisplay();
@@ -179,7 +178,7 @@ class ShoppingCart {
     showAddToCartFeedback(id) {
         const button = document.querySelector(`.add-to-cart[data-id="${id}"]`);
         if (!button) {
-            //debugLog(`Add to cart button not found for ID: ${id}`);
+            debugLog(`Add to cart button not found for ID: ${id}`);
             return;
         }
         
@@ -194,13 +193,13 @@ class ShoppingCart {
     }
     
     updateCartDisplay() {
-        //debugLog('Updating cart display');
+        debugLog('Updating cart display');
         const cartItemsList = document.getElementById('cart-items-list');
         const cartTotal = document.getElementById('cart-total');
         const cartFinalTotal = document.getElementById('cart-final-total');
         
         if (!cartItemsList) {
-            //debugLog('Cart items list element not found');
+            debugLog('Cart items list element not found');
             return;
         }
         
@@ -210,7 +209,7 @@ class ShoppingCart {
             cartItemsList.innerHTML = '<p class="empty-cart-message">Your cart is empty</p>';
             if (cartTotal) cartTotal.textContent = 'Total: $0.00';
             if (cartFinalTotal) cartFinalTotal.textContent = 'Total: $0.00';
-            //debugLog('Cart is empty, showing empty message');
+            debugLog('Cart is empty, showing empty message');
             return;
         }
         
@@ -242,7 +241,7 @@ class ShoppingCart {
     }
     
     setupCartItemControls() {
-        //debugLog('Setting up cart item controls');
+        debugLog('Setting up cart item controls');
         
         document.querySelectorAll('.decrease-quantity').forEach(button => {
             button.addEventListener('click', (e) => {
@@ -276,18 +275,18 @@ class ShoppingCart {
     }
     
     setupCartEventListeners() {
-        //debugLog('Setting up cart event listeners');
+        debugLog('Setting up cart event listeners');
         
         // Handle page changes to ensure cart updates
         document.addEventListener('pageChanged', () => {
-            //debugLog('Page changed, updating cart display');
+            debugLog('Page changed, updating cart display');
             this.updateCartDisplay();
         });
         
         // Handle popup opens to ensure cart updates
         document.addEventListener('popupOpened', (e) => {
             if (e.detail.popupId === 'cart-popup-content') {
-                //debugLog('Cart popup opened, updating display');
+                debugLog('Cart popup opened, updating display');
                 this.updateCartDisplay();
             }
         });
@@ -298,7 +297,7 @@ class ShoppingCart {
             detail: { items: this.items, total: this.getTotal() }
         });
         document.dispatchEvent(event);
-        //debugLog('Dispatched cartUpdated event', event.detail);
+        debugLog('Dispatched cartUpdated event', event.detail);
     }
 }
 
@@ -310,7 +309,7 @@ const cart = new ShoppingCart();
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 function initializeApp() {
-    //debugLog('Initializing application');
+    debugLog('Initializing application');
     setActiveNavButton();
     initializeTheme();
     initializeMarquees();
@@ -322,32 +321,32 @@ function initializeApp() {
     setupViewCartButton();
     setupCheckoutButton();
     
-    if (//debug_MODE) {
-        show//debugPanel();
+    if (debug_MODE) {
+        showdebugPanel();
     }
 }
 
 function setActiveNavButton() {
     const buttons = document.querySelectorAll('.nav-button-container');
     buttons[0].classList.add('active');
-    //debugLog('Set active nav button');
+    debugLog('Set active nav button');
 }
 
 function initializeTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     body.setAttribute('data-theme', savedTheme);
     updateThemeToggle();
-    //debugLog('Theme initialized', savedTheme);
+    debugLog('Theme initialized', savedTheme);
 }
 
 function fetchContent() {
-    //debugLog('Fetching content');
+    debugLog('Fetching content');
     fetchVideos();
     fetchPodcasts();
 }
 
 function setupAddToCartButtons() {
-    //debugLog('Setting up add to cart buttons');
+    debugLog('Setting up add to cart buttons');
     
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.removeEventListener('click', handleAddToCartClick);
@@ -365,7 +364,7 @@ function handleAddToCartClick(e) {
     const name = this.getAttribute('data-name');
     const price = this.getAttribute('data-price');
     
-    //debugLog('Add to cart button clicked', {id, name, price});
+    debugLog('Add to cart button clicked', {id, name, price});
     cart.addItem(id, name, price);
 }
 
@@ -374,11 +373,11 @@ function setupViewCartButton() {
     if (viewCartButton) {
         viewCartButton.addEventListener('click', function(e) {
             e.preventDefault();
-            //debugLog('View cart button clicked');
+            debugLog('View cart button clicked');
             openContentPopup('cart-popup-content');
         });
     } else {
-        //debugLog('View cart button not found');
+        debugLog('View cart button not found');
     }
 }
 
@@ -387,7 +386,7 @@ function setupCheckoutButton() {
     if (checkoutButton) {
         checkoutButton.addEventListener('click', function(e) {
             e.preventDefault();
-            //debugLog('Checkout button clicked');
+            debugLog('Checkout button clicked');
             if (cart.items.length === 0) {
                 alert('Your cart is empty!');
                 return;
@@ -397,7 +396,7 @@ function setupCheckoutButton() {
             closeContentPopup();
         });
     } else {
-        //debugLog('Checkout button not found');
+        debugLog('Checkout button not found');
     }
 }
 
@@ -405,30 +404,30 @@ function setupCheckoutButton() {
 /* EVENT HANDLERS */
 /* ==================== */
 function setupEventListeners() {
-    //debugLog('Setting up event listeners');
+    debugLog('Setting up event listeners');
     setupThemeToggles();
     setupNavButtons();
 }
 
 function setupThemeToggles() {
-    //debugLog('Setting up theme toggles');
+    debugLog('Setting up theme toggles');
     lightToDarkToggle.addEventListener('click', toggleTheme);
     darkToLightToggle.addEventListener('click', toggleTheme);
 }
 
 function setupNavButtons() {
-    //debugLog('Setting up nav buttons');
+    debugLog('Setting up nav buttons');
     const navButtons = document.querySelectorAll('.nav-button-container');
     navButtons.forEach((button, index) => {
         button.addEventListener('click', () => {
-            //debugLog(`Nav button ${index + 1} clicked`);
+            debugLog(`Nav button ${index + 1} clicked`);
             goToPage(index + 1);
         });
     });
 }
 
 function setupButtonHandlers() {
-    //debugLog('Setting up button handlers');
+    debugLog('Setting up button handlers');
     document.querySelectorAll('.popup-button').forEach(button => {
         button.removeEventListener('click', handlePopupButtonClick);
         button.addEventListener('click', handlePopupButtonClick);
@@ -438,7 +437,7 @@ function setupButtonHandlers() {
 function handlePopupButtonClick(e) {
     e.preventDefault();
     const contentId = this.getAttribute('data-popup-content');
-    //debugLog('Popup button clicked', {contentId});
+    debugLog('Popup button clicked', {contentId});
     
     if (contentId === 'subscribe-content') {
         openSubscribePopup();
@@ -454,7 +453,7 @@ function handlePopupButtonClick(e) {
 /* PAGE FUNCTIONALITY */
 /* ==================== */
 function goToPage(pageNumber) {
-    //debugLog(`Navigating to page ${pageNumber}`);
+    debugLog(`Navigating to page ${pageNumber}`);
     updateActiveNavButton(pageNumber);
     scrollToPage(pageNumber);
     
@@ -469,12 +468,12 @@ function updateActiveNavButton(pageNumber) {
     const buttons = document.querySelectorAll('.nav-button-container');
     buttons.forEach(button => button.classList.remove('active'));
     buttons[pageNumber - 1].classList.add('active');
-    //debugLog(`Updated active nav button to page ${pageNumber}`);
+    debugLog(`Updated active nav button to page ${pageNumber}`);
 }
 
 function scrollToPage(pageNumber) {
     container.style.transform = `translateX(-${(pageNumber - 1) * 100}vw)`;
-    //debugLog(`Scrolled to page ${pageNumber}`);
+    debugLog(`Scrolled to page ${pageNumber}`);
 }
 
 /* ==================== */
@@ -483,7 +482,7 @@ function scrollToPage(pageNumber) {
 function toggleTheme() {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    //debugLog(`Toggling theme from ${currentTheme} to ${newTheme}`);
+    debugLog(`Toggling theme from ${currentTheme} to ${newTheme}`);
     
     const switchElement = document.querySelector('.light-switch');
     switchElement.classList.add('clicked');
@@ -503,70 +502,70 @@ function updateThemeToggle() {
     const currentTheme = body.getAttribute('data-theme');
     darkToLightToggle.style.display = currentTheme === 'dark' ? 'block' : 'none';
     lightToDarkToggle.style.display = currentTheme === 'dark' ? 'none' : 'block';
-    //debugLog('Updated theme toggle display');
+    debugLog('Updated theme toggle display');
 }
 
 /* ==================== */
 /* CONTENT FETCHING */
 /* ==================== */
 async function fetchVideos() {
-    //debugLog('Fetching videos');
+    debugLog('Fetching videos');
     const cachedData = getCachedData(CACHE_KEY_VIDEOS);
     if (cachedData) {
-        //debugLog('Using cached video data');
+        debugLog('Using cached video data');
         renderVideoList(cachedData, videoList);
         return;
     }
 
     try {
         const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${YOUTUBE_API_KEY}&playlistId=${VIDEO_PLAYLIST_ID}&part=snippet&maxResults=5`;
-        //debugLog('Fetching videos from YouTube API', {apiUrl});
+        debugLog('Fetching videos from YouTube API', {apiUrl});
         const response = await fetch(apiUrl);
         const data = await response.json();
 
         if (data.items) {
-            //debugLog('Received video data from API', {itemCount: data.items.length});
+            debugLog('Received video data from API', {itemCount: data.items.length});
             cacheData(CACHE_KEY_VIDEOS, data.items);
             renderVideoList(data.items, videoList);
         } else {
             console.error('No videos found');
-            //debugLog('No videos found in API response');
+            debugLog('No videos found in API response');
             fetchMockVideos();
         }
     } catch (error) {
         console.error('Error fetching videos:', error);
-        //debugLog('Error fetching videos', error);
+        debugLog('Error fetching videos', error);
         fetchMockVideos();
     }
 }
 
 async function fetchPodcasts() {
-    //debugLog('Fetching podcasts');
+    debugLog('Fetching podcasts');
     const cachedData = getCachedData(CACHE_KEY_PODCASTS);
     if (cachedData) {
-        //debugLog('Using cached podcast data');
+        debugLog('Using cached podcast data');
         renderVideoList(cachedData, podcastList);
         return;
     }
 
     try {
         const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${YOUTUBE_API_KEY}&playlistId=${PODCAST_PLAYLIST_ID}&part=snippet&maxResults=5`;
-        //debugLog('Fetching podcasts from YouTube API', {apiUrl});
+        debugLog('Fetching podcasts from YouTube API', {apiUrl});
         const response = await fetch(apiUrl);
         const data = await response.json();
 
         if (data.items) {
-            //debugLog('Received podcast data from API', {itemCount: data.items.length});
+            debugLog('Received podcast data from API', {itemCount: data.items.length});
             cacheData(CACHE_KEY_PODCASTS, data.items);
             renderVideoList(data.items, podcastList);
         } else {
             console.error('No podcasts found');
-            //debugLog('No podcasts found in API response');
+            debugLog('No podcasts found in API response');
             fetchMockPodcasts();
         }
     } catch (error) {
         console.error('Error fetching podcasts:', error);
-        //debugLog('Error fetching podcasts', error);
+        debugLog('Error fetching podcasts', error);
         fetchMockPodcasts();
     }
 }
@@ -577,17 +576,17 @@ async function fetchPodcasts() {
 function getCachedData(cacheKey) {
     const cachedData = localStorage.getItem(cacheKey);
     if (!cachedData) {
-        //debugLog(`No cached data found for key: ${cacheKey}`);
+        debugLog(`No cached data found for key: ${cacheKey}`);
         return null;
     }
 
     const { timestamp, data } = JSON.parse(cachedData);
     if (Date.now() - timestamp < CACHE_EXPIRY) {
-        //debugLog(`Using valid cached data for key: ${cacheKey}`);
+        debugLog(`Using valid cached data for key: ${cacheKey}`);
         return data;
     }
     
-    //debugLog(`Cached data expired for key: ${cacheKey}`);
+    debugLog(`Cached data expired for key: ${cacheKey}`);
     localStorage.removeItem(cacheKey);
     return null;
 }
@@ -598,14 +597,14 @@ function cacheData(cacheKey, data) {
         data: data
     };
     localStorage.setItem(cacheKey, JSON.stringify(cache));
-    //debugLog(`Data cached for key: ${cacheKey}`, {itemCount: data.length});
+    debugLog(`Data cached for key: ${cacheKey}`, {itemCount: data.length});
 }
 
 /* ==================== */
 /* CONTENT RENDERING */
 /* ==================== */
 function renderVideoList(items, containerElement) {
-    //debugLog(`Rendering video list with ${items.length} items`);
+    debugLog(`Rendering video list with ${items.length} items`);
     containerElement.innerHTML = '';
 
     items.forEach(item => {
@@ -615,7 +614,7 @@ function renderVideoList(items, containerElement) {
 }
 
 function createMediaItem(media) {
-    //debugLog('Creating media item', {title: media.snippet.title});
+    debugLog('Creating media item', {title: media.snippet.title});
     const item = document.createElement('div');
     item.classList.add('video-item');
 
@@ -636,7 +635,7 @@ function createMediaItem(media) {
     item.append(thumbnail, textContainer);
     
     item.addEventListener('click', () => {
-        //debugLog('Media item clicked', {videoId: media.snippet.resourceId.videoId});
+        debugLog('Media item clicked', {videoId: media.snippet.resourceId.videoId});
         openVideoPopup(media.snippet.resourceId.videoId);
     });
     
@@ -647,7 +646,7 @@ function createMediaItem(media) {
 /* CART FUNCTIONALITY */
 /* ==================== */
 function initializeCart() {
-    //debugLog('Initializing cart');
+    debugLog('Initializing cart');
     setupAddToCartButtons();
     setupViewCartButton();
     setupCheckoutButton();
@@ -658,7 +657,7 @@ function initializeCart() {
 /* POPUP FUNCTIONALITY */
 /* ==================== */
 function openVideoPopup(videoId) {
-    //debugLog(`Opening video popup for video ID: ${videoId}`);
+    debugLog(`Opening video popup for video ID: ${videoId}`);
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     iframe.width = '100%';
@@ -674,13 +673,13 @@ function openVideoPopup(videoId) {
 }
 
 function closePopup() {
-    //debugLog('Closing video popup');
+    debugLog('Closing video popup');
     videoFrameContainer.innerHTML = '';
     hidePopup(videoPopup);
 }
 
 function openSubscribePopup() {
-    //debugLog('Opening subscribe popup');
+    debugLog('Opening subscribe popup');
     const popupContent = document.getElementById('subscribe-content').innerHTML;
     document.getElementById('subscribe-popup-html').innerHTML = popupContent;
     showPopup(subscribePopup);
@@ -693,7 +692,7 @@ function openSubscribePopup() {
 }
 
 function closeSubscribePopup() {
-    //debugLog('Closing subscribe popup');
+    debugLog('Closing subscribe popup');
     hidePopup(subscribePopup);
 }
 
@@ -701,7 +700,7 @@ function handleSubscribeFormSubmit(e) {
     e.preventDefault();
     const name = this.querySelector('input[type="text"]').value;
     const email = this.querySelector('input[type="email"]').value;
-    //debugLog('Subscribe form submitted', {name, email});
+    debugLog('Subscribe form submitted', {name, email});
     
     if (name && validateEmail(email)) {
         alert(`Gracias por suscribirte, ${name}! Te hemos enviado un correo a ${email}`);
@@ -713,11 +712,11 @@ function handleSubscribeFormSubmit(e) {
 }
 
 function openContentPopup(contentId) {
-    //debugLog(`Opening content popup for: ${contentId}`);
+    debugLog(`Opening content popup for: ${contentId}`);
     const contentElement = document.getElementById(contentId);
     if (!contentElement) {
         console.error('Content element not found:', contentId);
-        //debugLog(`Content element not found: ${contentId}`);
+        debugLog(`Content element not found: ${contentId}`);
         return;
     }
     
@@ -734,24 +733,24 @@ function openContentPopup(contentId) {
 }
 
 function closeContentPopup() {
-    //debugLog('Closing content popup');
+    debugLog('Closing content popup');
     hidePopup(contentPopup);
 }
 
 function showPopup(popupElement) {
-    //debugLog(`Showing popup: ${popupElement.id}`);
+    debugLog(`Showing popup: ${popupElement.id}`);
     popupElement.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function hidePopup(popupElement) {
-    //debugLog(`Hiding popup: ${popupElement.id}`);
+    debugLog(`Hiding popup: ${popupElement.id}`);
     popupElement.classList.remove('active');
     document.body.style.overflow = 'auto';
 }
 
 function setupPopupCloseHandlers(popupElement, closeFunction) {
-    //debugLog(`Setting up close handlers for popup: ${popupElement.id}`);
+    debugLog(`Setting up close handlers for popup: ${popupElement.id}`);
     popupElement.addEventListener('click', (e) => {
         if (e.target === popupElement) {
             closeFunction();
@@ -780,7 +779,7 @@ function setupPopupCloseHandlers(popupElement, closeFunction) {
 /* MARQUEE FUNCTIONALITY */
 /* ==================== */
 function initializeMarquees() {
-    //debugLog('Initializing marquees');
+    debugLog('Initializing marquees');
     const marquees = document.querySelectorAll('.marquee');
     marquees.forEach(marquee => {
         const originalContent = marquee.textContent.trim();
@@ -816,7 +815,7 @@ function validateEmail(email) {
 /* MOCK DATA (DEV ONLY) */
 /* ==================== */
 async function fetchMockVideos() {
-    //debugLog('Fetching mock videos');
+    debugLog('Fetching mock videos');
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     const mockResponse = {
@@ -852,7 +851,7 @@ async function fetchMockVideos() {
 }
 
 async function fetchMockPodcasts() {
-    //debugLog('Fetching mock podcasts');
+    debugLog('Fetching mock podcasts');
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     const mockResponse = {
