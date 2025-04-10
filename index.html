@@ -10,56 +10,37 @@
 <body>
     <!-- Navigation Bar -->
     <div class="nav-bar">
-        <div class="button-container">
-            <div class="nav-button-container" onclick="goToPage(1)">
-                <img src="assets/light/navbar.png" alt="Page 1" class="nav-button light-button">
-                <img src="assets/dark/navbar.png" alt="Page 1" class="nav-button dark-button">
-                <img src="assets/dark/navbarSelected.png" alt="Page 1" class="nav-button dark-selected-button">
-                <img src="assets/light/navbarSelected.png" alt="Page 1" class="nav-button light-selected-button">
-                <span class="button-text">Inicio</span>
-            </div>
-            <div class="nav-button-container" onclick="goToPage(2)">
-                <img src="assets/light/navbar.png" alt="Page 2" class="nav-button light-button">
-                <img src="assets/dark/navbar.png" alt="Page 2" class="nav-button dark-button">
-                <img src="assets/dark/navbarSelected.png" alt="Page 2" class="nav-button dark-selected-button">
-                <img src="assets/light/navbarSelected.png" alt="Page 2" class="nav-button light-selected-button">
-                <span class="button-text">Artículos</span>
-            </div>
-            <div class="nav-button-container" onclick="goToPage(3)">
-                <img src="assets/light/navbar.png" alt="Page 3" class="nav-button light-button">
-                <img src="assets/dark/navbar.png" alt="Page 3" class="nav-button dark-button">
-                <img src="assets/dark/navbarSelected.png" alt="Page 3" class="nav-button dark-selected-button">
-                <img src="assets/light/navbarSelected.png" alt="Page 3" class="nav-button light-selected-button">
-                <span class="button-text">Videos</span>
-            </div>
-            <div class="nav-button-container" onclick="goToPage(4)">
-                <img src="assets/light/navbar.png" alt="Page 4" class="nav-button light-button">
-                <img src="assets/dark/navbar.png" alt="Page 4" class="nav-button dark-button">
-                <img src="assets/dark/navbarSelected.png" alt="Page 4" class="nav-button dark-selected-button">
-                <img src="assets/light/navbarSelected.png" alt="Page 4" class="nav-button light-selected-button">
-                <span class="button-text">Podcasts</span>
-            </div>
-            <div class="nav-button-container" onclick="goToPage(5)">
-                <img src="assets/light/navbar.png" alt="Page 5" class="nav-button light-button">
-                <img src="assets/dark/navbar.png" alt="Page 5" class="nav-button dark-button">
-                <img src="assets/dark/navbarSelected.png" alt="Page 5" class="nav-button dark-selected-button">
-                <img src="assets/light/navbarSelected.png" alt="Page 5" class="nav-button light-selected-button">
-                <span class="button-text">Blogs</span>
-            </div>
-            <div class="nav-button-container" onclick="goToPage(6)">
-                <img src="assets/light/navbar.png" alt="Page 6" class="nav-button light-button">
-                <img src="assets/dark/navbar.png" alt="Page 6" class="nav-button dark-button">
-                <img src="assets/dark/navbarSelected.png" alt="Page 6" class="nav-button dark-selected-button">
-                <img src="assets/light/navbarSelected.png" alt="Page 6" class="nav-button light-selected-button">
-                <span class="button-text">Tienda</span>
-            </div>
+      <div class="button-container">
+        <div class="nav-button-container" onclick="goToPage(1)" data-page="1">
+          <div class="nav-button-bg"></div>
+          <span class="button-text">Inicio</span>
         </div>
-        <div class="theme-toggle-container">
-            <div class="light-switch">
-                <img src="assets/light/ThemeChange.png" id="light-to-dark-toggle" alt="Theme Toggle" class="light-mode-element switch-cord">
-                <img src="assets/dark/ThemeChange.png" id="dark-to-light-toggle" alt="Theme Toggle" class="dark-mode-element switch-cord">
-            </div>
+        <div class="nav-button-container" onclick="goToPage(2)" data-page="2">
+          <div class="nav-button-bg"></div>
+          <span class="button-text">Artículos</span>
         </div>
+        <div class="nav-button-container" onclick="goToPage(3)" data-page="3">
+          <div class="nav-button-bg"></div>
+          <span class="button-text">Videos</span>
+        </div>
+        <div class="nav-button-container" onclick="goToPage(4)" data-page="4">
+          <div class="nav-button-bg"></div>
+          <span class="button-text">Podcast</span>
+        </div>
+        <div class="nav-button-container" onclick="goToPage(5)" data-page="5">
+          <div class="nav-button-bg"></div>
+          <span class="button-text">Blogs</span>
+        </div>
+        <div class="nav-button-container" onclick="goToPage(6)" data-page="6">
+          <div class="nav-button-bg"></div>
+          <span class="button-text">Tienda</span>
+        </div>
+      </div>
+      <div class="theme-toggle-container">
+        <div class="light-switch">
+          <div class="theme-toggle-bg"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Page Container -->
