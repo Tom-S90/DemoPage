@@ -637,7 +637,8 @@ body {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 30px;
-    width: 60%;
+    width: 1092px;
+    height:955px;
     margin: 0 auto;
     padding: 30px;
     position: relative;
@@ -648,8 +649,8 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
+    width: 1080px;
+    height: 1005px;
     background-image: var(--articles-grid-light);
     background-size: contain;
     background-repeat: no-repeat;
@@ -668,6 +669,8 @@ body {
     z-index: 1;
     border-radius: 8px;
     padding: 20px;
+    width:530px;
+    height:462px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     display: flex;
@@ -744,6 +747,7 @@ body {
 .page2 .article-card:nth-child(4) {
     position: relative;
     top: 30px;
+    right: 8px;
 }
 
 .page2 .article-card:nth-child(5) {
@@ -754,6 +758,7 @@ body {
 .page2 .article-card:nth-child(6) {
     position: relative;
     top: 60px;
+    right: 8px;
 }
 
 .page2 .article-card:nth-child(7) {
@@ -902,22 +907,6 @@ body {
     text-overflow: ellipsis;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .page4 .video-item {
-        flex-direction: column;
-        width: 95%;
-    }
-    
-    .page4 .video-item img {
-        width: 100%;
-        height: auto;
-        max-height: 200px;
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-}
-
 /* ==================== */
 /* PAGE 5: BLOGS */
 /* ==================== */
@@ -937,8 +926,8 @@ body {
 
 
 .page5 .blogs-container {
-    width: 100%;
-    max-width: 1200px;
+    width: 1200px;
+    height:866px;
     padding: 20px;
 }
 
@@ -966,6 +955,8 @@ body {
     font-family: 'Gelato Extra Light';
     font-size:14px;
     margin: 10px;
+    width: 330px;
+    left:px; 
 }
 
 .page5 .blog-item:hover {
@@ -1012,6 +1003,25 @@ body {
 
 [data-theme="dark"] .blog-item .image-container .dark-mode-element {
     display: block;
+}
+
+.page5 .blog-item:nth-child(1) {
+    left: 45px;
+}
+.page5 .blog-item:nth-child(2) {
+    left: 8px;
+}
+.page5 .blog-item:nth-child(3) {
+    right: 25px;
+}
+.page5 .blog-item:nth-child(4) {
+    left: 45px;
+}
+.page5 .blog-item:nth-child(5) {
+    left: 8px;
+}
+.page5 .blog-item:nth-child(6) {
+    right: 25px;
 }
 
 
