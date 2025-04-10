@@ -1035,11 +1035,12 @@ body {
 
 .page6 .footer{
     position: absolute;
-    bottom: -1150px 
+    top: 1970px 
 }
 .page6 .store-grid-container {
     position: absolute;
-    width: 70%;
+    width: 1302px;
+    height: 1490px;
     margin: 0 auto;
     padding: 20px;
     min-height: 60vh;
@@ -1097,6 +1098,8 @@ body {
     background-color: var(--container-bg);
     border-radius: 10px;
     padding: 15px;
+    width: 400px;
+    height: 310px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -1567,66 +1570,6 @@ body {
     padding: 20px 0;
 }
 
-/* ==================== */
-/* RESPONSIVE DESIGN */
-/* ==================== */
-@media (max-width: 768px) {
-    .container {
-        width: 600vw;
-    }
-
-    .page {
-        padding-top: 120px;
-    }
-
-    .nav-bar {
-        flex-direction: column;
-        padding: 10px 0;
-    }
-
-    .button-container {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .nav-button-container {
-        margin-bottom: 5px;
-    }
-
-    .theme-toggle-container {
-        position: static;
-        margin-top: 10px;
-    }
-
-    .page1 .container-1 {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .page1 .left-image,
-    .page1 .right-image {
-        max-width: 80%;
-        margin-bottom: 20px;
-    }
-
-    .page3 .video-item,
-    .page4 .video-item {
-        flex-direction: column;
-    }
-
-    .page3 .video-item img,
-    .page4 .video-item img {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-
-    .page2 .article-grid,
-    .page5 .blog-grid,
-    .page6 .product-grid {
-        grid-template-columns: 1fr;
-    }
-}
 .articles-container > *,
 .blogs-container > *,
 .store-container > * {
