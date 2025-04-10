@@ -347,18 +347,25 @@ function fetchContent() {
 
 function setupAddToCartButtons() {
     debugLog('Setting up add to cart buttons');
+    
     document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const id = this.getAttribute('data-id');
-            const name = this.getAttribute('data-name');
-            const price = this.getAttribute('data-price');
-            
-            debugLog('Add to cart button clicked', {id, name, price});
-            cart.addItem(id, name, price);
-        });
+        button.removeEventListener('click', handleAddToCartClick);
     });
+    
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', handleAddToCartClick);
+    });
+}
+
+function handleAddToCartClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = this.getAttribute('data-id');
+    const name = this.getAttribute('data-name');
+    const price = this.getAttribute('data-price');
+    
+    debugLog('Add to cart button clicked', {id, name, price});
+    cart.addItem(id, name, price);
 }
 
 function setupViewCartButton() {
