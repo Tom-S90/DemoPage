@@ -23,9 +23,9 @@
     --border-color: #ddd;
     --general: #DBB92A;
     --accent-color: #4CAF50;
-    --articles-grid-light: url('assets/light/ArticlesLayoutBackground.png');
-    --blogs-grid-light: url('assets/light/BlogLayoutBackground.png');
-    --store-grid-light: url('assets/light/StoreLayoutBackground.png');
+    --articles-grid-light: url('assets/light/ArticlesLayoutBackground.webp');
+    --blogs-grid-light: url('assets/light/BlogLayoutBackground.webp');
+    --store-grid-light: url('assets/light/StoreLayoutBackground.webp');
 }
 
 [data-theme="dark"] {
@@ -48,9 +48,9 @@
     --text-overlay-color: white;
     --container-bg: #2a2a2a;
     --border-color: #444;
-    --articles-grid-dark: url('assets/dark/ArticlesLayoutBackground.png');
-    --blogs-grid-dark: url('assets/dark/BlogsLayoutBackground.png');
-    --store-grid-dark: url('assets/dark/StoreLayoutBackground.png');
+    --articles-grid-dark: url('assets/dark/ArticlesLayoutBackground.webp');
+    --blogs-grid-dark: url('assets/dark/BlogsLayoutBackground.webp');
+    --store-grid-dark: url('assets/dark/StoreLayoutBackground.webp');
 }
 
 .grid-bg-container {
@@ -193,19 +193,19 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('assets/light/navbar.png');
+  background-image: url('assets/light/navbar.webp');
 }
 
 [data-theme="dark"] .nav-button-bg {
-  background-image: url('assets/dark/navbar.png');
+  background-image: url('assets/dark/navbar.webp');
 }
 
 .nav-button-container.active .nav-button-bg {
-  background-image: url('assets/light/navbarSelected.png');
+  background-image: url('assets/light/navbarSelected.webp');
 }
 
 [data-theme="dark"] .nav-button-container.active .nav-button-bg {
-  background-image: url('assets/dark/navbarSelected.png');
+  background-image: url('assets/dark/navbarSelected.webp');
 }
 
 /* Button Text */
@@ -554,15 +554,15 @@ body {
 }
 
 .social-button.instagram {
-    background-image: url('assets/both/FooterWorld.png');
+    background-image: url('assets/both/FooterWorld.webp');
 }
 
 .social-button.facebook {
-    background-image: url('assets/both/FooterFacebook.png');
+    background-image: url('assets/both/FooterFacebook.webp');
 }
 
 .social-button.twitter {
-    background-image: url('assets/both/FooterInstagram.png');
+    background-image: url('assets/both/FooterInstagram.webp');
 }
 .footer-logo {
     width:10vw;
@@ -1455,7 +1455,7 @@ body {
 
 .cart-summary {
     flex: 1;
-    background-image: url('assets/both/whiteSquare.png');
+    background-image: url('assets/both/whiteSquare.webp');
     background-size: cover;
     background-position: center;
     padding: 30px;
