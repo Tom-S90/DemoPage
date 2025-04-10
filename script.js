@@ -698,11 +698,36 @@ function closeSubscribePopup() {
 
 function handleSubscribeFormSubmit(e) {
     e.preventDefault();
-    const name = this.querySelector('input[type="text"]').value;
-    const email = this.querySelector('input[type="email"]').value;
+    const nameInput = this.querySelector('input[type="text"]');
+    const emailInput = this.querySelector('input[type="email"]');
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
     debugLog('Subscribe form submitted', {name, email});
     
     if (name && validateEmail(email)) {
+        // Save to localStorage
+        const subscriber = {
+            name: name,
+            email: email,
+            date: new Date().toISOString()
+        };
+        
+        // Get existing subscribers or create new array
+        const subscribers = JSON.parse(localStorage.getItem('subscribers')) || [];
+        
+        // Check if email already exists
+        const existingIndex = subscribers.findIndex(sub => sub.email === email);
+        if (existingIndex >= 0) {
+            // Update existing subscriber
+            subscribers[existingIndex] = subscriber;
+        } else {
+            // Add new subscriber
+            subscribers.push(subscriber);
+        }
+        
+        // Save back to localStorage
+        localStorage.setItem('subscribers', JSON.stringify(subscribers));
+        
         alert(`Gracias por suscribirte, ${name}! Te hemos enviado un correo a ${email}`);
         this.reset();
         closeSubscribePopup();
