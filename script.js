@@ -196,6 +196,7 @@ class ShoppingCart {
         debugLog('Updating cart display');
         const cartItemsList = document.getElementById('cart-items-list');
         const cartTotal = document.getElementById('cart-total');
+        const cartFinalTotal = document.getElementById('cart-final-total');
         
         if (!cartItemsList) {
             debugLog('Cart items list element not found');
@@ -207,6 +208,7 @@ class ShoppingCart {
         if (this.items.length === 0) {
             cartItemsList.innerHTML = '<p class="empty-cart-message">Your cart is empty</p>';
             if (cartTotal) cartTotal.textContent = 'Total: $0.00';
+            if (cartFinalTotal) cartFinalTotal.textContent = 'Total: $0.00';
             debugLog('Cart is empty, showing empty message');
             return;
         }
@@ -215,29 +217,26 @@ class ShoppingCart {
             const cartItemElement = document.createElement('div');
             cartItemElement.className = 'cart-item';
             cartItemElement.innerHTML = `
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <p>$${item.price.toFixed(2)} each</p>
-                </div>
-                <div class="cart-item-controls">
-                    <button class="decrease-quantity" data-id="${item.id}">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="increase-quantity" data-id="${item.id}">+</button>
-                    <button class="remove-item" data-id="${item.id}">×</button>
-                </div>
-                <div class="cart-item-total">
-                    $${(item.price * item.quantity).toFixed(2)}
+                <img src="assets/both/${item.name.replace(/\s+/g, '')}.png" alt="${item.name}" class="cart-item-image">
+                <div class="cart-item-details">
+                    <h4 class="cart-item-name">${item.name}</h4>
+                    <p class="cart-item-price">$${item.price.toFixed(2)} each</p>
+                    <div class="cart-item-controls">
+                        <button class="decrease-quantity" data-id="${item.id}">-</button>
+                        <span class="cart-item-quantity">${item.quantity}</span>
+                        <button class="increase-quantity" data-id="${item.id}">+</button>
+                        <button class="remove-item" data-id="${item.id}">×</button>
+                    </div>
                 </div>
             `;
             
             cartItemsList.appendChild(cartItemElement);
         });
         
-        if (cartTotal) {
-            cartTotal.textContent = `Total: $${this.getTotal().toFixed(2)}`;
-        }
+        const total = this.getTotal().toFixed(2);
+        if (cartTotal) cartTotal.textContent = `Total: $${total}`;
+        if (cartFinalTotal) cartFinalTotal.textContent = `Total: $${total}`;
         
-        // Reattach event listeners to new buttons
         this.setupCartItemControls();
     }
     
