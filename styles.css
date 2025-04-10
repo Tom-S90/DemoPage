@@ -1499,3 +1499,44 @@ body {
     position: relative;
     z-index: 1;
 }
+
+/* ==================== */
+/* DEBUG PANEL STYLES (DEV ONLY JACKASS *STAY AWAY*) */
+/* ==================== */
+#debug-panel {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px;
+    z-index: 9999;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+#debug-panel h3 {
+    margin: 0 0 5px 0;
+}
+
+#debug-panel button {
+    margin: 2px;
+    padding: 3px 6px;
+    font-size: 11px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#debug-panel button:hover {
+    background: #666;
+}
+
+#debug-status {
+    margin-top: 5px;
+    color: #0f0;
+    font-size: 11px;
+}
