@@ -1016,7 +1016,7 @@ body {
 
 
 /* ==================== */
-/* STORE PAGE GRID LAYOUT */
+/* PAGE 6: TIENDA */
 /* ==================== */
 .page6 .store-grid-container {
     position: relative;
@@ -1025,33 +1025,12 @@ body {
     padding: 20px;
 }
 
-.page6 .store-grid-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: var(--store-grid-light);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 0;
-    opacity: 0.15;
-}
-
-[data-theme="dark"] .page6 .store-grid-bg {
-    background-image: var(--store-grid-dark);
-}
-
 .page6 .products-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, auto);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
     margin-top: 40px;
     margin-bottom: 80px;
-    position: relative;
-    z-index: 1;
 }
 
 .page6 .product-item {
@@ -1062,12 +1041,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.3s ease;
-}
-
-.page6 .product-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
 }
 
 .page6 .product-item img {
@@ -1089,22 +1063,37 @@ body {
     margin-bottom: 10px;
 }
 
-/* Grid position indicators - for visual reference only */
-.page6 .grid-text {
-    position: absolute;
-    z-index: 2;
-    font-family: 'Gelato Extra Light';
-    color: var(--text-color);
-    text-align: center;
+.page6 .add-to-cart {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.page6 .top-text {
-    left: 50%;
-    top: -15px;
-    transform: translateX(-50%);
-    width: 60%;
-    font-size: 1.5rem;
-    font-family: 'Avant Garde Book Condensed';    
+.page6 .add-to-cart-text {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: translate(-40%, -40%);
+    color: black;
+    font-family: 'Gelato Extra Light';
+    pointer-events: none;
+    font-size: .8rem;
+}
+
+.page6 .add-to-cart img {
+    width: 150px;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.page6 .add-to-cart:hover{
+    transform: scale(1.1);
 }
 
 /* Cart button in footer */
