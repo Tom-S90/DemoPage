@@ -10,7 +10,7 @@ const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
 const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
 
 // debug mode flag
-const debug_MODE = false;
+const debug_MODE = true;
 
 /* ==================== */
 /* DOM ELEMENTS */
