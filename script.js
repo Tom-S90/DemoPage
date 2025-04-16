@@ -387,13 +387,25 @@ function setupCheckoutButton() {
         checkoutButton.addEventListener('click', function(e) {
             e.preventDefault();
             debugLog('Checkout button clicked');
+            
             if (cart.items.length === 0) {
                 alert('Your cart is empty!');
                 return;
             }
-            alert(`Thank you for your purchase! Total: $${cart.getTotal().toFixed(2)}`);
+            
+            // Clear the cart
             cart.clearCart();
+            
+            // Show confirmation message
+            alert(`Thank you for your purchase! Your order has been processed.`);
+            
+            // Close the popup
             closeContentPopup();
+            
+            // Reload the page to reset to main page
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
         });
     } else {
         debugLog('Checkout button not found');
