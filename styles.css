@@ -15,7 +15,7 @@
     --video-item-background: #f9f9f9;
     --video-title-color: #333;
     --video-description-color: #888;
-    --popup-background: darkblue;
+    --popup-background: #222222;
     --popup-text: white;
     --logo-text-color: #333;
     --text-overlay-color: black;
@@ -178,7 +178,7 @@ body {
 /* Nav Button Container */
 .nav-button-container {
   position: relative;
-  bottom: -1px;
+  bottom: -3px;
   cursor: pointer;
   display: inline-block;
   width: 125px;
@@ -306,7 +306,7 @@ body {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1500px;
     margin-bottom: 40px;
     gap: 30px;
 }
@@ -321,8 +321,8 @@ body {
 .page1 .left-image {
     position: relative;
     top:75px;
-    right: 75px;
-    max-width: 25vw;
+    right: 200px;
+    max-width: 650px;
 }
 
 .page1 .right-image {
@@ -398,7 +398,7 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-    height: 30px;
+    height: 35px;
     margin: 10px 0;
 }
 
@@ -574,6 +574,11 @@ body {
 .page2 {
     padding-top: 100px;
     position: relative;
+}
+
+.page2 .footer{
+    position: absolute;
+    top:1500px;
 }
 
 .page2 .page-subtitle {
@@ -886,6 +891,8 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 30px;
+    bottom:600px;
+    top: 10px;
     background-image: var(--blogs-grid-light);
     background-size: contain;
     background-repeat: no-repeat;
