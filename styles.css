@@ -1046,28 +1046,30 @@ body {
 }
 
 .blog-popup-article .centered{
-    font-size: 48px;
+    font-size: 30px;
     font-family: 'Kilimanjaro';
     position: absolute;
-    top: 50%;
+    top: 43%;
     left: 50%;
+    text-align:center;
     transform: translate(-50%, -50%);
 }
 
 .blog-popup-article .centered-1{
-    font-size: 18px;
+    font-size: 12px;
     font-family: 'Avant Garde Book Condensed';
     position: absolute;
-    top: 65%;
+    top: 49%;
     left: 50%;
+    text-align:center;
     transform: translate(-50%, -50%);
 }
 
 .blog-popup-article .bottom-left {
     position: absolute;
-    bottom: 8px;
-    left: 16px;
-    font-size: 18px;
+    bottom: 20%;
+    left: 5%;
+    font-size: 14px;
     font-family:'Avant Garde Book Condensed';
 }
 
