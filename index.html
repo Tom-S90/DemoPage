@@ -202,8 +202,8 @@
             <div class="page-container">
                 <p style="text-align: left; margin-left: 2vw; font-size: 1rem; width: 90%;">**Informate ...</p>
                 <h1 style="font-family: 'Kilimanjaro'; text-align: center; width: 100%; margin: 10px 0;">Videos</h1>
-                <img src="assets/light/TripPlanets.webp" style="width: 25%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="light-mode-element">
-                <img src="assets/dark/TripPlanets.webp" style="width: 25%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="dark-mode-element">
+                <img src="assets/light/TripPlanets.webp" style="width: 100%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="light-mode-element">
+                <img src="assets/dark/TripPlanets.webp" style="width: 100%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="dark-mode-element">
                 <div class="videos-container"> 
                     <div id="video-list" class="video-list"></div>
                 </div>
@@ -227,8 +227,8 @@
             <div class="page-container">
                 <p style="text-align: left; margin-left: 2vw; font-size: 1rem; width: 90%;">**Ya lo oiste? ...</p>
                 <h1 style="font-family: 'Kilimanjaro'; text-align: center; width: 100%; margin: 10px 0;">Podcast</h1>
-                <img src="assets/light/TripPlanets.webp" style="width: 25%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="light-mode-element">
-                <img src="assets/dark/TripPlanets.webp" style="width: 25%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="dark-mode-element">
+                <img src="assets/light/TripPlanets.webp" style="width: 100%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="light-mode-element">
+                <img src="assets/dark/TripPlanets.webp" style="width: 100%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="dark-mode-element">
                 <div class="podcasts-container">
                     <div id="podcast-list" class="video-list"></div>
                 </div>
@@ -252,8 +252,8 @@
             <div class="page-container">
                 <p style="text-align: left; margin-left: 2vw; font-size: 1rem; width: 90%;">**Descubre cosas ...</p>
                 <h1 style="font-family: 'Kilimanjaro'; text-align: center; width: 100%; margin: 10px 0;">Blogs</h1>
-                <img src="assets/light/TripPlanets.webp" style="width: 25%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="light-mode-element">
-                <img src="assets/dark/TripPlanets.webp" style="width: 25%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="dark-mode-element">
+                <img src="assets/light/TripPlanets.webp" style="width: 100%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="light-mode-element">
+                <img src="assets/dark/TripPlanets.webp" style="width: 100%; height: auto; max-height: 20vh; object-fit: contain; margin: 20px 0; align-self: center;" class="dark-mode-element">
                 <div class="blogs-container grid-container">
                     <div class="blog-item popup-button" data-popup-content="blog1-content">
                         <h3>"La última estrella que vi"</h3>
@@ -524,10 +524,14 @@
 
     <!-- Hidden HTML for popup contents -->
     <div id="popup-contents" style="display:none;">
-        <!-- Right image content -->
         <div id="right-image-content">
             <h2>Mapa de contaminación lumínica</h2>
-            <p>Contenido por agregar...</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ" 
+                        frameborder="0" 
+                        allow="autoplay; encrypted-media" 
+                        allowfullscreen></iframe>
+            </div>
         </div>
 
         <!-- Orb contents -->
@@ -645,6 +649,14 @@
                             <img src="assets/both/CheckoutButton.webp" alt="Checkout">
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="subscribe-prompt-content">
+            <div class="subscribe-prompt-container">
+                <img src="assets/both/ClassifiedBlockout.webp" class="subscribe-prompt-bg">
+                <div class="subscribe-prompt-text">
+                    <button class="subscribe-prompt-button" onclick="openSubscribePopup()">Subscríbete!</button>
                 </div>
             </div>
         </div>    

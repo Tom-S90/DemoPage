@@ -9,7 +9,7 @@ const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
 const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
 
 // debug mode flag
-const debug_MODE = true;
+const debug_MODE = false;
 
 /* ==================== */
 /* DOM ELEMENTS */
@@ -445,8 +445,14 @@ function setupButtonHandlers() {
 function handlePopupButtonClick(e) {
     e.preventDefault();
     const contentId = this.getAttribute('data-popup-content');
-    debugLog('Popup button clicked', {contentId});
     
+    if (this.closest('.blog-item, .article-card')) {
+        const isFirstItem = this.closest('.blog-item:nth-child(1), .article-card:nth-child(1)');
+        if (!isFirstItem) {
+            openContentPopup('subscribe-prompt-content');
+            return;
+        }
+    }
     if (contentId === 'subscribe-content') {
         openSubscribePopup();
     } else if (contentId === 'cart-popup-content') {
