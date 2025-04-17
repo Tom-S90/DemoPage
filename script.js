@@ -10,7 +10,7 @@ const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
 const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
 
 // debug mode flag
-const debug_MODE = false;
+const debug_MODE = true;
 
 /* ==================== */
 /* DOM ELEMENTS */
@@ -217,7 +217,7 @@ class ShoppingCart {
             const cartItemElement = document.createElement('div');
             cartItemElement.className = 'cart-item';
             cartItemElement.innerHTML = `
-                <img src="assets/both/${item.name.replace(/\s+/g, '')}.png" alt="${item.name}" class="cart-item-image">
+                <img src="assets/both/${item.name.replace(/\s+/g, '')}.webp" alt="${item.name}" class="cart-item-image">
                 <div class="cart-item-details">
                     <h4 class="cart-item-name">${item.name}</h4>
                     <p class="cart-item-price">$${item.price.toFixed(2)} each</p>
