@@ -616,7 +616,7 @@ body {
     text-align: center;
     width: 100%;
     margin: 10px 0 30px;
-    font-size: 2.5rem;
+    font-size: 64px;
 }
 
 /* Planet Image */
@@ -764,6 +764,21 @@ body {
 .page2 .article-card:nth-child(7) {
     position: relative;
     top: 60px;
+}
+
+.article1-content .h3{
+    font-family: 'Gelato Bold';
+    font-size: 24px;
+}
+
+.article1-content .h3{
+    font-family: 'Gelato Regular';
+    font-size: 24px;
+}
+
+.article1-content .p{
+    font-family: 'Gelato Extra Light';
+    font-size: 16px;
 }
 
 /* ==================== */
@@ -976,6 +991,10 @@ body {
     align-items: center;
     justify-content: center;
 }
+.page5 .blog-item p{
+    font-family: 'Gelato Extra Light';
+    font-size: 16px;
+}
 
 .page5 .blog-item .image-container {
     margin-top: auto; /* Pushes image to bottom */
@@ -1026,6 +1045,41 @@ body {
     right: 25px;
 }
 
+.blog-popup-article .centered{
+    font-size: 48px;
+    font-family: 'Kilimanjaro';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.blog-popup-article .centered-1{
+    font-size: 18px;
+    font-family: 'Avant Garde Book Condensed';
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.blog-popup-article .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    font-size: 18px;
+    font-family:'Avant Garde Book Condensed';
+}
+
+.blog1-content .h3{
+    font-family: 'Gelato Regular';
+    font-size: 24px;
+}
+
+.blog1-content .p{
+    font-family: 'Gelato Extra Light';
+    font-size: 16px;
+}
 
 /* ==================== */
 /* PAGE 6: TIENDA */
@@ -1161,7 +1215,10 @@ body {
 .page6 .add-to-cart:hover {
     transform: scale(1.1);
 }
-
+.page6 h3{
+    font-family: 'Avant Garde CE Book';
+    font-size: 24px;
+}
 /* Position each product item in the grid */
 .page6 .product-item:nth-child(1){ 
     grid-row: 1; grid-column: 1; 
