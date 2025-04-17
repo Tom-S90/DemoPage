@@ -462,12 +462,26 @@ function handlePopupButtonClick(e) {
     if (this.closest('.blog-item, .article-card')) {
         const isFirstItem = this.closest('.blog-item:nth-child(1), .article-card:nth-child(1)');
         if (!isFirstItem) {
-            openContentPopup('subscribe-prompt-content');
+            // Close any existing popup first
+            if (contentPopup.classList.contains('active')) {
+                closeContentPopup();
+            }
+            // Then open the subscribe prompt
+            setTimeout(() => {
+                openContentPopup('subscribe-prompt-content');
+            }, 300);
             return;
         }
     }
+    
     if (contentId === 'subscribe-content') {
-        openSubscribePopup();
+        // Close any existing popup first
+        if (contentPopup.classList.contains('active')) {
+            closeContentPopup();
+        }
+        setTimeout(() => {
+            openSubscribePopup();
+        }, 300);
     } else if (contentId === 'cart-popup-content') {
         cart.updateCartDisplay();
         openContentPopup(contentId);
@@ -707,6 +721,15 @@ function closePopup() {
 
 function openSubscribePopup() {
     debugLog('Opening subscribe popup');
+    
+    // Close any existing popup first
+    if (contentPopup.classList.contains('active')) {
+        closeContentPopup();
+    }
+    if (videoPopup.classList.contains('active')) {
+        closePopup();
+    }
+    
     const popupContent = document.getElementById('subscribe-content').innerHTML;
     document.getElementById('subscribe-popup-html').innerHTML = popupContent;
     showPopup(subscribePopup);
