@@ -1,4 +1,3 @@
-
 /* ==================== */
 /* CONSTANTS AND CONFIG */
 /* ==================== */
@@ -382,13 +381,6 @@ function setupViewCartButton() {
 }
 
 function setupCheckoutButton() {
-    const checkoutButton = document.getElementById('checkout-button');
-    console.log('Checkout button element:', checkoutButton); // Debug line
-    
-    if (!checkoutButton) {
-        console.error('Checkout button not found!');
-        return;
-    }
     const checkoutButton = document.getElementById('checkout-button');
     if (checkoutButton) {
         checkoutButton.addEventListener('click', function(e) {
