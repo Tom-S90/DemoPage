@@ -381,9 +381,8 @@ function setupViewCartButton() {
 }
 
 function setupCheckoutButton() {
-    const checkoutButton = document.getElementById('checkout-button');
-    if (checkoutButton) {
-        checkoutButton.addEventListener('click', function(e) {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#checkout-button')) {
             e.preventDefault();
             debugLog('Checkout button clicked');
             
@@ -405,10 +404,8 @@ function setupCheckoutButton() {
             setTimeout(() => {
                 window.location.reload();
             }, 500);
-        });
-    } else {
-        debugLog('Checkout button not found');
-    }
+        }
+    });
 }
 
 /* ==================== */
