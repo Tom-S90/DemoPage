@@ -460,7 +460,7 @@ function handlePopupButtonClick(e) {
     const contentId = this.getAttribute('data-popup-content');
     
     if (this.closest('.blog-item, .article-card')) {
-        const isFirstItem = this.closest('.blog-item:nth-child(1), .article-card:nth-child(1)');
+        const isFirstItem = this.closest('.blog-item:nth-child(1), .article-card:nth-child(4)');
         if (!isFirstItem) {
             // Close any existing popup first
             if (contentPopup.classList.contains('active')) {
