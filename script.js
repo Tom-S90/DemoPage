@@ -415,6 +415,19 @@ function setupEventListeners() {
     debugLog('Setting up event listeners');
     setupThemeToggles();
     setupNavButtons();
+    setupSubscribePromptButton();
+}
+
+function setupSubscribePromptButton() {
+    const promptButton = document.getElementById('subscribe-prompt-btn');
+    if (promptButton) {
+        promptButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeContentPopup();
+            setTimeout(openSubscribePopup, 300);
+        });
+    }
 }
 
 function setupThemeToggles() {
