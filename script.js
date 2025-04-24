@@ -5,8 +5,8 @@ const CACHE_KEY_VIDEOS = 'youtube_videos_cache';
 const CACHE_KEY_PODCASTS = 'youtube_podcasts_cache';
 const CACHE_EXPIRY = 60 * 60 * 1000;
 const YOUTUBE_API_KEY = 'AIzaSyCradZiiUnprHyWDXh1Aw5R6Xul5w7MWnk';
-const VIDEO_PLAYLIST_ID = 'PLV0pICGsF8HKH5R6mLBvVdkX8o8GPmac6';
-const PODCAST_PLAYLIST_ID = 'PLV0pICGsF8HKH83-i_Ch6hRRoCT3vZNS3&si=DMvi3qshowcH06j3';
+const VIDEO_PLAYLIST_ID = 'PLx9dFnaFeee3cHDSJDV3VVUm5P0V1UtEa&si=9JL98V2c7GKbXhSS';
+const PODCAST_PLAYLIST_ID = 'PLx9dFnaFeee1Cc8Os_Yd9pHazL_lTrg76&si=9ikRPWL7IIvWJcY_';
 
 // debug mode flag
 const debug_MODE = false;
