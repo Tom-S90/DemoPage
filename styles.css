@@ -967,9 +967,9 @@ body {
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
-    display: flex; /* Added */
-    flex-direction: column; /* Added */
-    min-height: 350px; /* Added fixed height */
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
     font-family: 'Gelato Extra Light';
     font-size:14px;
     margin: 10px;
@@ -982,19 +982,18 @@ body {
 }
 
 .page5 .blog-item h3 {
-    padding: 5px 5px; /* Increased padding */
     text-align: left;
     font-family: 'Gelato Bold';
     color: var(--text-color);
     margin: 0;
-    flex-grow: 1; /* Takes remaining space */
+    flex-grow: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 .page5 .blog-item p{
     font-family: 'Gelato Extra Light';
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .page5 .blog-item .image-container {
