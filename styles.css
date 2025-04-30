@@ -1761,3 +1761,88 @@ body {
     color: #0f0;
     font-size: 11px;
 }
+
+/* ==================== */
+/* Password Page Styles */
+/* ==================== */
+
+.password-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.password-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+}
+
+.password-content {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    color: white;
+}
+
+.password-content h2 {
+    font-family: 'Gelato Bold';
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+#password-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #DBB92A;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+}
+
+#password-submit {
+    background-color: #DBB92A;
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Gelato Bold';
+}
+
+#password-submit:hover {
+    background-color: #f1d15d;
+}
+
+.error-message {
+    color: #ff6b6b;
+    margin-top: 15px;
+    font-family: 'Gelato Extra Light';
+    min-height: 20px;
+}
