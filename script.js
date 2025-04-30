@@ -319,6 +319,7 @@ function initializeApp() {
     setupAddToCartButtons();
     setupViewCartButton();
     setupCheckoutButton();
+    initializePasswordProtection();
     
     if (debug_MODE) {
         showdebugPanel();
@@ -884,6 +885,53 @@ function initializeMarquees() {
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
+}
+
+
+/* ==================== */
+/* PASSWORD PROTECTION */
+/* ==================== */
+function initializePasswordProtection() {
+    debugLog('Initializing password protection');
+    
+    // Generate a random password (for demonstration, we'll use "DUSTY STARS")
+    const correctPassword = "dusty stars"; // Not case sensitive
+    
+    const passwordPage = document.getElementById('password-page');
+    const passwordInput = document.getElementById('password-input');
+    const passwordSubmit = document.getElementById('password-submit');
+    const passwordError = document.getElementById('password-error');
+    
+    // Show password page
+    passwordPage.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    // Handle password submission
+    passwordSubmit.addEventListener('click', () => {
+        const enteredPassword = passwordInput.value.trim().toLowerCase();
+        
+        if (enteredPassword === correctPassword) {
+            // Correct password
+            debugLog('Correct password entered');
+            passwordError.textContent = '';
+            localStorage.setItem('sitePassword', correctPassword);
+            passwordPage.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        } else {
+            // Incorrect password
+            debugLog('Incorrect password entered');
+            passwordError.textContent = 'Contraseña incorrecta. Intenta nuevamente.';
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+    });
+    
+    // Allow submitting with Enter key
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            passwordSubmit.click();
+        }
+    });
 }
 
 /* ==================== */
