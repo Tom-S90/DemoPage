@@ -1060,23 +1060,26 @@ function openProductDetailsPopup(product) {
     const popup = document.getElementById('product-details-popup');
     const popupHtml = document.getElementById('product-details-popup-html');
     popupHtml.innerHTML = `
-        <div style="max-width:600px;min-width:320px;position:relative;">
+        <div style="max-width:720px;min-width:340px;position:relative;padding:32px 24px 24px 24px;">
             <div class="popup-close-button" style="position:absolute;top:10px;right:10px;cursor:pointer;">
                 <img src="assets/both/ExitButton.webp" alt="Cerrar">
             </div>
-            <h2 style="text-align:center;margin-bottom:1.5rem;">${product.name}</h2>
-            <div style="display:flex;gap:2rem;">
+            <h2 style="text-align:center;margin-bottom:2rem;font-size:2rem;">${product.name}</h2>
+            <div style="display:flex;gap:2.5rem;">
                 <!-- Left: Description -->
                 <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-start;">
-                    <h4 style="margin-bottom:0.5rem;">Descripción</h4>
-                    <p style="margin:0;">${product.description}</p>
+                    <h4 style="margin-bottom:0.5rem;font-size:1.2rem;">Descripción</h4>
+                    <p style="margin:0;font-size:1.05rem;">${product.description}</p>
                 </div>
                 <!-- Right: Image and Add to Cart -->
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;">
-                    <img src="assets/both/${product.image}" alt="${product.name}" style="width:100%;max-width:170px;max-height:170px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px #0002;margin-bottom:1.5rem;">
+                    <img src="assets/both/${product.image}" alt="${product.name}" style="width:100%;max-width:260px;max-height:260px;object-fit:contain;border-radius:12px;margin-bottom:2rem;">
                     <div style="display:flex;flex-direction:column;align-items:center;">
-                        <img src="assets/dark/AddToCartButton.webp" alt="Agregar a carrito" style="width:48px;height:48px;cursor:pointer;" id="popup-add-to-cart-btn">
-                        <span style="margin-top:0.5rem;font-weight:bold;">$${Number(product.price).toFixed(2)}</span>
+                        <button id="popup-add-to-cart-btn" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;">
+                            <img src="assets/dark/AddToCartButton.webp" alt="Agregar a carrito" style="width:64px;height:64px;">
+                            <span style="margin-top:0.25rem;font-size:1.1rem;font-weight:600;color:#333;">Agregar</span>
+                        </button>
+                        <span style="margin-top:0.7rem;font-weight:bold;font-size:1.15rem;">$${Number(product.price).toFixed(2)}</span>
                     </div>
                 </div>
             </div>
