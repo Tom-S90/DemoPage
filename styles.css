@@ -521,7 +521,7 @@ body {
     color: var(--button-hover-text);
 }
 
-/* Footer (Edited to maintain consistency/Changes can be found in the *Pages* section) */
+/* Footer*/
 
 .footer-image {
     width: 100%;
@@ -553,6 +553,7 @@ body {
     cursor: pointer;
     z-index: 2;
     font-size:1rem;
+    font-family: "Gelato light";
     transition: none !important;
 }
 
@@ -564,6 +565,7 @@ body {
     display: flex;
     gap: 15px;
     margin-left: auto;
+    background-color: #E9DDB8;
 }
 
 .social-button {
@@ -575,6 +577,7 @@ body {
     background-size: cover;
     background-position: center;
     transition: transform 0.3s ease;
+    background-color: #E9DDB8;
 }
 
 .social-button:hover {
@@ -594,6 +597,8 @@ body {
 }
 .footer-logo {
     width:10vw;
+    margin-top:5px;
+    margin-bottom:5px;
 }
 
 /* ==================== */
@@ -602,6 +607,32 @@ body {
 .page2 {
     padding-top: 100px;
     position: relative;
+}
+
+.page2 .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 35px;
+    margin: 10px 0;
+}
+
+.page2 .marquee-content {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+}
+
+.page2 .marquee-content span {
+    padding-right: 50px; /* Space between duplicates */
+}
+
+/* Animation moves the content by its full width */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .page2 .page-subtitle {
@@ -767,7 +798,7 @@ body {
     top: 60px;
 }
 
-.article1-content .h3{
+.article1-content .h2{
     font-family: 'Gelato Bold';
     font-size: 24px;
 }
@@ -787,6 +818,32 @@ body {
 /* ==================== */
 .page3 {
     padding-top: 100px;
+}
+
+.page3 .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 35px;
+    margin: 10px 0;
+}
+
+.page3 .marquee-content {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+}
+
+.page3 .marquee-content span {
+    padding-right: 50px; /* Space between duplicates */
+}
+
+/* Animation moves the content by its full width */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .page3 .videos-container {
@@ -861,6 +918,32 @@ body {
     width: 65vw;
     margin: 0 auto;
     padding: 20px;
+}
+
+.page4 .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 35px;
+    margin: 10px 0;
+}
+
+.page4 .marquee-content {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+}
+
+.page4 .marquee-content span {
+    padding-right: 50px; /* Space between duplicates */
+}
+
+/* Animation moves the content by its full width */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .page4 .video-list {
@@ -942,6 +1025,31 @@ body {
     background-image: var(--blogs-grid-dark);
 }
 
+.page5 .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 35px;
+    margin: 10px 0;
+}
+
+.page5 .marquee-content {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+}
+
+.page5 .marquee-content span {
+    padding-right: 50px; /* Space between duplicates */
+}
+
+/* Animation moves the content by its full width */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
 .page5 .blogs-container {
     width: 1200px;
@@ -1089,6 +1197,32 @@ body {
 .page6 {
     padding-top: 100px;
     position: relative;
+}
+
+.page6 .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 35px;
+    margin: 10px 0;
+}
+
+.page6 .marquee-content {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+}
+
+.page6 .marquee-content span {
+    padding-right: 50px; /* Space between duplicates */
+}
+
+/* Animation moves the content by its full width */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .page6 .store-grid-container {
@@ -1365,6 +1499,10 @@ body {
 
 .content-popup-content h2 {
     font-family: 'Gelato Bold';
+    color:#96afda;
+}
+.content-popup-content h3{
+    color: #DBB92A;
 }
 
 .content-popup.active .content-popup-content {

@@ -347,13 +347,59 @@ function fetchContent() {
 
 function setupAddToCartButtons() {
     debugLog('Setting up add to cart buttons');
-    
+    // Map of available products with details
+    const productData = {
+        "Pluma": {
+            id: "10",
+            name: "Pluma",
+            price: "20.00",
+            image: "Pluma.webp",
+            description: "Pluma elegante para tus notas y pensamientos."
+        },
+        "Block De Notas": {
+            id: "6",
+            name: "Block De Notas",
+            price: "20.00",
+            image: "BlockDeNotas.webp",
+            description: "Libreta de notas para tus ideas y apuntes diarios."
+        },
+        "Tote Bag": {
+            id: "3",
+            name: "Tote Bag",
+            price: "20.00",
+            image: "ToteBag.webp",
+            description: "Bolsa Tote Bag resistente y ecológica para llevar lo que quieras."
+        }
+    };
+    const availableProducts = Object.keys(productData);
+
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.removeEventListener('click', handleAddToCartClick);
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const name = this.getAttribute('data-name');
+            if (availableProducts.includes(name)) {
+                openProductDetailsPopup(productData[name]);
+            } else {
+                alert('No disponible');
+            }
+        });
     });
-    
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', handleAddToCartClick);
+
+    // Make the entire product-item clickable for available products
+    document.querySelectorAll('.product-item').forEach(item => {
+        const btn = item.querySelector('.add-to-cart');
+        if (!btn) return;
+        const name = btn.getAttribute('data-name');
+        if (availableProducts.includes(name)) {
+            item.style.cursor = 'pointer';
+            item.onclick = function(e) {
+                // Prevent double popup if button is clicked
+                if (e.target.classList.contains('add-to-cart')) return;
+                openProductDetailsPopup(productData[name]);
+            };
+        }
     });
 }
 
@@ -1007,4 +1053,42 @@ async function fetchMockPodcasts() {
     };
     
     renderVideoList(mockResponse.items, podcastList);
+}
+
+function openProductDetailsPopup(product) {
+    const popup = document.getElementById('product-details-popup');
+    const popupHtml = document.getElementById('product-details-popup-html');
+    popupHtml.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:400px;margin:auto;">
+            <div class="popup-close-button" style="position:absolute;top:10px;right:10px;cursor:pointer;">
+                <img src="assets/both/ExitButton.webp" alt="Cerrar">
+            </div>
+            <h2 style="margin-bottom:0.5rem;text-align:center;">${product.name}</h2>
+            <div style="display:flex;gap:1.5rem;align-items:flex-start;">
+                <img src="assets/both/${product.image}" alt="${product.name}" style="width:140px;height:auto;border-radius:10px;box-shadow:0 2px 8px #0002;">
+                <div style="display:flex;flex-direction:column;align-items:center;">
+                    <img src="assets/both/AddToCartButton.webp" alt="Agregar a carrito" style="width:48px;height:48px;cursor:pointer;" id="popup-add-to-cart-btn">
+                    <span style="margin-top:0.5rem;font-weight:bold;">$${Number(product.price).toFixed(2)}</span>
+                </div>
+            </div>
+            <div style="width:100%;margin-top:1rem;">
+                <h4 style="margin-bottom:0.25rem;">Descripción</h4>
+                <p style="margin:0;">${product.description}</p>
+            </div>
+        </div>
+    `;
+    showPopup(popup);
+    // Close button
+    popup.querySelector('.popup-close-button').onclick = () => hidePopup(popup);
+    // Add to cart button
+    document.getElementById('popup-add-to-cart-btn').onclick = function() {
+        cart.addItem(product.id, product.name, product.price);
+    };
+    // Escape key closes popup
+    document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+            hidePopup(popup);
+            document.removeEventListener('keydown', escHandler);
+        }
+    });
 }
