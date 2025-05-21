@@ -347,28 +347,27 @@ function fetchContent() {
 
 function setupAddToCartButtons() {
     debugLog('Setting up add to cart buttons');
-    // Map of available products with details
     const productData = {
         "Pluma": {
             id: "10",
             name: "Pluma",
             price: "20.00",
             image: "Pluma.webp",
-            description: "Pluma elegante para tus notas y pensamientos."
+            description: "Más que una pluma, una extensión de tu creatividad. Ofrece una experiencia de escritura suave y confiable, perfecta para tomar notas, firmar ideas importantes o simplemente dejar fluir tus pensamientos."
         },
         "Block De Notas": {
             id: "6",
             name: "Block De Notas",
             price: "20.00",
             image: "BlockDeNotas.webp",
-            description: "Libreta de notas para tus ideas y apuntes diarios."
+            description: "Tu espacio creativo empieza aquí. Esta libreta cuenta con papel de alta calidad, ideal para escribir, dibujar o planear sin preocuparte por el traspaso de tinta. Ideal para mentes inquietas que quieren transformar pensamientos en proyectos."
         },
         "Tote Bag": {
             id: "3",
             name: "Tote Bag",
             price: "20.00",
             image: "ToteBag.webp",
-            description: "Bolsa Tote Bag resistente y ecológica para llevar lo que quieras."
+            description: "Nuestra tote bag está hecha con materiales resistentes de alta calidad, ideal para acompañarte en tu día a día. Reutilizable, ligera y con costuras reforzadas pensadas para durar y para inspirarte a llevar tus ideas a donde vayas."
         }
     };
     const availableProducts = Object.keys(productData);
@@ -387,18 +386,20 @@ function setupAddToCartButtons() {
         });
     });
 
-    // Make the entire product-item clickable for available products
+    // Only make available items clickable as a whole
     document.querySelectorAll('.product-item').forEach(item => {
         const btn = item.querySelector('.add-to-cart');
         if (!btn) return;
         const name = btn.getAttribute('data-name');
+        item.onclick = null; // Remove any previous handler
         if (availableProducts.includes(name)) {
             item.style.cursor = 'pointer';
             item.onclick = function(e) {
-                // Prevent double popup if button is clicked
                 if (e.target.classList.contains('add-to-cart')) return;
                 openProductDetailsPopup(productData[name]);
             };
+        } else {
+            item.style.cursor = 'not-allowed';
         }
     });
 }
@@ -1059,21 +1060,25 @@ function openProductDetailsPopup(product) {
     const popup = document.getElementById('product-details-popup');
     const popupHtml = document.getElementById('product-details-popup-html');
     popupHtml.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:400px;margin:auto;">
+        <div style="max-width:600px;min-width:320px;position:relative;">
             <div class="popup-close-button" style="position:absolute;top:10px;right:10px;cursor:pointer;">
                 <img src="assets/both/ExitButton.webp" alt="Cerrar">
             </div>
-            <h2 style="margin-bottom:0.5rem;text-align:center;">${product.name}</h2>
-            <div style="display:flex;gap:1.5rem;align-items:flex-start;">
-                <img src="assets/both/${product.image}" alt="${product.name}" style="width:140px;height:auto;border-radius:10px;box-shadow:0 2px 8px #0002;">
-                <div style="display:flex;flex-direction:column;align-items:center;">
-                    <img src="assets/both/AddToCartButton.webp" alt="Agregar a carrito" style="width:48px;height:48px;cursor:pointer;" id="popup-add-to-cart-btn">
-                    <span style="margin-top:0.5rem;font-weight:bold;">$${Number(product.price).toFixed(2)}</span>
+            <h2 style="text-align:center;margin-bottom:1.5rem;">${product.name}</h2>
+            <div style="display:flex;gap:2rem;">
+                <!-- Left: Description -->
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-start;">
+                    <h4 style="margin-bottom:0.5rem;">Descripción</h4>
+                    <p style="margin:0;">${product.description}</p>
                 </div>
-            </div>
-            <div style="width:100%;margin-top:1rem;">
-                <h4 style="margin-bottom:0.25rem;">Descripción</h4>
-                <p style="margin:0;">${product.description}</p>
+                <!-- Right: Image and Add to Cart -->
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;">
+                    <img src="assets/both/${product.image}" alt="${product.name}" style="width:100%;max-width:170px;max-height:170px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px #0002;margin-bottom:1.5rem;">
+                    <div style="display:flex;flex-direction:column;align-items:center;">
+                        <img src="assets/dark/AddToCartButton.webp" alt="Agregar a carrito" style="width:48px;height:48px;cursor:pointer;" id="popup-add-to-cart-btn">
+                        <span style="margin-top:0.5rem;font-weight:bold;">$${Number(product.price).toFixed(2)}</span>
+                    </div>
+                </div>
             </div>
         </div>
     `;
